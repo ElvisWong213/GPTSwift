@@ -9,13 +9,13 @@ import Foundation
 import OpenAI
 
 enum Author {
-    case User, GPT
+    case User, GPT, Error
     
     var isUser: Bool {
         switch self {
         case .User:
             return true
-        case .GPT:
+        case .GPT, .Error:
             return false
         }
     }
@@ -26,6 +26,8 @@ enum Author {
             return .user
         case .GPT:
             return .assistant
+        case .Error:
+            return .system
         }
     }
 }

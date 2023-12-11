@@ -16,10 +16,13 @@ struct ChatView: View {
                 LazyVStack {
                     ForEach(viewModel.messages) { message in
                         ForEach(message.content) { content in
-                            Chatbubble(author: message.author, content: content)
+                            Chatbubble(author: message.author, messageType: content.type, value: content.value)
                         }
                     }
-                }                                        
+                    if !viewModel.errorMessage.isEmpty {
+                        Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
+                    }
+                }
                 .rotationEffect(.degrees(180))
             }
             .scrollIndicators(.never)

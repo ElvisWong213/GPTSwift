@@ -12,9 +12,11 @@ class ChatViewModel: ObservableObject {
     @Published var textInput: String = ""
     @Published var isSent: Bool = false
     @Published var messages: [MyMessage] = []
+    @Published var errorMessage: String = ""
     
     func sendMessage() {
         isSent = true
+        errorMessage = ""
         let openAI = OpenAI(apiToken: KeychainService.getKey())
         let chatQuery = ChatQuery(model: .gpt3_5Turbo_1106, messages: messages.map{ $0.convertToMessage() })
         // debug
@@ -33,6 +35,7 @@ class ChatViewModel: ObservableObject {
                 }
             case .failure(let error):
                 print(error)
+                self.getErrorMessage(errorResponse: error as! APIErrorResponse, messageIndex: index)
                 self.updateIsSent(false)
             }
         } completion: { error in
@@ -50,6 +53,15 @@ class ChatViewModel: ObservableObject {
     private func updateIsSent(_ value: Bool) {
         DispatchQueue.main.async {
             self.isSent = value
+        }
+    }
+    
+    private func getErrorMessage(errorResponse: APIErrorResponse, messageIndex index: Int) {
+        DispatchQueue.main.async {
+            self.errorMessage = errorResponse.error.message
+            if self.messages[index].content[0].value.isEmpty {
+                self.messages.remove(at: index)
+            }
         }
     }
 }

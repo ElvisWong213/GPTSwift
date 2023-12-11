@@ -9,7 +9,8 @@ import SwiftUI
 
 struct Chatbubble: View {
     let author: Author
-    var content: MyContent
+    let messageType: MessageType
+    var value: String
     
     var body: some View {
         HStack {
@@ -17,12 +18,12 @@ struct Chatbubble: View {
                 Spacer()
             }
             VStack(alignment: author.isUser ? .trailing : .leading) {
-                if content.type == .Text {
-                    Text(LocalizedStringKey(content.value))
+                if messageType == .Text {
+                    Text(LocalizedStringKey(value))
                         .textSelection(.enabled)
                         .foregroundStyle(.white)
                 } else {
-                    if let data = Data(base64Encoded: content.value) {
+                    if let data = Data(base64Encoded: value) {
                         Image(uiImage: UIImage(data: data)!)
                             .resizable()
                             .scaledToFit()
@@ -32,7 +33,7 @@ struct Chatbubble: View {
             .padding()
             .background() {
                 RoundedRectangle(cornerRadius: 25)
-                    .foregroundStyle(author.isUser ? .blue : .gray)
+                    .foregroundStyle(foregroundColor())
             }
             if !author.isUser {
                 Spacer()
@@ -43,13 +44,24 @@ struct Chatbubble: View {
         .padding(.trailing, author.isUser ? 0 : 20)
         .padding(.leading, author.isUser ? 20 : 0)
     }
+    
+    private func foregroundColor() -> Color {
+        switch author {
+        case .User:
+            return .blue
+        case .GPT:
+            return .gray
+        case .Error:
+            return .red
+        }
+    }
 }
 
 #Preview {
     ScrollView {
         ForEach(MyMessage.MOCK) { message in
             ForEach(message.content) { content in
-                Chatbubble(author: message.author, content: content)
+                Chatbubble(author: message.author, messageType: content.type, value: content.value)
             }
         }
     }
