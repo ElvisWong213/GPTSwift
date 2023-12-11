@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EFD2B2785C900522152 /* UserSettingView.swift */; };
 		AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F7F2B279FD20041B64E /* KeychainService.swift */; };
 		AA9B8F832B27BC010041B64E /* ChatsRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */; };
+		AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA9B8F852B27CFCD0041B64E /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
+				AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */,
 				AA013EF12B266B2000522152 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +186,7 @@
 			packageProductDependencies = (
 				AA013EF02B266B2000522152 /* OpenAI */,
 				AA013EFA2B27859900522152 /* KeychainSwift */,
+				AA9B8F852B27CFCD0041B64E /* OpenAI */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -214,8 +217,8 @@
 			);
 			mainGroup = AA013EBE2B25FA0B00522152;
 			packageReferences = (
-				AA013EEF2B266B2000522152 /* XCLocalSwiftPackageReference "../SwiftOpenAI" */,
 				AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
@@ -476,13 +479,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		AA013EEF2B266B2000522152 /* XCLocalSwiftPackageReference "../SwiftOpenAI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftOpenAI;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -490,6 +486,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 20.0.0;
+			};
+		};
+		AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ElvisWong213/SwiftOpenAI.git";
+			requirement = {
+				branch = "fix-new-content";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -503,6 +507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		AA9B8F852B27CFCD0041B64E /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
+			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

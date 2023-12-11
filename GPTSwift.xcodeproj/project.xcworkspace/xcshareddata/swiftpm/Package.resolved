@@ -8,6 +8,15 @@
         "revision" : "d108a1fa6189e661f91560548ef48651ed8d93b9",
         "version" : "20.0.0"
       }
+    },
+    {
+      "identity" : "swiftopenai",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ElvisWong213/SwiftOpenAI.git",
+      "state" : {
+        "branch" : "fix-new-content",
+        "revision" : "887852498ed6c3c3e01b726eac8ac5955d3954d9"
+      }
     }
   ],
   "version" : 2
