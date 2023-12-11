@@ -13,6 +13,20 @@ struct ContentView: View {
     @Query private var items: [Item]
 
     var body: some View {
+        TabView {
+            ChatView()
+                .tabItem {
+                    Label("Chats", systemImage: "message")
+                }
+            UserSettingView()
+                .tabItem {
+                    Label("Setting", systemImage: "gearshape")
+                }
+        }
+    }
+    
+    @ViewBuilder func a() -> some View {
+        
         NavigationSplitView {
             List {
                 ForEach(items) { item in

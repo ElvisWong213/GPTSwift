@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,19 @@
 		AA013ECF2B25FA0B00522152 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013ECE2B25FA0B00522152 /* Item.swift */; };
 		AA013ED12B25FA0C00522152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA013ED02B25FA0C00522152 /* Assets.xcassets */; };
 		AA013ED52B25FA0C00522152 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA013ED42B25FA0C00522152 /* Preview Assets.xcassets */; };
+		AA013EDF2B25FAEB00522152 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EDE2B25FAEB00522152 /* ChatView.swift */; };
+		AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EE12B25FCE200522152 /* ChatInputTextField.swift */; };
+		AA013EE42B25FD4400522152 /* Chatbubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EE32B25FD4400522152 /* Chatbubble.swift */; };
+		AA013EE72B262E4E00522152 /* MyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EE62B262E4E00522152 /* MyMessage.swift */; };
+		AA013EE92B262E8800522152 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EE82B262E8800522152 /* Author.swift */; };
+		AA013EEB2B26306600522152 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EEA2B26306600522152 /* ChatViewModel.swift */; };
+		AA013EF12B266B2000522152 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA013EF02B266B2000522152 /* OpenAI */; };
+		AA013EF32B267D9400522152 /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EF22B267D9400522152 /* MessageType.swift */; };
+		AA013EF52B267DA500522152 /* MyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EF42B267DA500522152 /* MyContent.swift */; };
+		AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA013EFA2B27859900522152 /* KeychainSwift */; };
+		AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EFD2B2785C900522152 /* UserSettingView.swift */; };
+		AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F7F2B279FD20041B64E /* KeychainService.swift */; };
+		AA9B8F832B27BC010041B64E /* ChatsRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +35,17 @@
 		AA013ED02B25FA0C00522152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA013ED22B25FA0C00522152 /* GPTSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GPTSwift.entitlements; sourceTree = "<group>"; };
 		AA013ED42B25FA0C00522152 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA013EDE2B25FAEB00522152 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		AA013EE12B25FCE200522152 /* ChatInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputTextField.swift; sourceTree = "<group>"; };
+		AA013EE32B25FD4400522152 /* Chatbubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatbubble.swift; sourceTree = "<group>"; };
+		AA013EE62B262E4E00522152 /* MyMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessage.swift; sourceTree = "<group>"; };
+		AA013EE82B262E8800522152 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		AA013EEA2B26306600522152 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		AA013EF22B267D9400522152 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		AA013EF42B267DA500522152 /* MyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContent.swift; sourceTree = "<group>"; };
+		AA013EFD2B2785C900522152 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		AA9B8F7F2B279FD20041B64E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRoomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
+				AA013EF12B266B2000522152 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +80,10 @@
 		AA013EC92B25FA0B00522152 /* GPTSwift */ = {
 			isa = PBXGroup;
 			children = (
+				AA013EF82B27831200522152 /* Services */,
+				AA013EF62B2782DF00522152 /* Components */,
+				AA013EE52B262E3800522152 /* Models */,
+				AA013EE02B25FCBB00522152 /* Views */,
 				AA013ECA2B25FA0B00522152 /* GPTSwiftApp.swift */,
 				AA013ECC2B25FA0B00522152 /* ContentView.swift */,
 				AA013ECE2B25FA0B00522152 /* Item.swift */,
@@ -72,6 +102,69 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		AA013EE02B25FCBB00522152 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA9B8F812B27BBED0041B64E /* UserSetting */,
+				AA013EFC2B2785AC00522152 /* Chat */,
+				AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA013EE52B262E3800522152 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EE62B262E4E00522152 /* MyMessage.swift */,
+				AA013EF42B267DA500522152 /* MyContent.swift */,
+				AA013EF22B267D9400522152 /* MessageType.swift */,
+				AA013EE82B262E8800522152 /* Author.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA013EF62B2782DF00522152 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EF72B27830600522152 /* Chat */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA013EF72B27830600522152 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EE12B25FCE200522152 /* ChatInputTextField.swift */,
+				AA013EE32B25FD4400522152 /* Chatbubble.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA013EF82B27831200522152 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA9B8F7F2B279FD20041B64E /* KeychainService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA013EFC2B2785AC00522152 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EDE2B25FAEB00522152 /* ChatView.swift */,
+				AA013EEA2B26306600522152 /* ChatViewModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA9B8F812B27BBED0041B64E /* UserSetting */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EFD2B2785C900522152 /* UserSettingView.swift */,
+			);
+			path = UserSetting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,6 +181,10 @@
 			dependencies = (
 			);
 			name = GPTSwift;
+			packageProductDependencies = (
+				AA013EF02B266B2000522152 /* OpenAI */,
+				AA013EFA2B27859900522152 /* KeychainSwift */,
+			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +213,10 @@
 				Base,
 			);
 			mainGroup = AA013EBE2B25FA0B00522152;
+			packageReferences = (
+				AA013EEF2B266B2000522152 /* XCLocalSwiftPackageReference "../SwiftOpenAI" */,
+				AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -142,9 +243,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */,
+				AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */,
+				AA013EDF2B25FAEB00522152 /* ChatView.swift in Sources */,
+				AA013EE92B262E8800522152 /* Author.swift in Sources */,
+				AA013EF32B267D9400522152 /* MessageType.swift in Sources */,
 				AA013ECD2B25FA0B00522152 /* ContentView.swift in Sources */,
+				AA013EE42B25FD4400522152 /* Chatbubble.swift in Sources */,
+				AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */,
+				AA013EF52B267DA500522152 /* MyContent.swift in Sources */,
 				AA013ECF2B25FA0B00522152 /* Item.swift in Sources */,
 				AA013ECB2B25FA0B00522152 /* GPTSwiftApp.swift in Sources */,
+				AA9B8F832B27BC010041B64E /* ChatsRoomView.swift in Sources */,
+				AA013EEB2B26306600522152 /* ChatViewModel.swift in Sources */,
+				AA013EE72B262E4E00522152 /* MyMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +475,36 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AA013EEF2B266B2000522152 /* XCLocalSwiftPackageReference "../SwiftOpenAI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftOpenAI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA013EF02B266B2000522152 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenAI;
+		};
+		AA013EFA2B27859900522152 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA013EBF2B25FA0B00522152 /* Project object */;
 }
