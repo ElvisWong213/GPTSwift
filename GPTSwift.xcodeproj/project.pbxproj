@@ -23,9 +23,11 @@
 		AA013EF52B267DA500522152 /* MyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EF42B267DA500522152 /* MyContent.swift */; };
 		AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA013EFA2B27859900522152 /* KeychainSwift */; };
 		AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EFD2B2785C900522152 /* UserSettingView.swift */; };
+		AA8C67C52B31E83F00ACA7FE /* APIDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8C67C42B31E83F00ACA7FE /* APIDataHelper.swift */; };
 		AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F7F2B279FD20041B64E /* KeychainService.swift */; };
-		AA9B8F832B27BC010041B64E /* ChatsRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */; };
+		AA9B8F832B27BC010041B64E /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatListView.swift */; };
 		AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA9B8F852B27CFCD0041B64E /* OpenAI */; };
+		AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F892B27E7850041B64E /* Chat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +47,10 @@
 		AA013EF22B267D9400522152 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		AA013EF42B267DA500522152 /* MyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContent.swift; sourceTree = "<group>"; };
 		AA013EFD2B2785C900522152 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		AA8C67C42B31E83F00ACA7FE /* APIDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataHelper.swift; sourceTree = "<group>"; };
 		AA9B8F7F2B279FD20041B64E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRoomView.swift; sourceTree = "<group>"; };
+		AA9B8F822B27BC010041B64E /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		AA9B8F892B27E7850041B64E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 		AA013EC92B25FA0B00522152 /* GPTSwift */ = {
 			isa = PBXGroup;
 			children = (
+				AA8C67C22B31E82200ACA7FE /* Helpers */,
 				AA013EF82B27831200522152 /* Services */,
 				AA013EF62B2782DF00522152 /* Components */,
 				AA013EE52B262E3800522152 /* Models */,
@@ -109,7 +114,7 @@
 			children = (
 				AA9B8F812B27BBED0041B64E /* UserSetting */,
 				AA013EFC2B2785AC00522152 /* Chat */,
-				AA9B8F822B27BC010041B64E /* ChatsRoomView.swift */,
+				AA9B8F822B27BC010041B64E /* ChatListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,10 +122,8 @@
 		AA013EE52B262E3800522152 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA013EE62B262E4E00522152 /* MyMessage.swift */,
-				AA013EF42B267DA500522152 /* MyContent.swift */,
-				AA013EF22B267D9400522152 /* MessageType.swift */,
-				AA013EE82B262E8800522152 /* Author.swift */,
+				AA9B8F882B27E7790041B64E /* Chat */,
+				AA9B8F872B27E76A0041B64E /* Message */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,12 +162,39 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		AA8C67C22B31E82200ACA7FE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AA8C67C42B31E83F00ACA7FE /* APIDataHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		AA9B8F812B27BBED0041B64E /* UserSetting */ = {
 			isa = PBXGroup;
 			children = (
 				AA013EFD2B2785C900522152 /* UserSettingView.swift */,
 			);
 			path = UserSetting;
+			sourceTree = "<group>";
+		};
+		AA9B8F872B27E76A0041B64E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EE62B262E4E00522152 /* MyMessage.swift */,
+				AA013EF42B267DA500522152 /* MyContent.swift */,
+				AA013EF22B267D9400522152 /* MessageType.swift */,
+				AA013EE82B262E8800522152 /* Author.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		AA9B8F882B27E7790041B64E /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA9B8F892B27E7850041B64E /* Chat.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,7 +230,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					AA013EC62B25FA0B00522152 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -248,6 +278,7 @@
 			files = (
 				AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */,
 				AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */,
+				AA8C67C52B31E83F00ACA7FE /* APIDataHelper.swift in Sources */,
 				AA013EDF2B25FAEB00522152 /* ChatView.swift in Sources */,
 				AA013EE92B262E8800522152 /* Author.swift in Sources */,
 				AA013EF32B267D9400522152 /* MessageType.swift in Sources */,
@@ -257,8 +288,9 @@
 				AA013EF52B267DA500522152 /* MyContent.swift in Sources */,
 				AA013ECF2B25FA0B00522152 /* Item.swift in Sources */,
 				AA013ECB2B25FA0B00522152 /* GPTSwiftApp.swift in Sources */,
-				AA9B8F832B27BC010041B64E /* ChatsRoomView.swift in Sources */,
+				AA9B8F832B27BC010041B64E /* ChatListView.swift in Sources */,
 				AA013EEB2B26306600522152 /* ChatViewModel.swift in Sources */,
+				AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */,
 				AA013EE72B262E4E00522152 /* MyMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +332,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -361,6 +394,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -388,6 +422,7 @@
 				CODE_SIGN_ENTITLEMENTS = GPTSwift/GPTSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GPTSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 447H88N27M;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -426,6 +461,7 @@
 				CODE_SIGN_ENTITLEMENTS = GPTSwift/GPTSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GPTSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 447H88N27M;
 				ENABLE_HARDENED_RUNTIME = YES;

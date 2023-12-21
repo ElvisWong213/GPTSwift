@@ -11,9 +11,10 @@ import PhotosUI
 import UIKit
 #endif
 import AVFoundation
+import SwiftData
 
 struct ChatInputTextField: View {
-    @EnvironmentObject var chatViewModel: ChatViewModel
+    @Bindable var chatViewModel: ChatViewModel
     @State var selectedItem: PhotosPickerItem?
     @State var uiImage: UIImage?
     
@@ -41,8 +42,7 @@ struct ChatInputTextField: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             Button {
-                setUpMessage()
-                chatViewModel.sendMessage()
+                sendMessage()
             } label: {
                 if chatViewModel.isSent {
                     Image(systemName: "ellipsis")
@@ -65,24 +65,24 @@ struct ChatInputTextField: View {
         }
     }
     
-    private func setUpMessage() {
-        var content: [MyContent] = []
+    private func sendMessage() {
+        var contents: [MyContent] = []
         if let image = uiImage {
-            content.append(MyContent(type: .Image, value: image.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""))
+            contents.append(MyContent(type: .Image, value: image.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""))
         }
-        content.append(MyContent(type: .Text, value: chatViewModel.textInput))
-        chatViewModel.messages.append(.init(author: .User, content: content))
+        contents.append(MyContent(type: .Text, value: chatViewModel.textInput))
+        let newMessage = MyMessage(author: .User, contents: contents)
         
         // Clear input
         chatViewModel.textInput = ""
         selectedItem = nil
         uiImage = nil
+        chatViewModel.sendMessage(newMessage: newMessage)
     }
 }
 
 #Preview {
-    ChatInputTextField()
-        .environmentObject(ChatViewModel())
+    ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: "")))
 }
 
 public extension UIImage {

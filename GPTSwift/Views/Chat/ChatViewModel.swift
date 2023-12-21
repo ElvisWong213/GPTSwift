@@ -7,35 +7,48 @@
 
 import Foundation
 import OpenAI
+import SwiftData
 
-class ChatViewModel: ObservableObject {
-    @Published var textInput: String = ""
-    @Published var isSent: Bool = false
-    @Published var messages: [MyMessage] = []
-    @Published var errorMessage: String = ""
+@Observable
+class ChatViewModel {
+    let modelContext: ModelContext
+    var chat: Chat
+    var textInput: String = ""
+    var isSent: Bool = false
+    var errorMessage: String = ""
     
-    func sendMessage() {
+    init(modelContext: ModelContext, chat: Chat) {
+        self.modelContext = modelContext
+        self.chat = chat
+    }
+    
+    func sendMessage(newMessage: MyMessage) {
         isSent = true
         errorMessage = ""
+        chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
-        let chatQuery = ChatQuery(model: .gpt3_5Turbo_1106, messages: messages.map{ $0.convertToMessage() })
+        let chatQuery = ChatQuery(model: .gpt3_5Turbo_1106, messages: chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() })
         // debug
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try? encoder.encode(chatQuery)
         print(String(data: data!, encoding: .utf8) ?? "")
         
-        messages.append(.init(author: .GPT, content: [MyContent(type: .Text, value: "")]))
-        let index = messages.count - 1
+        let newMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")])
+        
+        chat.messages.append(newMessage)
+        
         openAI.chatsStream(query: chatQuery) { response in
             switch response {
             case .success(let data):
                 for choice in data.choices {
-                    self.updateMessageContent(messageIndex: index, content: choice.delta.content ?? "")
+                    self.updateMessageContent(newMessage: newMessage, content: choice.delta.content ?? "")
                 }
+//                self.modelContext.insert(self.chat)
+                try? self.modelContext.save()
             case .failure(let error):
                 print(error)
-                self.getErrorMessage(errorResponse: error as! APIErrorResponse, messageIndex: index)
+                self.getErrorMessage(errorResponse: error as! APIErrorResponse, newMessage: newMessage)
                 self.updateIsSent(false)
             }
         } completion: { error in
@@ -44,9 +57,9 @@ class ChatViewModel: ObservableObject {
         }
     }
     
-    private func updateMessageContent(messageIndex index: Int, content: String) {
+    private func updateMessageContent(newMessage: MyMessage, content: String) {
         DispatchQueue.main.async {
-            self.messages[index].content[0].value.append(content)
+            newMessage.contents.first?.value.append(content)
         }
     }
     
@@ -56,12 +69,11 @@ class ChatViewModel: ObservableObject {
         }
     }
     
-    private func getErrorMessage(errorResponse: APIErrorResponse, messageIndex index: Int) {
+    private func getErrorMessage(errorResponse: APIErrorResponse, newMessage: MyMessage) {
         DispatchQueue.main.async {
             self.errorMessage = errorResponse.error.message
-            if self.messages[index].content[0].value.isEmpty {
-                self.messages.remove(at: index)
-            }
+            self.chat.messages.removeAll(where: { $0.id == newMessage.id })
+            try? self.modelContext.save()
         }
     }
 }

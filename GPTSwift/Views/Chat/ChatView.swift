@@ -6,16 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ChatView: View {
-    @StateObject var viewModel = ChatViewModel()
-        
+    @State private var viewModel: ChatViewModel
+    
+    init(modelContext: ModelContext,chat: Chat) {
+        self._viewModel = State(initialValue: ChatViewModel(modelContext: modelContext, chat: chat))
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(viewModel.messages) { message in
-                        ForEach(message.content) { content in
+                    ForEach(viewModel.chat.messages.sorted(by: { $0.timestamp < $1.timestamp } )) { message in
+                        ForEach(message.contents) { content in
                             Chatbubble(author: message.author, messageType: content.type, value: content.value)
                         }
                     }
@@ -27,8 +32,7 @@ struct ChatView: View {
             }
             .scrollIndicators(.never)
             .rotationEffect(.degrees(180))
-            ChatInputTextField()
-                .environmentObject(viewModel)
+            ChatInputTextField(chatViewModel: viewModel)
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -37,5 +41,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView()
+    ChatView(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: ""))
 }

@@ -32,7 +32,7 @@ struct Chatbubble: View {
             }
             .padding()
             .background() {
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: 15)
                     .foregroundStyle(foregroundColor())
             }
             if !author.isUser {
@@ -60,7 +60,7 @@ struct Chatbubble: View {
 #Preview {
     ScrollView {
         ForEach(MyMessage.MOCK) { message in
-            ForEach(message.content) { content in
+            ForEach(message.contents) { content in
                 Chatbubble(author: message.author, messageType: content.type, value: content.value)
             }
         }

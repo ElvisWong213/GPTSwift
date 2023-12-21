@@ -8,7 +8,7 @@
 import Foundation
 import OpenAI
 
-enum Author {
+enum Author: Codable {
     case User, GPT, Error
     
     var isUser: Bool {
@@ -29,5 +29,11 @@ enum Author {
         case .Error:
             return .system
         }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case User = "User"
+        case GPT = "GPT"
+        case Error = "Error"
     }
 }

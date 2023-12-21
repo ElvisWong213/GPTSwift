@@ -8,7 +8,7 @@
 import Foundation
 import OpenAI
 
-enum MessageType {
+enum MessageType: Codable {
     case Text, Image
     
     var chatContentType: ChatContent.ChatContentType {
@@ -18,5 +18,10 @@ enum MessageType {
         case .Image:
             return .imageUrl
         }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case Text = "Text"
+        case Image = "Image"
     }
 }

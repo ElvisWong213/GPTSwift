@@ -11,7 +11,7 @@ struct UserSettingView: View {
     @State private var apiKey: String = ""
     
     var body: some View {
-        VStack {
+        NavigationStack {
             Form {
                 enterApiKeyView()
                 Button {
@@ -22,6 +22,7 @@ struct UserSettingView: View {
                     Text("Delete Key")
                 }
             }
+            .navigationTitle("Setting")
         }
         .onAppear() {
             apiKey = KeychainService.getKey()
