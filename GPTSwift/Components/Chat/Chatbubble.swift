@@ -17,23 +17,27 @@ struct Chatbubble: View {
             if author.isUser {
                 Spacer()
             }
-            VStack(alignment: author.isUser ? .trailing : .leading) {
-                if messageType == .Text {
-                    Text(LocalizedStringKey(value))
-                        .textSelection(.enabled)
-                        .foregroundStyle(.white)
-                } else {
-                    if let data = Data(base64Encoded: value) {
-                        Image(uiImage: UIImage(data: data)!)
-                            .resizable()
-                            .scaledToFit()
+            if author != .System {
+                VStack(alignment: author.isUser ? .trailing : .leading) {
+                    if messageType == .Text {
+                        Text(LocalizedStringKey(value))
+                            .textSelection(.enabled)
+                            .foregroundStyle(.white)
+                    } else {
+                        if let data = Data(base64Encoded: value) {
+                            #if os(iOS)
+                            Image(uiImage: UIImage(data: data)!)
+                                .resizable()
+                                .scaledToFit()
+                            #endif
+                        }
                     }
                 }
-            }
-            .padding()
-            .background() {
-                RoundedRectangle(cornerRadius: 15)
-                    .foregroundStyle(foregroundColor())
+                .padding()
+                .background() {
+                    RoundedRectangle(cornerRadius: 15)
+                        .foregroundStyle(foregroundColor())
+                }
             }
             if !author.isUser {
                 Spacer()
@@ -53,6 +57,8 @@ struct Chatbubble: View {
             return .gray
         case .Error:
             return .red
+        case .System:
+            return .clear
         }
     }
 }

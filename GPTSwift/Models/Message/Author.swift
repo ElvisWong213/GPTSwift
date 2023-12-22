@@ -9,13 +9,13 @@ import Foundation
 import OpenAI
 
 enum Author: Codable {
-    case User, GPT, Error
+    case User, GPT, Error, System
     
     var isUser: Bool {
         switch self {
         case .User:
             return true
-        case .GPT, .Error:
+        case .GPT, .Error, .System:
             return false
         }
     }
@@ -28,6 +28,8 @@ enum Author: Codable {
             return .assistant
         case .Error:
             return .system
+        case .System:
+            return .system
         }
     }
     
@@ -35,5 +37,6 @@ enum Author: Codable {
         case User = "User"
         case GPT = "GPT"
         case Error = "Error"
+        case System = "system"
     }
 }

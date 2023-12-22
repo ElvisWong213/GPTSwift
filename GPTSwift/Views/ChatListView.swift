@@ -11,6 +11,7 @@ import SwiftData
 struct ChatListView: View {
     @State private var count = 1
     @Environment(\.modelContext) private var modelContext
+    private var fetchDescriptor = FetchDescriptor<Chat>(sortBy: [SortDescriptor(\.title)])
     @Query private var chats: [Chat]
     
     var body: some View {
@@ -26,38 +27,55 @@ struct ChatListView: View {
                 }
             }
             .navigationTitle("Chats")
-#if os(macOS)
+            #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
+            #endif
             .toolbar {
-#if os(iOS)
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        let newChat = Chat(title: "\(count)")
-                        modelContext.insert(newChat)
-                        count += 1
-                    } label: {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    createNewChat()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        do {
-                            try modelContext.delete(model: Chat.self)
-                        } catch {
-                            print(error)
-                        }
+                        removeAllChats()
                     } label: {
                         Label("Remove", systemImage: "minus")
                     }
                 }
-#endif
+                #elseif os(macOS)
                 ToolbarItem {
+                    createNewChat()
                 }
+                ToolbarItem {
+                    Button {
+                        removeAllChats()
+                    } label: {
+                        Label("Remove", systemImage: "minus")
+                    }
+                }
+                #endif
             }
         } detail: {
             Text("Select an item")
         }
+    }
+    
+    @ViewBuilder private func createNewChat() -> some View {
+        NavigationLink {
+            NewChatView()
+        } label: {
+            Label("Add Item", systemImage: "plus")
+        }
+
+    }
+    
+    private func removeAllChats() {
+        do {
+            try modelContext.delete(model: Chat.self)
+        } catch {
+            print(error)
+        }
+        
     }
 }
 

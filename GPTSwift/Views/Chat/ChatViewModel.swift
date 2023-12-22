@@ -27,7 +27,10 @@ class ChatViewModel {
         errorMessage = ""
         chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
-        let chatQuery = ChatQuery(model: .gpt3_5Turbo_1106, messages: chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() })
+        let promptMessage = Message(role: .system, content: .object([ChatContent(type: .text, value: chat.prompt)]))
+        var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
+        messages.insert(promptMessage, at: 0)
+        let chatQuery = ChatQuery(model: chat.model!, messages: messages)
         // debug
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -44,8 +47,6 @@ class ChatViewModel {
                 for choice in data.choices {
                     self.updateMessageContent(newMessage: newMessage, content: choice.delta.content ?? "")
                 }
-//                self.modelContext.insert(self.chat)
-                try? self.modelContext.save()
             case .failure(let error):
                 print(error)
                 self.getErrorMessage(errorResponse: error as! APIErrorResponse, newMessage: newMessage)
@@ -54,6 +55,8 @@ class ChatViewModel {
         } completion: { error in
             print(error?.localizedDescription ?? "")
             self.updateIsSent(false)
+            try? self.modelContext.save()
+            print("Save")
         }
     }
     
@@ -73,7 +76,6 @@ class ChatViewModel {
         DispatchQueue.main.async {
             self.errorMessage = errorResponse.error.message
             self.chat.messages.removeAll(where: { $0.id == newMessage.id })
-            try? self.modelContext.save()
         }
     }
 }

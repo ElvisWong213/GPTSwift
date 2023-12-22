@@ -28,5 +28,10 @@ struct GPTSwiftApp: App {
             ContentView()
         }
         .modelContainer(for: [Chat.self], isAutosaveEnabled: false)
+        #if os(macOS)
+        Settings {
+            UserSettingView()
+        }
+        #endif
     }
 }

@@ -11,7 +11,7 @@ import SwiftData
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
     
-    init(modelContext: ModelContext,chat: Chat) {
+    init(modelContext: ModelContext, chat: Chat) {
         self._viewModel = State(initialValue: ChatViewModel(modelContext: modelContext, chat: chat))
     }
     
@@ -30,16 +30,19 @@ struct ChatView: View {
                 }
                 .rotationEffect(.degrees(180))
             }
+            .onTapGesture {
+                #if os(iOS)
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                #endif
+            }
             .scrollIndicators(.never)
             .rotationEffect(.degrees(180))
             ChatInputTextField(chatViewModel: viewModel)
-        }
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }
 
 #Preview {
     ChatView(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: ""))
+        .modelContainer(for: Chat.self, inMemory: true)
 }

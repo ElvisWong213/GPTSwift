@@ -7,32 +7,31 @@
 
 import Foundation
 import SwiftData
+import OpenAI
 
 @Model
 class Chat: Identifiable, Codable {
     @Attribute(.unique) var id: UUID = UUID()
     var title: String
+    var model: Model?
+    var prompt: String
     
     @Relationship(deleteRule: .cascade, inverse: \MyMessage.chat)
     var messages: [MyMessage] = []
     
-    init(id: UUID = UUID(), title: String, messages: [MyMessage] = []) {
+    init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = []) {
         self.id = id
         self.title = title
+        self.model = model
+        self.prompt = prompt
         self.messages = messages
     }
     
-    func fetchMessages() -> [MyMessage] {
-        let fetchDescriptor = FetchDescriptor(predicate: #Predicate<MyMessage>{ $0.chat == self })
-        do {
-            guard let result = try modelContext?.fetch(fetchDescriptor) else {
-                return []
-            }
-            return result
-        } catch {
-            print(error)
-        }
-        return []
+    func convertToChatQuery() -> ChatQuery {
+        let promptMessage = MyMessage(author: .System, contents: [MyContent(type: .Text, value: prompt)], chat: self)
+        var messages = self.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
+        messages.insert(promptMessage.convertToMessage(), at: 0)
+        return ChatQuery(model: self.model!, messages: messages)
     }
     
     // Codable
@@ -40,6 +39,8 @@ class Chat: Identifiable, Codable {
         case id
         case title
         case messages
+        case model
+        case prompt
     }
     
     required init(from decoder: Decoder) throws {
@@ -47,6 +48,8 @@ class Chat: Identifiable, Codable {
         self.id = try container.decode(UUID.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.messages = try container.decode([MyMessage].self, forKey: .messages)
+        self.model = try container.decode(Model.self, forKey: .model)
+        self.prompt = try container.decode(String.self, forKey: .prompt)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -54,5 +57,7 @@ class Chat: Identifiable, Codable {
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(messages, forKey: .messages)
+        try container.encode(model, forKey: .model)
+        try container.encode(prompt, forKey: .prompt)
     }
 }
