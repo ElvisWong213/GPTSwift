@@ -53,10 +53,13 @@ class ChatViewModel {
                 self.updateIsSent(false)
             }
         } completion: { error in
-            print(error?.localizedDescription ?? "")
+            if let error {
+                print(error)
+            }
             self.updateIsSent(false)
             newMessage.timestamp = Date.now
             try? self.modelContext.save()
+            print("Save")
         }
     }
     
@@ -80,6 +83,7 @@ class ChatViewModel {
     }
     
     func removeMessage(message: MyMessage) {
+        chat.messages.removeAll(where: { $0.id == message.id })
         modelContext.delete(message)
         try? modelContext.save()
     }

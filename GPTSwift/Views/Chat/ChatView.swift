@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
+    private let errorMessageId: UUID = UUID()
     
     init(modelContext: ModelContext, chat: Chat) {
         self._viewModel = State(initialValue: ChatViewModel(modelContext: modelContext, chat: chat))
@@ -33,12 +34,19 @@ struct ChatView: View {
                         }
                         if !viewModel.errorMessage.isEmpty {
                             Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
+                                .id(errorMessageId)
                                 .listRowSeparator(.hidden)
                         }
                     }
                     .onChange(of: viewModel.sortMessages().last!.contents.last?.value) { oldValue, newValue in
-                        proxy.scrollTo(viewModel.sortMessages().last?.id, anchor: .bottom)
+                        let messages = viewModel.sortMessages()
+                        proxy.scrollTo(messages.last?.id, anchor: .bottom)
                     }
+                    .onChange(of: viewModel.errorMessage, { oldValue, newValue in
+                        if !newValue.isEmpty {
+                            proxy.scrollTo(errorMessageId)
+                        }
+                    })
                     .onAppear() {
                         let messages = viewModel.sortMessages()
                         proxy.scrollTo(messages.last?.id, anchor: .bottom)

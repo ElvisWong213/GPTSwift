@@ -37,9 +37,14 @@ struct UserSettingView: View {
         VStack {
             LabeledContent {
                 TextField("", text: $apiKey)
+                    .multilineTextAlignment(.trailing)
+                    .onChange(of: apiKey, { oldValue, newValue in
+                        KeychainService.setKey(key: newValue)
+                    })
                     .onSubmit {
                         KeychainService.setKey(key: apiKey)
                     }
+                    .submitLabel(.done)
             } label: {
                 Text("API Key")
             }
