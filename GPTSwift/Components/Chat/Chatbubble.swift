@@ -45,8 +45,8 @@ struct Chatbubble: View {
         }
         .padding(.horizontal)
         .padding(.bottom)
-        .padding(.trailing, author.isUser ? 0 : 20)
-        .padding(.leading, author.isUser ? 20 : 0)
+        .padding(.trailing, author.isUser ? 0 : 15)
+        .padding(.leading, author.isUser ? 15 : 0)
     }
     
     private func foregroundColor() -> Color {

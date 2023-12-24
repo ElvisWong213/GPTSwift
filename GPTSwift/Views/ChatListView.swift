@@ -9,22 +9,22 @@ import SwiftUI
 import SwiftData
 
 struct ChatListView: View {
-    @State private var count = 1
     @Environment(\.modelContext) private var modelContext
-    private var fetchDescriptor = FetchDescriptor<Chat>(sortBy: [SortDescriptor(\.title)])
     @Query private var chats: [Chat]
+    @State private var selectedChat: Chat?
     
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(chats) { chat in
-                    NavigationLink {
-                        ChatView(modelContext: modelContext, chat: chat)
-                    } label: {
-                        Text(chat.title)
+            List(chats, selection: $selectedChat) { chat in
+                NavigationLink(chat.title, value: chat)
+                    .swipeActions() {
+                        Button {
+                            removeChat(chat: chat)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
                     }
-                    
-                }
             }
             .navigationTitle("Chats")
             #if os(macOS)
@@ -35,50 +35,37 @@ struct ChatListView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     createNewChat()
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        removeAllChats()
-                    } label: {
-                        Label("Remove", systemImage: "minus")
-                    }
-                }
                 #elseif os(macOS)
                 ToolbarItem {
                     createNewChat()
                 }
-                ToolbarItem {
-                    Button {
-                        removeAllChats()
-                    } label: {
-                        Label("Remove", systemImage: "minus")
-                    }
-                }
                 #endif
             }
         } detail: {
-            Text("Select an item")
+            if selectedChat != nil {
+                ChatView(modelContext: modelContext, chat: selectedChat!)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(selectedChat!.title)
+            }
         }
     }
     
     @ViewBuilder private func createNewChat() -> some View {
         NavigationLink {
-            NewChatView()
+            NewChatView(selectedChat: $selectedChat)
         } label: {
             Label("Add Item", systemImage: "plus")
         }
 
     }
     
-    private func removeAllChats() {
-        do {
-            try modelContext.delete(model: Chat.self)
-        } catch {
-            print(error)
-        }
-        
+    private func removeChat(chat: Chat) {
+        modelContext.delete(chat)
+        try? modelContext.save()
     }
 }
 
 #Preview {
     ChatListView()
+        .modelContainer(for: [Chat.self])
 }

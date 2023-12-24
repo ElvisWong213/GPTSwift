@@ -78,4 +78,16 @@ class ChatViewModel {
             self.chat.messages.removeAll(where: { $0.id == newMessage.id })
         }
     }
+    
+    func removeMessage(message: MyMessage) {
+        modelContext.delete(message)
+        try? modelContext.save()
+    }
+    
+    func removeAllMessage() {
+        for message in chat.messages {
+            modelContext.delete(message)
+        }
+        try? modelContext.save()
+    }
 }

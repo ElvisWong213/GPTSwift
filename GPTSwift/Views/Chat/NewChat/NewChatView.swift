@@ -9,24 +9,30 @@ import SwiftUI
 import OpenAI
 
 struct NewChatView: View {
+    @Binding var selectedChat: Chat?
+    
     @State private var openAIModels: [ModelResult] = []
-    @State private var newChat: Chat = Chat(title: "")
-    private let openAI = OpenAI(apiToken: KeychainService.getKey())
-    
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.modelContext) var modelContext
-    
+    @State private var title: String = ""
+    @State private var prompt: String = ""
+    @State private var model: Model?
+    @State var editChat: Chat? = nil
+        
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         Form {
             LabeledContent("Chat Title") {
-                TextField("", text: $newChat.title)
-            }  
+                TextField("", text: $title)
+                    .multilineTextAlignment(.trailing)
+            }
             LabeledContent("Prompt") {
-                TextEditor(text: $newChat.prompt)
+                TextEditor(text: $prompt)
+                    .multilineTextAlignment(.trailing)
                     .frame(height: 150)
                     .font(.title3)
             }
-            Picker(selection: $newChat.model, label: Text("GPT Version")) {
+            Picker(selection: $model, label: Text("GPT Version")) {
                 ForEach(openAIModels) { model in
                     Text(model.id)
                         .tag(Optional(model.id))
@@ -41,51 +47,87 @@ struct NewChatView: View {
                 }
                 Spacer()
                 Button {
-                    createNewChat()
+                    if isEdit {
+                        updateChat()
+                    } else {
+                        createNewChat()
+                    }
                 } label: {
-                    Text("Create")
+                    Text(isEdit ? "Save" : "Create")
                 }
             }
             #endif
         }
+        .toolbarTitleDisplayMode(.inline)
+        .navigationTitle(editChat != nil ? "Edit Chat" : "Create New Chat")
         #if os(macOS)
         .padding()
         #elseif os(iOS)
         .toolbar {
             ToolbarItem {
                 Button {
-                    createNewChat()
+                    if editChat != nil {
+                        updateChat()
+                    } else {
+                        createNewChat()
+                    }
                 } label: {
-                    Text("Create")
+                    Text(editChat != nil ? "Save" : "Create")
                 }
             }
         }
         #endif
         .onAppear() {
+            setUpEditChat()
             fetchAvailableModels()
         }
     }
     
     private func fetchAvailableModels() {
         Task {
+            let openAI = OpenAI(apiToken: KeychainService.getKey())
             let result = try? await openAI.models()
             openAIModels = result?.data.sorted(by: { $0.id < $1.id }) ?? []
             openAIModels = openAIModels.filter{ $0.id.contains("gpt") }
-            if !openAIModels.isEmpty {
-                newChat.model = Optional(openAIModels.first!.id)
+            if !openAIModels.isEmpty && model == nil {
+                model = Optional(openAIModels.first!.id)
             }
         }
     }
     
-    private func createNewChat() {
-        guard newChat.model != nil else {
+    private func setUpEditChat() {
+        guard let editChat else {
             return
         }
+        title = editChat.title
+        model = editChat.model
+        prompt = editChat.prompt
+    }
+    
+    private func createNewChat() {
+        guard model != nil else {
+            return
+        }
+        if title.isEmpty {
+            title = "New Chat"
+        }
+        let newChat = Chat(title: title, model: model, prompt: prompt)
         modelContext.insert(newChat)
+        try? modelContext.save()
+        selectedChat = newChat
+    }
+    
+    func updateChat() {
+        editChat?.title = title
+        editChat?.model = model
+        editChat?.prompt = prompt
+        try? modelContext.save()
         dismiss()
     }
+    
 }
 
-#Preview {
-    NewChatView()
-}
+//#Preview {
+//    NewChatView(selectedChat: .constant(Chat(title: "")))
+//        .modelContainer(for: [Chat.self])
+//}
