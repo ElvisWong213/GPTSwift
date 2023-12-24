@@ -55,8 +55,8 @@ class ChatViewModel {
         } completion: { error in
             print(error?.localizedDescription ?? "")
             self.updateIsSent(false)
+            newMessage.timestamp = Date.now
             try? self.modelContext.save()
-            print("Save")
         }
     }
     
@@ -89,5 +89,9 @@ class ChatViewModel {
             modelContext.delete(message)
         }
         try? modelContext.save()
+    }
+    
+    func sortMessages() -> [MyMessage] {
+        return chat.messages.sorted(by: { $0.timestamp < $1.timestamp })
     }
 }

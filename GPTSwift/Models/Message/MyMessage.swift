@@ -13,7 +13,7 @@ import SwiftData
 class MyMessage: Identifiable, Codable {
     @Attribute(.unique) var id: UUID = UUID()
     let author: Author
-    let timestamp: Date = Date.now
+    var timestamp: Date = Date.now
     
     @Relationship(deleteRule: .cascade, inverse: \MyContent.message)
     var contents: [MyContent] = []

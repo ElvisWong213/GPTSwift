@@ -7,10 +7,11 @@
 
 import SwiftUI
 import PhotosUI
+import SwiftData
+import OpenAI
 #if canImport(UIKit)
 import UIKit
 #endif
-import SwiftData
 
 struct ChatInputTextField: View {
     @Bindable var chatViewModel: ChatViewModel
@@ -23,6 +24,7 @@ struct ChatInputTextField: View {
                 Image(systemName: "plus")
                     .font(.title2)
             }
+            .disabled(chatViewModel.chat.model != .gpt4_vision_preview)
             VStack {
                 if let uiImage = uiImage {
                     Button {
@@ -53,14 +55,10 @@ struct ChatInputTextField: View {
             .font(.title2)
             .disabled(chatViewModel.textInput.isEmpty || chatViewModel.isSent)
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 5)
         .onChange(of: selectedItem) {
-            Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                    uiImage = UIImage(data: data)
-                    uiImage = uiImage?.resize(512, 512)
-                }
-            }
+            resizeImage()
         }
     }
     
@@ -77,6 +75,15 @@ struct ChatInputTextField: View {
         selectedItem = nil
         uiImage = nil
         chatViewModel.sendMessage(newMessage: newMessage)
+    }
+    
+    private func resizeImage() {
+        Task {
+            if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                uiImage = UIImage(data: data)
+                uiImage = uiImage?.resize(512, 512)
+            }
+        }
     }
 }
 

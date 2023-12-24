@@ -19,28 +19,29 @@ struct ChatView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List {
-                    ForEach(viewModel.chat.messages.sorted(by: { $0.timestamp < $1.timestamp } )) { message in
-                        ForEach(message.contents) { content in
-                            Chatbubble(author: message.author, messageType: content.type, value: content.value)
+                ScrollViewReader { proxy in
+                    List {
+                        ForEach(viewModel.sortMessages()) { message in
+                            ForEach(message.contents) { content in
+                                Chatbubble(author: message.author, messageType: content.type, value: content.value)
+                                    .id(message.id)
+                                    .listRowSeparator(.hidden)
+                                    .contextMenu {
+                                        contextMenuButtons(message: message, content: content)
+                                    }
+                            }
+                        }
+                        if !viewModel.errorMessage.isEmpty {
+                            Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
                                 .listRowSeparator(.hidden)
-                                .contextMenu {
-                                    Button {
-                                        UIPasteboard.general.setValue(content.value, forPasteboardType: UTType.plainText.identifier)
-                                    } label: {
-                                        Label("Copy", systemImage: "doc.on.doc")
-                                    }
-                                    Button(role: .destructive) {
-                                        viewModel.removeMessage(message: message)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
                         }
                     }
-                    if !viewModel.errorMessage.isEmpty {
-                        Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
-                            .listRowSeparator(.hidden)
+                    .onChange(of: viewModel.sortMessages().last!.contents.last?.value) { oldValue, newValue in
+                        proxy.scrollTo(viewModel.sortMessages().last?.id, anchor: .bottom)
+                    }
+                    .onAppear() {
+                        let messages = viewModel.sortMessages()
+                        proxy.scrollTo(messages.last?.id, anchor: .bottom)
                     }
                 }
                 .onTapGesture {
@@ -62,6 +63,19 @@ struct ChatView: View {
                 }
             }
             .toolbar(.hidden, for: .tabBar)
+        }
+    }
+    
+    @ViewBuilder private func contextMenuButtons(message: MyMessage, content: MyContent) -> some View {
+        Button {
+            UIPasteboard.general.setValue(content.value, forPasteboardType: UTType.plainText.identifier)
+        } label: {
+            Label("Copy", systemImage: "doc.on.doc")
+        }
+        Button(role: .destructive) {
+            viewModel.removeMessage(message: message)
+        } label: {
+            Label("Delete", systemImage: "trash")
         }
     }
 }
