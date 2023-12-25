@@ -18,65 +18,68 @@ struct ChatView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                ScrollViewReader { proxy in
-                    List {
-                        ForEach(viewModel.sortMessages()) { message in
-                            ForEach(message.contents) { content in
-                                Chatbubble(author: message.author, messageType: content.type, value: content.value)
-                                    .id(message.id)
-                                    .listRowSeparator(.hidden)
-                                    .contextMenu {
-                                        contextMenuButtons(message: message, content: content)
-                                    }
-                            }
-                        }
-                        if !viewModel.errorMessage.isEmpty {
-                            Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
-                                .id(errorMessageId)
-                                .listRowSeparator(.hidden)
+        VStack {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    ForEach(viewModel.sortMessages()) { message in
+                        ForEach(message.contents) { content in
+                            Chatbubble(author: message.author, messageType: content.type, value: content.value)
+                                .id(message.id)
+                                .contextMenu {
+                                    contextMenuButtons(message: message, content: content)
+                                }
                         }
                     }
-                    .onChange(of: viewModel.sortMessages().last?.contents.last?.value) { oldValue, newValue in
-                        let messages = viewModel.sortMessages()
-                        proxy.scrollTo(messages.last?.id, anchor: .bottom)
-                    }
-                    .onChange(of: viewModel.errorMessage, { oldValue, newValue in
-                        if !newValue.isEmpty {
-                            proxy.scrollTo(errorMessageId)
-                        }
-                    })
-                    .onAppear() {
-                        let messages = viewModel.sortMessages()
-                        proxy.scrollTo(messages.last?.id, anchor: .bottom)
+                    if !viewModel.errorMessage.isEmpty {
+                        Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
+                            .id(errorMessageId)
+                            .listRowSeparator(.hidden)
                     }
                 }
-                .onTapGesture {
-                    #if os(iOS)
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    #endif
+                .onChange(of: viewModel.sortMessages().last?.contents.last?.value) { oldValue, newValue in
+                    let messages = viewModel.sortMessages()
+                    proxy.scrollTo(messages.last?.id, anchor: .bottom)
                 }
-                .scrollIndicators(.never)
-                .listStyle(.plain)
-                ChatInputTextField(chatViewModel: viewModel)
-            }
-            .toolbar {
-                ToolbarItem {
-                    NavigationLink {
-                        NewChatView(selectedChat: .constant(nil), editChat: viewModel.chat)
-                    } label: {
-                        Text("Edit")
+                .onChange(of: viewModel.errorMessage, { oldValue, newValue in
+                    if !newValue.isEmpty {
+                        proxy.scrollTo(errorMessageId)
                     }
+                })
+                .onAppear() {
+                    let messages = viewModel.sortMessages()
+                    proxy.scrollTo(messages.last?.id, anchor: .bottom)
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
+            .onTapGesture {
+#if os(iOS)
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+#endif
+            }
+            .scrollIndicators(.never)
+            .listStyle(.plain)
+            ChatInputTextField(chatViewModel: viewModel)
         }
+        .toolbar {
+            ToolbarItem {
+                NavigationLink {
+                    NewChatView(selectedChat: .constant(nil), editChat: viewModel.chat)
+                } label: {
+                    Text("Edit")
+                }
+            }
+        }
+#if os(iOS)
+        .toolbar(.hidden, for: .tabBar)
+#endif
     }
     
     @ViewBuilder private func contextMenuButtons(message: MyMessage, content: MyContent) -> some View {
         Button {
+#if os(iOS)
             UIPasteboard.general.setValue(content.value, forPasteboardType: UTType.plainText.identifier)
+#elseif os(macOS)
+            NSPasteboard.general.setString(content.value, forType: .string)
+#endif
         } label: {
             Label("Copy", systemImage: "doc.on.doc")
         }

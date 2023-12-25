@@ -38,9 +38,6 @@ struct UserSettingView: View {
             LabeledContent {
                 TextField("", text: $apiKey)
                     .multilineTextAlignment(.trailing)
-                    .onChange(of: apiKey, { oldValue, newValue in
-                        KeychainService.setKey(key: newValue)
-                    })
                     .onSubmit {
                         KeychainService.setKey(key: apiKey)
                     }

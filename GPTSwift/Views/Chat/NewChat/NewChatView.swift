@@ -29,13 +29,14 @@ struct NewChatView: View {
             }
             LabeledContent("Prompt") {
                 TextEditor(text: $prompt)
-                    .multilineTextAlignment(.trailing)
                     .frame(height: 150)
                     .font(.title3)
             }
             LabeledContent("Max Token") {
                 TextField("", value: $maxToken, format: .number)
+                #if os(iOS)
                     .keyboardType(.numberPad)
+                #endif
                     .multilineTextAlignment(.trailing)
             }
             Picker(selection: $model, label: Text("GPT Version")) {
@@ -53,13 +54,13 @@ struct NewChatView: View {
                 }
                 Spacer()
                 Button {
-                    if isEdit {
+                    if editChat != nil {
                         updateChat()
                     } else {
                         createNewChat()
                     }
                 } label: {
-                    Text(isEdit ? "Save" : "Create")
+                    Text(editChat != nil ? "Save" : "Create")
                 }
             }
             #endif

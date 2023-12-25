@@ -29,6 +29,7 @@
 		AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */; };
 		AAA76CCF2B34FBB800DA5F04 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */; };
 		AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */; };
+		AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
 		AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */,
+				AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				AA013ECD2B25FA0B00522152 /* ContentView.swift in Sources */,
 				AA013EE42B25FD4400522152 /* Chatbubble.swift in Sources */,
 				AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */,
+				AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */,
 				AA013EF52B267DA500522152 /* MyContent.swift in Sources */,
 				AA013ECB2B25FA0B00522152 /* GPTSwiftApp.swift in Sources */,
 				AA9B8F832B27BC010041B64E /* ChatListView.swift in Sources */,
@@ -363,7 +367,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -419,7 +425,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

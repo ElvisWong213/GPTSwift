@@ -29,6 +29,11 @@ struct Chatbubble: View {
                             Image(uiImage: UIImage(data: data)!)
                                 .resizable()
                                 .scaledToFit()
+                            #elseif os(macOS)
+                            Image(nsImage: NSImage(data: data)!)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 400)
                             #endif
                         }
                     }

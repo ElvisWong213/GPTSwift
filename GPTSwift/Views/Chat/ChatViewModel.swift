@@ -11,7 +11,7 @@ import SwiftData
 
 @Observable
 class ChatViewModel {
-    let modelContext: ModelContext
+    var modelContext: ModelContext
     var chat: Chat
     var textInput: String = ""
     var isSent: Bool = false

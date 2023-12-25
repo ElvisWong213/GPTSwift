@@ -15,37 +15,51 @@ struct ChatListView: View {
     
     var body: some View {
         NavigationSplitView {
-            List(chats, selection: $selectedChat) { chat in
-                NavigationLink(chat.title, value: chat)
-                    .swipeActions() {
-                        Button {
-                            removeChat(chat: chat)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                        .tint(.red)
+            List(selection: $selectedChat) {
+                Section("Chats") {
+                    ForEach(chats) { chat in
+                        NavigationLink(chat.title, value: chat)
+                            .contextMenu {
+                                contextMenuButtons(chat: chat)
+                            }
+                            .swipeActions() {
+                                Button {
+                                    removeChat(chat: chat)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                                .tint(.red)
+                            }
                     }
+                }
             }
             .navigationTitle("Chats")
-            #if os(macOS)
+#if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-            #endif
+#endif
             .toolbar {
-                #if os(iOS)
+#if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     createNewChat()
                 }
-                #elseif os(macOS)
+#elseif os(macOS)
                 ToolbarItem {
                     createNewChat()
                 }
-                #endif
+#endif
             }
         } detail: {
-            if selectedChat != nil {
-                ChatView(modelContext: modelContext, chat: selectedChat!)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle(selectedChat!.title)
+            if let selectedChat = selectedChat {
+                NavigationStack {
+                    ChatView(modelContext: modelContext, chat: selectedChat)
+                        .id(selectedChat)
+                }
+#if os(iOS)
+                .navigationBarTitleDisplayMode(.inline)
+#endif
+                .navigationTitle(selectedChat.title)
+            } else {
+                Text("Select a chat")
             }
         }
     }
@@ -62,6 +76,15 @@ struct ChatListView: View {
     private func removeChat(chat: Chat) {
         modelContext.delete(chat)
         try? modelContext.save()
+    }
+    
+    
+    @ViewBuilder private func contextMenuButtons(chat: Chat) -> some View {
+        Button(role: .destructive) {
+            removeChat(chat: chat)
+        } label: {
+            Label("Delete", systemImage: "trash")
+        }
     }
 }
 
