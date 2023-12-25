@@ -38,7 +38,7 @@ struct ChatView: View {
                                 .listRowSeparator(.hidden)
                         }
                     }
-                    .onChange(of: viewModel.sortMessages().last!.contents.last?.value) { oldValue, newValue in
+                    .onChange(of: viewModel.sortMessages().last?.contents.last?.value) { oldValue, newValue in
                         let messages = viewModel.sortMessages()
                         proxy.scrollTo(messages.last?.id, anchor: .bottom)
                     }

@@ -15,23 +15,18 @@ class Chat: Identifiable, Codable {
     var title: String
     var model: Model?
     var prompt: String
+    var maxToken: Int?
     
     @Relationship(deleteRule: .cascade, inverse: \MyMessage.chat)
     var messages: [MyMessage] = []
     
-    init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = []) {
+    init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = [], maxToken: Int? = nil) {
         self.id = id
         self.title = title
         self.model = model
         self.prompt = prompt
         self.messages = messages
-    }
-    
-    func convertToChatQuery() -> ChatQuery {
-        let promptMessage = MyMessage(author: .System, contents: [MyContent(type: .Text, value: prompt)], chat: self)
-        var messages = self.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
-        messages.insert(promptMessage.convertToMessage(), at: 0)
-        return ChatQuery(model: self.model!, messages: messages)
+        self.maxToken = maxToken
     }
     
     // Codable
@@ -41,6 +36,7 @@ class Chat: Identifiable, Codable {
         case messages
         case model
         case prompt
+        case maxToken
     }
     
     required init(from decoder: Decoder) throws {
@@ -50,6 +46,7 @@ class Chat: Identifiable, Codable {
         self.messages = try container.decode([MyMessage].self, forKey: .messages)
         self.model = try container.decode(Model.self, forKey: .model)
         self.prompt = try container.decode(String.self, forKey: .prompt)
+        self.maxToken = try container.decode(Int.self, forKey: .maxToken)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -59,5 +56,6 @@ class Chat: Identifiable, Codable {
         try container.encode(messages, forKey: .messages)
         try container.encode(model, forKey: .model)
         try container.encode(prompt, forKey: .prompt)
+        try container.encode(maxToken, forKey: .maxToken)
     }
 }

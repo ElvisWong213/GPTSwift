@@ -30,7 +30,8 @@ class ChatViewModel {
         let promptMessage = Message(role: .system, content: .object([ChatContent(type: .text, value: chat.prompt)]))
         var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
         messages.insert(promptMessage, at: 0)
-        let chatQuery = ChatQuery(model: chat.model!, messages: messages)
+        
+        let chatQuery = ChatQuery(model: chat.model!, messages: messages, maxTokens: chat.maxToken)
         // debug
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted

@@ -15,6 +15,7 @@ struct NewChatView: View {
     @State private var title: String = ""
     @State private var prompt: String = ""
     @State private var model: Model?
+    @State private var maxToken: Int? = nil
     @State var editChat: Chat? = nil
         
     @Environment(\.modelContext) private var modelContext
@@ -31,6 +32,11 @@ struct NewChatView: View {
                     .multilineTextAlignment(.trailing)
                     .frame(height: 150)
                     .font(.title3)
+            }
+            LabeledContent("Max Token") {
+                TextField("", value: $maxToken, format: .number)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
             }
             Picker(selection: $model, label: Text("GPT Version")) {
                 ForEach(openAIModels) { model in
@@ -102,6 +108,7 @@ struct NewChatView: View {
         title = editChat.title
         model = editChat.model
         prompt = editChat.prompt
+        maxToken = editChat.maxToken
     }
     
     private func createNewChat() {
@@ -111,16 +118,29 @@ struct NewChatView: View {
         if title.isEmpty {
             title = "New Chat"
         }
-        let newChat = Chat(title: title, model: model, prompt: prompt)
+        if model == .gpt4_vision_preview && maxToken == nil {
+            maxToken = 4096
+        }
+        let newChat = Chat(title: title, model: model, prompt: prompt, maxToken: maxToken)
         modelContext.insert(newChat)
         try? modelContext.save()
         selectedChat = newChat
     }
     
     func updateChat() {
+        guard model != nil else {
+            return
+        }
+        if title.isEmpty {
+            title = "New Chat"
+        }
+        if model == .gpt4_vision_preview && maxToken == nil {
+            maxToken = 4096
+        }
         editChat?.title = title
         editChat?.model = model
         editChat?.prompt = prompt
+        editChat?.maxToken = maxToken
         try? modelContext.save()
         dismiss()
     }
