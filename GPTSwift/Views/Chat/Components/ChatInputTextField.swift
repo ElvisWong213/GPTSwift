@@ -67,9 +67,7 @@ struct ChatInputTextField: View {
                     }
                     .textFieldStyle(.plain)
                     .onSubmit {
-                        if !chatViewModel.textInput.isEmpty && !chatViewModel.isSent {
-                            sendMessage()
-                        }
+                        sendMessage()
                     }
             }
             Button {
@@ -95,6 +93,11 @@ struct ChatInputTextField: View {
 
 extension ChatInputTextField {
     private func sendMessage() {
+        guard chatViewModel.textInput.isEmpty || chatViewModel.isSent else {
+            print("Debug: Unable to send Message (text field is empty or gpt is responding)")
+            return
+        }
+        
         var contents: [MyContent] = []
         
 #if os(iOS)

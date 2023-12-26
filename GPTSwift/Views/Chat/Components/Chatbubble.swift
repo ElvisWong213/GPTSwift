@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct Chatbubble: View {
     let author: Author
@@ -20,9 +21,10 @@ struct Chatbubble: View {
             if author != .System {
                 VStack(alignment: author.isUser ? .trailing : .leading) {
                     if messageType == .Text {
-                        Text(LocalizedStringKey(value))
+                        Markdown(value)
                             .textSelection(.enabled)
-                            .foregroundStyle(.white)
+                            .markdownTheme(.customMarkdownTheme)
+                            .markdownCodeSyntaxHighlighter(.splash())
                     } else {
                         if let data = Data(base64Encoded: value) {
 #if os(iOS)
@@ -41,7 +43,7 @@ struct Chatbubble: View {
                 .padding()
                 .background() {
                     RoundedRectangle(cornerRadius: 15)
-                        .foregroundStyle(foregroundColor())
+                        .foregroundStyle(bubbleForegroundColor())
                 }
             }
             if !author.isUser {
@@ -54,12 +56,12 @@ struct Chatbubble: View {
         .padding(.leading, author.isUser ? 15 : 0)
     }
     
-    private func foregroundColor() -> Color {
+    private func bubbleForegroundColor() -> Color {
         switch author {
         case .User:
             return .blue
         case .GPT:
-            return .gray
+            return .gray.opacity(0.7)
         case .Error:
             return .red
         case .System:
@@ -69,11 +71,16 @@ struct Chatbubble: View {
 }
 
 #Preview {
-    ScrollView {
-        ForEach(MyMessage.MOCK) { message in
-            ForEach(message.contents) { content in
-                Chatbubble(author: message.author, messageType: content.type, value: content.value)
-            }
-        }
+//    ScrollView {
+//        ForEach(MyMessage.MOCK) { message in
+//            ForEach(message.contents) { content in
+//                Chatbubble(author: message.author, messageType: content.type, value: content.value)
+//            }
+//        }
+//    }
+    VStack {
+        Chatbubble(author: .User, messageType: .Text, value: "Test")
+        Chatbubble(author: .GPT, messageType: .Text, value: "Test")
+        Chatbubble(author: .Error, messageType: .Text, value: "Test")
     }
 }
