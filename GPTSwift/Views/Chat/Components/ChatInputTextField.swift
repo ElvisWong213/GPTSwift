@@ -18,11 +18,11 @@ import AppKit
 struct ChatInputTextField: View {
     @Bindable var chatViewModel: ChatViewModel
     @State var selectedItem: PhotosPickerItem?
-    #if os(iOS)
+#if os(iOS)
     @State var uiImage: UIImage?
-    #elseif os(macOS)
+#elseif os(macOS)
     @State var nsimage: NSImage?
-    #endif
+#endif
     
     var body: some View {
         HStack {
@@ -32,7 +32,7 @@ struct ChatInputTextField: View {
             }
             .disabled(chatViewModel.chat.model != .gpt4_vision_preview)
             VStack {
-                #if os(iOS)
+#if os(iOS)
                 if let uiImage = uiImage {
                     Button {
                         self.uiImage = nil
@@ -44,7 +44,7 @@ struct ChatInputTextField: View {
                             .frame(height: 100)
                     }
                 }
-                #elseif os(macOS)
+#elseif os(macOS)
                 if let nsimage = nsimage {
                     Button {
                         self.nsimage = nil
@@ -56,7 +56,7 @@ struct ChatInputTextField: View {
                             .frame(height: 100)
                     }
                 }
-                #endif
+#endif
                 TextField("Message", text: $chatViewModel.textInput, axis: .vertical)
                     .lineLimit(5)
                     .padding(.horizontal, 5)
@@ -91,15 +91,17 @@ struct ChatInputTextField: View {
             resizeImage()
         }
     }
-    
+}
+
+extension ChatInputTextField {
     private func sendMessage() {
         var contents: [MyContent] = []
         
-        #if os(iOS)
+#if os(iOS)
         if let image = uiImage {
             contents.append(MyContent(type: .Image, value: image.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""))
         }
-        #elseif os(macOS)
+#elseif os(macOS)
         if let image = nsimage {
             guard let imageData = image.tiffRepresentation else {
                 print("DEBUG: Cannot convert NSImage to image data")
@@ -109,7 +111,7 @@ struct ChatInputTextField: View {
             let pngData = bitmap?.representation(using: .png, properties: [:])
             contents.append(MyContent(type: .Image, value: pngData?.base64EncodedString() ?? ""))
         }
-        #endif
+#endif
         
         contents.append(MyContent(type: .Text, value: chatViewModel.textInput))
         let newMessage = MyMessage(author: .User, contents: contents)
@@ -117,24 +119,24 @@ struct ChatInputTextField: View {
         // Clear input
         chatViewModel.textInput = ""
         selectedItem = nil
-        #if os(iOS)
+#if os(iOS)
         uiImage = nil
-        #elseif os(macOS)
+#elseif os(macOS)
         nsimage = nil
-        #endif
+#endif
         chatViewModel.sendMessage(newMessage: newMessage)
     }
     
     private func resizeImage() {
         Task {
             if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                #if os(iOS)
+#if os(iOS)
                 uiImage = UIImage(data: data)
                 uiImage = uiImage?.resize(512, 512)
-                #elseif os(macOS)
+#elseif os(macOS)
                 nsimage = NSImage(data: data)
                 nsimage = nsimage?.resize(512, 512)
-                #endif
+#endif
             }
         }
     }

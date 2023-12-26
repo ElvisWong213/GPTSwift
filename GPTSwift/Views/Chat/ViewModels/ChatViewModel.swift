@@ -99,4 +99,8 @@ class ChatViewModel {
     func sortMessages() -> [MyMessage] {
         return chat.messages.sorted(by: { $0.timestamp < $1.timestamp })
     }
+    
+    func getLatestMessage() -> MyMessage? {
+        return sortMessages().last
+    }
 }

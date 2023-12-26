@@ -92,7 +92,6 @@
 			children = (
 				AAA76CCA2B34BC9500DA5F04 /* Extensions */,
 				AA013EF82B27831200522152 /* Services */,
-				AA013EF62B2782DF00522152 /* Components */,
 				AA013EE52B262E3800522152 /* Models */,
 				AA013EE02B25FCBB00522152 /* Views */,
 				AA013ECA2B25FA0B00522152 /* GPTSwiftApp.swift */,
@@ -117,7 +116,6 @@
 			children = (
 				AA9B8F812B27BBED0041B64E /* UserSetting */,
 				AA013EFC2B2785AC00522152 /* Chat */,
-				AA9B8F822B27BC010041B64E /* ChatListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,18 +132,10 @@
 		AA013EF62B2782DF00522152 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AA013EF72B27830600522152 /* Chat */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		AA013EF72B27830600522152 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
 				AA013EE12B25FCE200522152 /* ChatInputTextField.swift */,
 				AA013EE32B25FD4400522152 /* Chatbubble.swift */,
 			);
-			path = Chat;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		AA013EF82B27831200522152 /* Services */ = {
@@ -160,9 +150,9 @@
 		AA013EFC2B2785AC00522152 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				AAA76CCD2B34FBA900DA5F04 /* NewChat */,
-				AA013EDE2B25FAEB00522152 /* ChatView.swift */,
-				AA013EEA2B26306600522152 /* ChatViewModel.swift */,
+				AA013EF62B2782DF00522152 /* Components */,
+				AAD377FA2B3B16DD001D0B24 /* Views */,
+				AAD377F92B3B16D6001D0B24 /* ViewModels */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -203,12 +193,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		AAA76CCD2B34FBA900DA5F04 /* NewChat */ = {
+		AAD377F92B3B16D6001D0B24 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA013EEA2B26306600522152 /* ChatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AAD377FA2B3B16DD001D0B24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */,
+				AA013EDE2B25FAEB00522152 /* ChatView.swift */,
+				AA9B8F822B27BC010041B64E /* ChatListView.swift */,
 			);
-			path = NewChat;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

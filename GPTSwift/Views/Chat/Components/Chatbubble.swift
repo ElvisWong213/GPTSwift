@@ -25,16 +25,16 @@ struct Chatbubble: View {
                             .foregroundStyle(.white)
                     } else {
                         if let data = Data(base64Encoded: value) {
-                            #if os(iOS)
+#if os(iOS)
                             Image(uiImage: UIImage(data: data)!)
                                 .resizable()
                                 .scaledToFit()
-                            #elseif os(macOS)
+#elseif os(macOS)
                             Image(nsImage: NSImage(data: data)!)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 400)
-                            #endif
+#endif
                         }
                     }
                 }

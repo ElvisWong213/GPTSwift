@@ -70,7 +70,6 @@ struct ChatListView: View {
         } label: {
             Label("Add Item", systemImage: "plus")
         }
-
     }
     
     private func removeChat(chat: Chat) {

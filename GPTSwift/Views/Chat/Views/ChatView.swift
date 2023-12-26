@@ -12,6 +12,11 @@ import UniformTypeIdentifiers
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
     private let errorMessageId: UUID = UUID()
+    private var latestMessageString: String? {
+        get {
+            viewModel.getLatestMessage()?.contents.last?.value
+        }
+    }
     
     init(modelContext: ModelContext, chat: Chat) {
         self._viewModel = State(initialValue: ChatViewModel(modelContext: modelContext, chat: chat))
@@ -21,33 +26,20 @@ struct ChatView: View {
         VStack {
             ScrollViewReader { proxy in
                 ScrollView {
-                    ForEach(viewModel.sortMessages()) { message in
-                        ForEach(message.contents) { content in
-                            Chatbubble(author: message.author, messageType: content.type, value: content.value)
-                                .id(message.id)
-                                .contextMenu {
-                                    contextMenuButtons(message: message, content: content)
-                                }
-                        }
-                    }
-                    if !viewModel.errorMessage.isEmpty {
-                        Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
-                            .id(errorMessageId)
-                            .listRowSeparator(.hidden)
-                    }
-                }
-                .onChange(of: viewModel.sortMessages().last?.contents.last?.value) { oldValue, newValue in
-                    let messages = viewModel.sortMessages()
-                    proxy.scrollTo(messages.last?.id, anchor: .bottom)
+                    allMessages()
+                    errorMessage()
                 }
                 .onChange(of: viewModel.errorMessage, { oldValue, newValue in
                     if !newValue.isEmpty {
                         proxy.scrollTo(errorMessageId)
                     }
                 })
+                .onChange(of: latestMessageString) { oldValue, newValue in
+                    proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
+                }
                 .onAppear() {
                     let messages = viewModel.sortMessages()
-                    proxy.scrollTo(messages.last?.id, anchor: .bottom)
+                    proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
                 }
             }
             .onTapGesture {
@@ -87,6 +79,26 @@ struct ChatView: View {
             viewModel.removeMessage(message: message)
         } label: {
             Label("Delete", systemImage: "trash")
+        }
+    }
+    
+    @ViewBuilder private func allMessages() -> some View {
+        ForEach(viewModel.sortMessages()) { message in
+            ForEach(message.contents) { content in
+                Chatbubble(author: message.author, messageType: content.type, value: content.value)
+                    .id(message.id)
+                    .contextMenu {
+                        contextMenuButtons(message: message, content: content)
+                    }
+            }
+        }
+    }
+    
+    @ViewBuilder private func errorMessage() -> some View {
+        if !viewModel.errorMessage.isEmpty {
+            Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
+                .id(errorMessageId)
+                .listRowSeparator(.hidden)
         }
     }
 }

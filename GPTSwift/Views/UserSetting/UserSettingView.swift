@@ -24,10 +24,10 @@ struct UserSettingView: View {
             }
             .navigationTitle("Setting")
         }
-        #if os(macOS)
+#if os(macOS)
         .padding()
         .frame(width: 375, height: 150)
-        #endif
+#endif
         .onAppear() {
             apiKey = KeychainService.getKey()
         }

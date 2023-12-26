@@ -17,10 +17,10 @@ struct NewChatView: View {
     @State private var model: Model?
     @State private var maxToken: Int? = nil
     @State var editChat: Chat? = nil
-        
+    
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         Form {
             LabeledContent("Chat Title") {
@@ -34,9 +34,9 @@ struct NewChatView: View {
             }
             LabeledContent("Max Token") {
                 TextField("", value: $maxToken, format: .number)
-                #if os(iOS)
+#if os(iOS)
                     .keyboardType(.numberPad)
-                #endif
+#endif
                     .multilineTextAlignment(.trailing)
             }
             Picker(selection: $model, label: Text("GPT Version")) {
@@ -45,7 +45,7 @@ struct NewChatView: View {
                         .tag(Optional(model.id))
                 }
             }
-            #if os(macOS)
+#if os(macOS)
             HStack {
                 Button {
                     dismiss()
@@ -63,13 +63,13 @@ struct NewChatView: View {
                     Text(editChat != nil ? "Save" : "Create")
                 }
             }
-            #endif
+#endif
         }
         .toolbarTitleDisplayMode(.inline)
         .navigationTitle(editChat != nil ? "Edit Chat" : "Create New Chat")
-        #if os(macOS)
+#if os(macOS)
         .padding()
-        #elseif os(iOS)
+#elseif os(iOS)
         .toolbar {
             ToolbarItem {
                 Button {
@@ -83,7 +83,7 @@ struct NewChatView: View {
                 }
             }
         }
-        #endif
+#endif
         .onAppear() {
             setUpEditChat()
             fetchAvailableModels()
@@ -148,7 +148,7 @@ struct NewChatView: View {
     
 }
 
-//#Preview {
-//    NewChatView(selectedChat: .constant(Chat(title: "")))
-//        .modelContainer(for: [Chat.self])
-//}
+#Preview {
+    NewChatView(selectedChat: .constant(Chat(title: "")))
+        .modelContainer(for: [Chat.self])
+}
