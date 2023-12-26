@@ -93,7 +93,7 @@ struct ChatInputTextField: View {
 
 extension ChatInputTextField {
     private func sendMessage() {
-        guard chatViewModel.textInput.isEmpty || chatViewModel.isSent else {
+        guard !chatViewModel.textInput.isEmpty && !chatViewModel.isSent else {
             print("Debug: Unable to send Message (text field is empty or gpt is responding)")
             return
         }
