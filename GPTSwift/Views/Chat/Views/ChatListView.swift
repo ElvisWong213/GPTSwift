@@ -16,22 +16,7 @@ struct ChatListView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChat) {
-                Section("Chats") {
-                    ForEach(chats) { chat in
-                        NavigationLink(chat.title, value: chat)
-                            .contextMenu {
-                                contextMenuButtons(chat: chat)
-                            }
-                            .swipeActions() {
-                                Button {
-                                    removeChat(chat: chat)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                                .tint(.red)
-                            }
-                    }
-                }
+                allChats()
             }
             .navigationTitle("Chats")
 #if os(macOS)
@@ -60,6 +45,25 @@ struct ChatListView: View {
                 .navigationTitle(selectedChat.title)
             } else {
                 Text("Select a chat")
+            }
+        }
+    }
+    
+    @ViewBuilder private func allChats() -> some View {
+        Section("Chats") {
+            ForEach(chats) { chat in
+                NavigationLink(chat.title, value: chat)
+                    .contextMenu {
+                        contextMenuButtons(chat: chat)
+                    }
+                    .swipeActions() {
+                        Button {
+                            removeChat(chat: chat)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
             }
         }
     }

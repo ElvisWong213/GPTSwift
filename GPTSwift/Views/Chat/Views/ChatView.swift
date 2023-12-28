@@ -47,7 +47,6 @@ struct ChatView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 #endif
             }
-            .scrollIndicators(.never)
             .listStyle(.plain)
             ChatInputTextField(chatViewModel: viewModel)
         }
