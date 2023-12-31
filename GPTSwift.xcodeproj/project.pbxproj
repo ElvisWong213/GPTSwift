@@ -22,6 +22,12 @@
 		AA013EF52B267DA500522152 /* MyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EF42B267DA500522152 /* MyContent.swift */; };
 		AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA013EFA2B27859900522152 /* KeychainSwift */; };
 		AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EFD2B2785C900522152 /* UserSettingView.swift */; };
+		AA4B02652B3E53BB00C5B227 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B02642B3E53BB00C5B227 /* FloatingPanel.swift */; };
+		AA4B02672B3E5E7800C5B227 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B02662B3E5E7800C5B227 /* View+Extensions.swift */; };
+		AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */; };
+		AA4B026C2B3EF3A900C5B227 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B026B2B3EF3A900C5B227 /* KeyboardShortcuts+Extensions.swift */; };
+		AA4B026E2B404A3C00C5B227 /* FloatingChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B026D2B404A3C00C5B227 /* FloatingChatView.swift */; };
+		AA4B02702B40F8D800C5B227 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B026F2B40F8D800C5B227 /* VisualEffect.swift */; };
 		AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F7F2B279FD20041B64E /* KeychainService.swift */; };
 		AA9B8F832B27BC010041B64E /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatListView.swift */; };
 		AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA9B8F852B27CFCD0041B64E /* OpenAI */; };
@@ -62,6 +68,11 @@
 		AA013EF22B267D9400522152 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		AA013EF42B267DA500522152 /* MyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContent.swift; sourceTree = "<group>"; };
 		AA013EFD2B2785C900522152 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		AA4B02642B3E53BB00C5B227 /* FloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanel.swift; sourceTree = "<group>"; };
+		AA4B02662B3E5E7800C5B227 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		AA4B026B2B3EF3A900C5B227 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
+		AA4B026D2B404A3C00C5B227 /* FloatingChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingChatView.swift; sourceTree = "<group>"; };
+		AA4B026F2B40F8D800C5B227 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		AA9B8F7F2B279FD20041B64E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		AA9B8F822B27BC010041B64E /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		AA9B8F892B27E7850041B64E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -81,6 +92,7 @@
 			files = (
 				AAD378182B3B3801001D0B24 /* SplashImageGen in Frameworks */,
 				AAD378142B3B3801001D0B24 /* Splash in Frameworks */,
+				AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */,
 				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
 				AAD3781C2B3B3801001D0B24 /* SplashTokenizer in Frameworks */,
 				AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */,
@@ -163,6 +175,7 @@
 			children = (
 				AA013EE12B25FCE200522152 /* ChatInputTextField.swift */,
 				AA013EE32B25FD4400522152 /* Chatbubble.swift */,
+				AA4B026F2B40F8D800C5B227 /* VisualEffect.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -184,6 +197,23 @@
 				AAD377F92B3B16D6001D0B24 /* ViewModels */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA4B02622B3E539D00C5B227 /* CodeSyntax */ = {
+			isa = PBXGroup;
+			children = (
+				AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */,
+				AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */,
+			);
+			path = CodeSyntax;
+			sourceTree = "<group>";
+		};
+		AA4B02632B3E53AD00C5B227 /* FloatingPanel */ = {
+			isa = PBXGroup;
+			children = (
+				AA4B02642B3E53BB00C5B227 /* FloatingPanel.swift */,
+			);
+			path = FloatingPanel;
 			sourceTree = "<group>";
 		};
 		AA9B8F812B27BBED0041B64E /* UserSetting */ = {
@@ -219,6 +249,8 @@
 				AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */,
 				AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */,
 				AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */,
+				AA4B02662B3E5E7800C5B227 /* View+Extensions.swift */,
+				AA4B026B2B3EF3A900C5B227 /* KeyboardShortcuts+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +269,7 @@
 				AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */,
 				AA013EDE2B25FAEB00522152 /* ChatView.swift */,
 				AA9B8F822B27BC010041B64E /* ChatListView.swift */,
+				AA4B026D2B404A3C00C5B227 /* FloatingChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,8 +277,8 @@
 		AAD377FE2B3B3258001D0B24 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */,
-				AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */,
+				AA4B02632B3E53AD00C5B227 /* FloatingPanel */,
+				AA4B02622B3E539D00C5B227 /* CodeSyntax */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -281,6 +314,7 @@
 				AAD378222B3B496D001D0B24 /* SplashImageGen */,
 				AAD378242B3B496D001D0B24 /* SplashMarkdown */,
 				AAD378262B3B496D001D0B24 /* SplashTokenizer */,
+				AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -315,6 +349,7 @@
 				AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 				AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				AAD3781D2B3B496D001D0B24 /* XCRemoteSwiftPackageReference "Splash" */,
+				AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
@@ -342,16 +377,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4B026C2B3EF3A900C5B227 /* KeyboardShortcuts+Extensions.swift in Sources */,
+				AA4B02652B3E53BB00C5B227 /* FloatingPanel.swift in Sources */,
 				AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */,
 				AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */,
 				AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */,
 				AAA76CCF2B34FBB800DA5F04 /* NewChatView.swift in Sources */,
 				AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */,
 				AA013EDF2B25FAEB00522152 /* ChatView.swift in Sources */,
+				AA4B026E2B404A3C00C5B227 /* FloatingChatView.swift in Sources */,
 				AA013EE92B262E8800522152 /* Author.swift in Sources */,
+				AA4B02672B3E5E7800C5B227 /* View+Extensions.swift in Sources */,
 				AA013EF32B267D9400522152 /* MessageType.swift in Sources */,
 				AA013ECD2B25FA0B00522152 /* ContentView.swift in Sources */,
 				AA013EE42B25FD4400522152 /* Chatbubble.swift in Sources */,
+				AA4B02702B40F8D800C5B227 /* VisualEffect.swift in Sources */,
 				AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */,
 				AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */,
 				AA013EF52B267DA500522152 /* MyContent.swift in Sources */,
@@ -599,6 +639,14 @@
 				minimumVersion = 20.0.0;
 			};
 		};
+		AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.16.1;
+			};
+		};
 		AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ElvisWong213/SwiftOpenAI.git";
@@ -634,6 +682,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 		AA9B8F852B27CFCD0041B64E /* OpenAI */ = {
 			isa = XCSwiftPackageProductDependency;

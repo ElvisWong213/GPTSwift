@@ -16,10 +16,12 @@ class ChatViewModel {
     var textInput: String = ""
     var isSent: Bool = false
     var errorMessage: String = ""
+    let isTempMessage: Bool
     
-    init(modelContext: ModelContext, chat: Chat) {
+    init(modelContext: ModelContext, chat: Chat, isTempMessage: Bool) {
         self.modelContext = modelContext
         self.chat = chat
+        self.isTempMessage = isTempMessage
     }
     
     func sendMessage(newMessage: MyMessage) {
@@ -59,8 +61,10 @@ class ChatViewModel {
             }
             self.updateIsSent(false)
             newMessage.timestamp = Date.now
-            try? self.modelContext.save()
-            print("Save")
+            if !self.isTempMessage {
+                try? self.modelContext.save()
+                print("Save")
+            }
         }
     }
     
@@ -86,14 +90,18 @@ class ChatViewModel {
     func removeMessage(message: MyMessage) {
         chat.messages.removeAll(where: { $0.id == message.id })
         modelContext.delete(message)
-        try? modelContext.save()
+        if !isTempMessage {
+            try? modelContext.save()
+        }
     }
     
     func removeAllMessage() {
         for message in chat.messages {
             modelContext.delete(message)
         }
-        try? modelContext.save()
+        if !isTempMessage {
+            try? modelContext.save()
+        }
     }
     
     func sortMessages() -> [MyMessage] {

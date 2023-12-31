@@ -18,8 +18,9 @@ struct ChatView: View {
         }
     }
     
-    init(modelContext: ModelContext, chat: Chat) {
-        self._viewModel = State(initialValue: ChatViewModel(modelContext: modelContext, chat: chat))
+    init(modelContext: ModelContext, chat: Chat, isTempMessage: Bool = false) {
+        let viewModel = ChatViewModel(modelContext: modelContext, chat: chat, isTempMessage: isTempMessage)
+        self._viewModel = State(initialValue: viewModel)
     }
     
     var body: some View {
@@ -38,7 +39,6 @@ struct ChatView: View {
                     proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
                 }
                 .onAppear() {
-                    let messages = viewModel.sortMessages()
                     proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
                 }
             }
@@ -47,6 +47,7 @@ struct ChatView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 #endif
             }
+            .scrollIndicators(.never)
             .listStyle(.plain)
             ChatInputTextField(chatViewModel: viewModel)
         }

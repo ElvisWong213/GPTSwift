@@ -146,5 +146,5 @@ extension ChatInputTextField {
 }
 
 #Preview {
-    ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: "")))
+    ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: ""), isTempMessage: false))
 }

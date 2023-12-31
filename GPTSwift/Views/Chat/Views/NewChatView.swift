@@ -65,8 +65,6 @@ struct NewChatView: View {
             }
 #endif
         }
-        .toolbarTitleDisplayMode(.inline)
-        .navigationTitle(editChat != nil ? "Edit Chat" : "Create New Chat")
 #if os(macOS)
         .padding()
 #elseif os(iOS)
@@ -84,6 +82,8 @@ struct NewChatView: View {
             }
         }
 #endif
+        .toolbarTitleDisplayMode(.inline)
+        .navigationTitle(editChat != nil ? "Edit Chat" : "Create New Chat")
         .onAppear() {
             setUpEditChat()
             fetchAvailableModels()
@@ -92,10 +92,7 @@ struct NewChatView: View {
     
     private func fetchAvailableModels() {
         Task {
-            let openAI = OpenAI(apiToken: KeychainService.getKey())
-            let result = try? await openAI.models()
-            openAIModels = result?.data.sorted(by: { $0.id < $1.id }) ?? []
-            openAIModels = openAIModels.filter{ $0.id.contains("gpt") }
+            openAIModels = await OpenAIService.fetchAvailableModels()
             if !openAIModels.isEmpty && model == nil {
                 model = Optional(openAIModels.first!.id)
             }
