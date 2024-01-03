@@ -85,6 +85,7 @@ extension EnvironmentValues {
 
 struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
     @Binding var isPresented: Bool
+    @Binding var isUpdatedSetting: Bool
     
     var contentRect: CGRect = CGRect(x: 0, y: 0, width: 624, height: 512)
 
@@ -95,11 +96,7 @@ struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear() {
-                panel = FloatingPanel(view: view, contentRect: contentRect, isPresented: $isPresented)
-                panel?.center()
-                if isPresented {
-                    present()
-                }
+                createPanel()
             }
             .onDisappear() {
                 panel?.close()
@@ -107,6 +104,10 @@ struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
             }
             .onChange(of: isPresented) { oldValue, newValue in
                 if newValue {
+                    if isUpdatedSetting {
+                        createPanel()
+                        isUpdatedSetting = false
+                    }
                     present()
                 } else {
                     panel?.close()
@@ -114,9 +115,15 @@ struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
             }
     }
     
+    func createPanel() {
+        panel = FloatingPanel(view: view, contentRect: contentRect, isPresented: $isPresented)
+        panel?.center()
+    }
     func present() {
-        panel?.orderFront(nil)
-        panel?.makeKey()
+        if isPresented && panel != nil {
+            panel?.orderFront(nil)
+            panel?.makeKey()
+        }
     }
 }
 

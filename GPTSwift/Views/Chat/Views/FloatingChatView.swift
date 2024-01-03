@@ -11,6 +11,7 @@ import OpenAI
 
 struct FloatingChatView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var appState: AppState
     @State private var chat: Chat?
     
     @AppStorage ("defaultPrompt") var prompt: String = ""
@@ -38,6 +39,12 @@ struct FloatingChatView: View {
         .onAppear() {
             createNewChat()
         }
+        .onChange(of: prompt) {
+            appState.isUpdatedSetting = true
+        }
+        .onChange(of: model) {
+            appState.isUpdatedSetting = true
+        }
     }
     
     private func createNewChat() {
@@ -56,6 +63,7 @@ struct FloatingChatView: View {
 
 #Preview {
     FloatingChatView()
+        .environmentObject(AppState())
 }
 
 #endif

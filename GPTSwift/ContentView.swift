@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    
     var body: some View {
-        #if os(iOS)
+#if os(iOS)
         TabView {
             ChatListView()
                 .tabItem {
@@ -21,9 +22,9 @@ struct ContentView: View {
                     Label("Setting", systemImage: "gearshape")
                 }
         }
-        #else
+#else
         ChatListView()
-        #endif
+#endif
     }
 }
 
