@@ -10,7 +10,7 @@ import SwiftData
 
 struct ChatListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var chats: [Chat]
+    @Query(filter: #Predicate<Chat> { !$0.title.contains("New Floating Chat") }) private var chats: [Chat]
     @State private var selectedChat: Chat?
     
     var body: some View {

@@ -27,6 +27,11 @@ struct FloatingChatView: View {
                     } label: {
                         Text("Clear")
                     }
+//                    Button {
+//                        saveChat()
+//                    } label: {
+//                        Text("Save")
+//                    }
                 }
                 ChatView(modelContext: modelContext, chat: chat, isTempMessage: true)
             } else {
@@ -40,9 +45,17 @@ struct FloatingChatView: View {
             createNewChat()
         }
         .onChange(of: prompt) {
+            if let chat = chat {
+                // Remove chat from Swift Data
+                modelContext.delete(chat)
+            }
             appState.isUpdatedSetting = true
         }
         .onChange(of: model) {
+            if let chat = chat {
+                // Remove chat from Swift Data
+                modelContext.delete(chat)
+            }
             appState.isUpdatedSetting = true
         }
     }
@@ -51,13 +64,17 @@ struct FloatingChatView: View {
         if model == nil {
             model = .gpt3_5Turbo_1106
         }
-        let newChat = Chat(title: "New Chat", model: model, prompt: prompt)
+        let newChat = Chat(title: "New Floating Chat", model: model, prompt: prompt)
         modelContext.insert(newChat)
         chat = newChat
     }
     
     private func clearChat() {
         chat?.messages = []
+    }
+    
+    private func saveChat() {
+        try? modelContext.save()
     }
 }
 

@@ -94,7 +94,7 @@ struct NewChatView: View {
         Task {
             openAIModels = await OpenAIService.fetchAvailableModels()
             if !openAIModels.isEmpty && model == nil {
-                model = Optional(openAIModels.first!.id)
+                model = Optional(.gpt3_5Turbo_1106)
             }
         }
     }

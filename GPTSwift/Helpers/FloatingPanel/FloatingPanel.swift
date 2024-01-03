@@ -119,6 +119,7 @@ struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
         panel = FloatingPanel(view: view, contentRect: contentRect, isPresented: $isPresented)
         panel?.center()
     }
+    
     func present() {
         if isPresented && panel != nil {
             panel?.orderFront(nil)
