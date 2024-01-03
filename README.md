@@ -3,6 +3,13 @@
 # About this project
 Use ChatGPT on Mac and iOS devices
 
+# Features
+- Floating chat window
+- Custom chat prompt
+- Support GPT4 vision, you can upload an image to the chat
+- Support Markdown format responses
+- Support code syntax (Swift)
+
 # Framework Used
 - SwiftUI
 - SwiftData
