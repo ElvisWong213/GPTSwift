@@ -74,6 +74,7 @@ struct ChatListView: View {
         } label: {
             Label("Add Item", systemImage: "plus")
         }
+        .keyboardShortcut("n", modifiers: .command)
     }
     
     private func removeChat(chat: Chat) {
