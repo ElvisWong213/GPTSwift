@@ -16,17 +16,19 @@ class Chat: Identifiable, Codable {
     var model: Model?
     var prompt: String
     var maxToken: Int?
+    var updateDate: Date = Date.now
     
     @Relationship(deleteRule: .cascade, inverse: \MyMessage.chat)
     var messages: [MyMessage] = []
     
-    init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = [], maxToken: Int? = nil) {
+    init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = [], maxToken: Int? = nil, updateDate: Date = Date.now) {
         self.id = id
         self.title = title
         self.model = model
         self.prompt = prompt
         self.messages = messages
         self.maxToken = maxToken
+        self.updateDate = updateDate
     }
     
     // Codable
@@ -37,6 +39,7 @@ class Chat: Identifiable, Codable {
         case model
         case prompt
         case maxToken
+        case updateDate
     }
     
     required init(from decoder: Decoder) throws {
@@ -47,6 +50,7 @@ class Chat: Identifiable, Codable {
         self.model = try container.decode(Model.self, forKey: .model)
         self.prompt = try container.decode(String.self, forKey: .prompt)
         self.maxToken = try container.decode(Int.self, forKey: .maxToken)
+        self.updateDate = try container.decode(Date.self, forKey: .updateDate)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -57,5 +61,6 @@ class Chat: Identifiable, Codable {
         try container.encode(model, forKey: .model)
         try container.encode(prompt, forKey: .prompt)
         try container.encode(maxToken, forKey: .maxToken)
+        try container.encode(updateDate, forKey: .updateDate)
     }
 }

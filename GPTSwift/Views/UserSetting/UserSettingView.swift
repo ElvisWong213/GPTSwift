@@ -37,6 +37,9 @@ struct UserSettingView: View {
                     .onSubmit {
                         KeychainService.setKey(key: apiKey)
                     }
+                    .onChange(of: apiKey) {
+                        KeychainService.setKey(key: apiKey)
+                    }
                     .submitLabel(.done)
             } label: {
                 Text("API Key")

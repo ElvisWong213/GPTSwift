@@ -10,7 +10,7 @@ import SwiftData
 
 struct ChatListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: #Predicate<Chat> { !$0.title.contains("New Floating Chat") }) private var chats: [Chat]
+    @Query(filter: #Predicate<Chat> { !$0.title.contains("New Floating Chat") }/*, sort: \Chat.updateDate, order: .reverse, animation: .default*/) private var chats: [Chat]
     @State private var selectedChat: Chat?
     
     var body: some View {
@@ -85,6 +85,7 @@ struct ChatListView: View {
     @ViewBuilder private func contextMenuButtons(chat: Chat) -> some View {
         Button(role: .destructive) {
             removeChat(chat: chat)
+            selectedChat = nil
         } label: {
             Label("Delete", systemImage: "trash")
         }

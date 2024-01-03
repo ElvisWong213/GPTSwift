@@ -13,7 +13,9 @@ final class KeychainService {
     static private let keyName = "gptApiKey"
     
     static func setKey(key:  String) {
-        keychain.set(key, forKey: keyName)
+        DispatchQueue.global().async {
+            keychain.set(key, forKey: keyName)
+        }
     }
     
     static func getKey() -> String {

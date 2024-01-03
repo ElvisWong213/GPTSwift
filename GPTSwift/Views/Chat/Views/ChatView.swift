@@ -30,12 +30,12 @@ struct ChatView: View {
                     allMessages()
                     errorMessage()
                 }
-                .onChange(of: viewModel.errorMessage, { oldValue, newValue in
-                    if !newValue.isEmpty {
+                .onChange(of: viewModel.errorMessage) {
+                    if !viewModel.errorMessage.isEmpty {
                         proxy.scrollTo(errorMessageId)
                     }
-                })
-                .onChange(of: latestMessageString) { oldValue, newValue in
+                }
+                .onChange(of: latestMessageString) {
                     proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
                 }
                 .onAppear() {
