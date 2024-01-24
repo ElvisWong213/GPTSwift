@@ -60,6 +60,7 @@ class ChatViewModel {
                 print(error)
             }
             self.updateIsSent(false)
+            self.chat.updateDate = Date.now
             if !self.isTempMessage {
                 try? self.modelContext.save()
                 print("Save")
