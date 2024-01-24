@@ -70,6 +70,7 @@ struct ChatView: View {
 #if os(iOS)
             UIPasteboard.general.setValue(content.value, forPasteboardType: UTType.plainText.identifier)
 #elseif os(macOS)
+            NSPasteboard.general.clearContents()
             NSPasteboard.general.setString(content.value, forType: .string)
 #endif
         } label: {
