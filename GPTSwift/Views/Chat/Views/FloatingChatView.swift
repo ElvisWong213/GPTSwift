@@ -33,7 +33,7 @@ struct FloatingChatView: View {
 //                        Text("Save")
 //                    }
                 }
-                ChatView(modelContext: modelContext, chat: chat, isTempMessage: true)
+                ChatView(modelContext: modelContext, chatId: chat.id, isTempMessage: true)
             } else {
                 EmptyView()
             }

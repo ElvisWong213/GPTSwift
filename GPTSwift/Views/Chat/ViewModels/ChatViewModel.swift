@@ -12,19 +12,25 @@ import SwiftData
 @Observable
 class ChatViewModel {
     var modelContext: ModelContext
-    var chat: Chat
+    var chatId: UUID
+    var chat: Chat?
     var textInput: String = ""
     var isSent: Bool = false
     var errorMessage: String = ""
     let isTempMessage: Bool
     
-    init(modelContext: ModelContext, chat: Chat, isTempMessage: Bool) {
+    init(modelContext: ModelContext, chatId: UUID, isTempMessage: Bool) {
         self.modelContext = modelContext
-        self.chat = chat
+        self.chatId = chatId
         self.isTempMessage = isTempMessage
+        self.fetchData()
     }
     
     func sendMessage(newMessage: MyMessage) {
+        guard let chat = chat else {
+            print("DEBUG: Chat is empty")
+            return
+        }
         isSent = true
         errorMessage = ""
         chat.messages.append(newMessage)
@@ -60,7 +66,7 @@ class ChatViewModel {
                 print(error)
             }
             self.updateIsSent(false)
-            self.chat.updateDate = Date.now
+            chat.updateDate = Date.now
             if !self.isTempMessage {
                 try? self.modelContext.save()
                 print("Save")
@@ -81,13 +87,40 @@ class ChatViewModel {
     }
     
     private func getErrorMessage(errorResponse: APIErrorResponse, newMessage: MyMessage) {
+        guard let chat = chat else {
+            print("DEBUG: Chat is empty")
+            return
+        }
         DispatchQueue.main.async {
             self.errorMessage = errorResponse.error.message
-            self.chat.messages.removeAll(where: { $0.id == newMessage.id })
+            chat.messages.removeAll(where: { $0.id == newMessage.id })
+        }
+    }
+    
+    private func fetchData() {
+        let predicate = #Predicate<Chat>{ $0.id == chatId }
+        let descriptor = FetchDescriptor<Chat>(predicate: predicate)
+        DispatchQueue.global().async {
+            do {
+                let chats = try self.modelContext.fetch(descriptor)
+                DispatchQueue.main.async {
+                    guard let fetchChat = chats.first else {
+                        print("DUBUG: Chats are empty")
+                        return
+                    }
+                    self.chat = fetchChat
+                }
+            } catch {
+                print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
+            }
         }
     }
     
     func removeMessage(message: MyMessage) {
+        guard let chat = chat else {
+            print("DEBUG: Chat is empty")
+            return
+        }
         chat.messages.removeAll(where: { $0.id == message.id })
         modelContext.delete(message)
         if !isTempMessage {
@@ -96,6 +129,9 @@ class ChatViewModel {
     }
     
     func removeAllMessage() {
+        guard let chat = chat else {
+            return
+        }
         for message in chat.messages {
             modelContext.delete(message)
         }
@@ -105,6 +141,10 @@ class ChatViewModel {
     }
     
     func sortMessages() -> [MyMessage] {
+        guard let chat = chat else {
+            print("DEBUG: Chat is empty")
+            return []
+        }
         return chat.messages.sorted(by: { $0.timestamp < $1.timestamp })
     }
     

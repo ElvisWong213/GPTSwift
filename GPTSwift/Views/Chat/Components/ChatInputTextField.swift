@@ -30,7 +30,7 @@ struct ChatInputTextField: View {
                 Image(systemName: "plus")
                     .font(.title2)
             }
-            .disabled(chatViewModel.chat.model != .gpt4_vision_preview)
+            .disabled(chatViewModel.chat?.model != .gpt4_vision_preview)
             VStack {
 #if os(iOS)
                 if let uiImage = uiImage {
@@ -146,5 +146,5 @@ extension ChatInputTextField {
 }
 
 #Preview {
-    ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: ""), isTempMessage: false))
+    ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chatId: Chat(title: "").id, isTempMessage: false))
 }

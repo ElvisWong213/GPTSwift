@@ -55,8 +55,8 @@ struct ChatListView: View {
         } detail: {
             if let selectedChat = selectedChat {
                 NavigationStack {
-                    ChatView(modelContext: modelContext, chat: selectedChat)
-                        .id(selectedChat)
+                    ChatView(modelContext: modelContext, chatId: selectedChat.id)
+                        .id(selectedChat.id)
                 }
 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)

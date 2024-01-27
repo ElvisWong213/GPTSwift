@@ -18,8 +18,8 @@ struct ChatView: View {
         }
     }
     
-    init(modelContext: ModelContext, chat: Chat, isTempMessage: Bool = false) {
-        let viewModel = ChatViewModel(modelContext: modelContext, chat: chat, isTempMessage: isTempMessage)
+    init(modelContext: ModelContext, chatId: UUID, isTempMessage: Bool = false) {
+        let viewModel = ChatViewModel(modelContext: modelContext, chatId: chatId, isTempMessage: isTempMessage)
         self._viewModel = State(initialValue: viewModel)
     }
     
@@ -27,8 +27,10 @@ struct ChatView: View {
         VStack {
             ScrollViewReader { proxy in
                 ScrollView {
-                    allMessages()
-                    errorMessage()
+                    LazyVStack {
+                        allMessages()
+                        errorMessage()
+                    }
                 }
                 .onChange(of: viewModel.errorMessage) {
                     if !viewModel.errorMessage.isEmpty {
@@ -49,6 +51,11 @@ struct ChatView: View {
             }
             .scrollIndicators(.automatic)
             .listStyle(.plain)
+            .overlay {
+                if viewModel.sortMessages().isEmpty {
+                    ProgressView()
+                }
+            }
             ChatInputTextField(chatViewModel: viewModel)
         }
         .toolbar {
@@ -105,6 +112,6 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chat: Chat(title: ""))
+    ChatView(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chatId: Chat(title: "").id)
         .modelContainer(for: Chat.self, inMemory: true)
 }
