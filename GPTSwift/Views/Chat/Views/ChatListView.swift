@@ -95,5 +95,5 @@ struct ChatListView: View {
 
 #Preview {
     ChatListView()
-        .modelContainer(for: [Chat.self])
+        .modelContainer(SwiftDataService.previewData)
 }

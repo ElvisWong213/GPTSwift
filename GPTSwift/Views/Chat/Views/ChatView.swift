@@ -112,6 +112,6 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chatId: Chat(title: "").id)
-        .modelContainer(for: Chat.self, inMemory: true)
+    ChatView(modelContext: SwiftDataService.previewData.mainContext, chatId: Chat.MOCK.id)
+        .modelContainer(SwiftDataService.previewData)
 }

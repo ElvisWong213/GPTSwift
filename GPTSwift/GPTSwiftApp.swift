@@ -11,22 +11,7 @@ import KeyboardShortcuts
 
 @main
 struct GPTSwiftApp: App {
-    var sharedModelContext: ModelContext = {
-        let schema = Schema([
-            Chat.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema)
-
-        do {
-            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            let context = ModelContext(container)
-            context.autosaveEnabled = false
-            return context
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-    
+    private var service = SwiftDataService()
 #if os(macOS)
     @StateObject private var appState = AppState()
 #endif
@@ -37,12 +22,12 @@ struct GPTSwiftApp: App {
 #if os(macOS)
                 .floatingPanel(isPresented: $appState.toggleFloatWindow, isUpdatedSetting: $appState.isUpdatedSetting) {
                     FloatingChatView()
-                        .modelContext(sharedModelContext)
+                        .modelContext(service.sharedModelContext)
                         .environmentObject(appState)
                 }
 #endif
         }
-        .modelContext(sharedModelContext)
+        .modelContext(service.sharedModelContext)
 #if os(macOS)
         Settings {
             UserSettingView()

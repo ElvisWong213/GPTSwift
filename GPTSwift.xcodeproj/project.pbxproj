@@ -50,6 +50,7 @@
 		AAD378272B3B496D001D0B24 /* SplashTokenizer in Frameworks */ = {isa = PBXBuildFile; productRef = AAD378262B3B496D001D0B24 /* SplashTokenizer */; };
 		AAD378292B3B4D57001D0B24 /* Theme+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */; };
 		AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */; };
+		AADDFEF22B69355E00FAE4B5 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextOutputFormat.swift; sourceTree = "<group>"; };
 		AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Extensions.swift"; sourceTree = "<group>"; };
 		AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
+		AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			children = (
 				AA9B8F7F2B279FD20041B64E /* KeychainService.swift */,
 				AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */,
+				AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				AA013EEB2B26306600522152 /* ChatViewModel.swift in Sources */,
 				AAD3780F2B3B36A8001D0B24 /* TextOutputFormat.swift in Sources */,
 				AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */,
+				AADDFEF22B69355E00FAE4B5 /* SwiftDataService.swift in Sources */,
 				AA013EE72B262E4E00522152 /* MyMessage.swift in Sources */,
 				AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */,
 			);
