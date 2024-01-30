@@ -1,5 +1,5 @@
 # GPTSwift
-
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ElvisWong)
 # About this project
 Use ChatGPT on Mac and iOS devices
 
