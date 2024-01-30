@@ -19,7 +19,8 @@ struct FloatingChatView: View {
 
     var body: some View {
         VStack {
-            if let chat = chat {
+            ZStack {
+                title()
                 HStack {
                     Spacer()
                     Button {
@@ -27,15 +28,15 @@ struct FloatingChatView: View {
                     } label: {
                         Text("Clear")
                     }
-//                    Button {
-//                        saveChat()
-//                    } label: {
-//                        Text("Save")
-//                    }
+//                        Button {
+//                            saveChat()
+//                        } label: {
+//                            Text("Save")
+//                        }
                 }
+            }
+            if let chat = chat {
                 ChatView(modelContext: modelContext, chatId: chat.id, isTempMessage: true)
-            } else {
-                EmptyView()
             }
         }
         .padding()
@@ -50,6 +51,7 @@ struct FloatingChatView: View {
                 modelContext.delete(chat)
             }
             appState.isUpdatedSetting = true
+            createNewChat()
         }
         .onChange(of: model) {
             if let chat = chat {
@@ -57,6 +59,22 @@ struct FloatingChatView: View {
                 modelContext.delete(chat)
             }
             appState.isUpdatedSetting = true
+            createNewChat()
+        }
+    }
+    
+    @ViewBuilder func title() -> some View {
+        HStack {
+            Text(chat?.title ?? "")
+                .font(.title3)
+                .bold()
+            Text(chat?.getModelString() ?? "")
+                .font(.footnote)
+                .padding(3)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(.gray, lineWidth: 0.5)
+                }
         }
     }
     

@@ -7,13 +7,15 @@
 
 import SwiftUI
 import SwiftData
+import OpenAI
 
 struct ChatListView: View {
     @Environment(\.modelContext) private var modelContext
     
     static var descriptor: FetchDescriptor<Chat> {
         var descriptor = FetchDescriptor<Chat>(sortBy: [SortDescriptor<Chat>(\.updateDate, order: .reverse)])
-        descriptor.predicate = #Predicate<Chat> { !$0.title.contains("New Floating Chat") }
+        let floatingChatTitle = "New Floating Chat"
+        descriptor.predicate = #Predicate<Chat> { $0.title != floatingChatTitle }
         return descriptor
     }
     
@@ -23,23 +25,33 @@ struct ChatListView: View {
     var body: some View {
         NavigationSplitView {
             List(chats, id: \.self, selection: $selectedChat) { chat in
-                Text(chat.title)
-                    .contextMenu {
-                        contextMenuButtons(chat: chat)
-                    }
-                    .swipeActions() {
-                        Button {
-                            removeChat(chat: chat)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                HStack {
+                    Text(chat.title)
+                    Spacer()
+                    Text(chat.getModelString())
+                        .font(.footnote)
+                        .padding(3)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(.gray, lineWidth: 0.5)
                         }
-                        .tint(.red)
+                }
+                .contextMenu {
+                    contextMenuButtons(chat: chat)
+                }
+                .swipeActions() {
+                    Button {
+                        removeChat(chat: chat)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
                     }
+                    .tint(.red)
+                }
                 
             }
             .navigationTitle("Chats")
 #if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 300)
 #endif
             .toolbar {
 #if os(iOS)
@@ -47,7 +59,7 @@ struct ChatListView: View {
                     createNewChat()
                 }
 #elseif os(macOS)
-                ToolbarItem {
+                ToolbarItem(placement: .primaryAction) {
                     createNewChat()
                 }
 #endif
@@ -58,10 +70,23 @@ struct ChatListView: View {
                     ChatView(modelContext: modelContext, chatId: selectedChat.id)
                         .id(selectedChat.id)
                 }
-#if os(iOS)
-                .navigationBarTitleDisplayMode(.inline)
-#endif
                 .navigationTitle(selectedChat.title)
+#if os(macOS)
+                .navigationSubtitle(selectedChat.getModelString())
+#elseif os(iOS)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem {
+                        Text(selectedChat.getModelString())
+                            .font(.footnote)
+                            .padding(3)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.gray, lineWidth: 0.5)
+                            }
+                    }
+                }
+#endif
             } else {
                 Text("Select a chat")
             }

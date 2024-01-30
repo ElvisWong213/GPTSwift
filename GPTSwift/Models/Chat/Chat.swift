@@ -63,4 +63,29 @@ class Chat: Identifiable, Codable {
         try container.encode(maxToken, forKey: .maxToken)
         try container.encode(updateDate, forKey: .updateDate)
     }
+    
+    func getModelString() -> String {
+        guard let model = self.model else {
+            return ""
+        }
+        switch model {
+        case .gpt4, .gpt4_32k, .gpt4_0613, .gpt4_1106_preview:
+            return "GPT4"
+        case .gpt4_vision_preview:
+            return "GPT4 Vision"
+        case .gpt3_5Turbo, .gpt3_5Turbo_16k, .gpt3_5Turbo_1106, .gpt3_5Turbo_16k_0613:
+            return "GPT3.5"
+        default:
+            return ""
+        }
+    }
+    
+    static let MOCK: Chat = Chat(title: "Test Data Chat", model: .gpt3_5Turbo, messages: [
+        MyMessage(id: UUID(), author: .User, contents: [
+            MyContent(type: .Text, value: "Dolorum pariatur exercitationem ipsum eum nulla. Optio fugiat nostrum nesciunt eius pariatur quaerat reiciendis architecto repellat.")
+        ]),
+        MyMessage(id: UUID(), author: .GPT, contents: [
+            MyContent(type: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
+        ]),
+    ])
 }

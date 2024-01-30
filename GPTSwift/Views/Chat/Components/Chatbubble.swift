@@ -52,8 +52,8 @@ struct Chatbubble: View {
         }
         .padding(.horizontal)
         .padding(.bottom)
-        .padding(.trailing, author.isUser ? 0 : 15)
-        .padding(.leading, author.isUser ? 15 : 0)
+        .padding(.trailing, author.isUser ? 0 : 30)
+        .padding(.leading, author.isUser ? 30 : 0)
     }
     
     private func bubbleForegroundColor() -> Color {
@@ -79,8 +79,8 @@ struct Chatbubble: View {
 //        }
 //    }
     VStack {
-        Chatbubble(author: .User, messageType: .Text, value: "Test")
-        Chatbubble(author: .GPT, messageType: .Text, value: "Test")
-        Chatbubble(author: .Error, messageType: .Text, value: "Test")
+        Chatbubble(author: .User, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
+        Chatbubble(author: .GPT, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
+        Chatbubble(author: .Error, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
     }
 }

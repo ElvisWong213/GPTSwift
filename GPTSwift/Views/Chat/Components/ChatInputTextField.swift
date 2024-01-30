@@ -73,7 +73,7 @@ struct ChatInputTextField: View {
             Button {
                 sendMessage()
             } label: {
-                if chatViewModel.isSent {
+                if chatViewModel.chatState == .FetchingAPI {
                     Image(systemName: "ellipsis")
                         .symbolEffect(.pulse)
                 } else {
@@ -81,7 +81,7 @@ struct ChatInputTextField: View {
                 }
             }
             .font(.title2)
-            .disabled(chatViewModel.textInput.isEmpty || chatViewModel.isSent)
+            .disabled(chatViewModel.textInput.isEmpty || chatViewModel.chatState == .FetchingAPI)
         }
         .padding(.horizontal)
         .padding(.vertical, 5)
@@ -93,7 +93,7 @@ struct ChatInputTextField: View {
 
 extension ChatInputTextField {
     private func sendMessage() {
-        guard !chatViewModel.textInput.isEmpty && !chatViewModel.isSent else {
+        guard !chatViewModel.textInput.isEmpty && chatViewModel.chatState != .FetchingAPI else {
             print("Debug: Unable to send Message (text field is empty or gpt is responding)")
             return
         }

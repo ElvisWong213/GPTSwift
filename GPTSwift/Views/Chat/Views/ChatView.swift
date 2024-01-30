@@ -38,10 +38,10 @@ struct ChatView: View {
                     }
                 }
                 .onChange(of: latestMessageString) {
-                    proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
+                    proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
                 }
                 .onAppear() {
-                    proxy.scrollTo(viewModel.getLatestMessage()?.id, anchor: .bottom)
+                    proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
                 }
             }
             .onTapGesture {
@@ -52,18 +52,24 @@ struct ChatView: View {
             .scrollIndicators(.automatic)
             .listStyle(.plain)
             .overlay {
-                if viewModel.sortMessages().isEmpty {
+                switch viewModel.chatState {
+                case .FetchingDatabase:
                     ProgressView()
+                case .Empty:
+                    Text("Send a message to ChatGPT")
+                case .Done, .FetchingAPI:
+                    EmptyView()
                 }
             }
             ChatInputTextField(chatViewModel: viewModel)
         }
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .primaryAction) {
                 NavigationLink {
                     NewChatView(selectedChat: .constant(nil), editChat: viewModel.chat)
                 } label: {
                     Text("Edit")
+                        .fixedSize()
                 }
             }
         }
@@ -94,7 +100,7 @@ struct ChatView: View {
         ForEach(viewModel.sortMessages()) { message in
             ForEach(message.contents) { content in
                 Chatbubble(author: message.author, messageType: content.type, value: content.value)
-                    .id(message.id)
+                    .id(content.id)
                     .contextMenu {
                         contextMenuButtons(message: message, content: content)
                     }

@@ -15,9 +15,9 @@ class ChatViewModel {
     var chatId: UUID
     var chat: Chat?
     var textInput: String = ""
-    var isSent: Bool = false
     var errorMessage: String = ""
     let isTempMessage: Bool
+    var chatState: ChatState = .Empty
     
     init(modelContext: ModelContext, chatId: UUID, isTempMessage: Bool) {
         self.modelContext = modelContext
@@ -31,7 +31,7 @@ class ChatViewModel {
             print("DEBUG: Chat is empty")
             return
         }
-        isSent = true
+        chatState = .FetchingAPI
         errorMessage = ""
         chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
@@ -59,18 +59,19 @@ class ChatViewModel {
             case .failure(let error):
                 print(error)
                 self.getErrorMessage(errorResponse: error as! APIErrorResponse, newMessage: newMessage)
-                self.updateIsSent(false)
+                self.updateChatState(.Done)
             }
         } completion: { error in
             if let error {
                 print(error)
             }
-            self.updateIsSent(false)
+            self.updateChatState(.Done)
             chat.updateDate = Date.now
             if !self.isTempMessage {
                 try? self.modelContext.save()
                 print("Save")
             }
+            self.updateChatState(.Done)
         }
     }
     
@@ -80,9 +81,9 @@ class ChatViewModel {
         }
     }
     
-    private func updateIsSent(_ value: Bool) {
+    private func updateChatState(_ state: ChatState) {
         DispatchQueue.main.async {
-            self.isSent = value
+            self.chatState = state
         }
     }
     
@@ -98,22 +99,33 @@ class ChatViewModel {
     }
     
     private func fetchData() {
+        if isTempMessage {
+            return
+        }
+        chatState = .FetchingDatabase
         let predicate = #Predicate<Chat>{ $0.id == chatId }
         let descriptor = FetchDescriptor<Chat>(predicate: predicate)
-        DispatchQueue.global().async {
+//        DispatchQueue.global().async {
             do {
                 let chats = try self.modelContext.fetch(descriptor)
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     guard let fetchChat = chats.first else {
                         print("DUBUG: Chats are empty")
+                        self.chatState = .Empty
                         return
                     }
+                    if fetchChat.messages.isEmpty {
+                        self.chatState = .Empty
+                    } else {
+                        self.chatState = .Done
+                    }
                     self.chat = fetchChat
-                }
+//                }
             } catch {
                 print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
+                self.chatState = .Empty
             }
-        }
+//        }
     }
     
     func removeMessage(message: MyMessage) {
@@ -151,4 +163,8 @@ class ChatViewModel {
     func getLatestMessage() -> MyMessage? {
         return sortMessages().last
     }
+}
+
+enum ChatState {
+    case FetchingAPI, FetchingDatabase, Empty, Done
 }
