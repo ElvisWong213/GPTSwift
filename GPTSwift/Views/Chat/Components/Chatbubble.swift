@@ -12,6 +12,8 @@ struct Chatbubble: View {
     let author: Author
     let messageType: MessageType
     var value: String
+    var chatState: ChatState
+    var isLatest: Bool?
     
     var body: some View {
         HStack {
@@ -39,9 +41,17 @@ struct Chatbubble: View {
 #endif
                         }
                     }
+                    // Loading indicator
+                    if chatState == .FetchingAPI && isLatest == true {
+                        Image(systemName: "ellipsis")
+                            .font(.title)
+                            .symbolEffect(.pulse)
+                            .padding(.top)
+                    }
                 }
                 .padding()
                 .background() {
+                    // Background
                     RoundedRectangle(cornerRadius: 15)
                         .foregroundStyle(bubbleForegroundColor())
                 }
@@ -79,8 +89,9 @@ struct Chatbubble: View {
 //        }
 //    }
     VStack {
-        Chatbubble(author: .User, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
-        Chatbubble(author: .GPT, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
-        Chatbubble(author: .Error, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.")
+        Chatbubble(author: .User, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.", chatState: .Done)
+        Chatbubble(author: .GPT, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.", chatState: .Done)
+        Chatbubble(author: .GPT, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.", chatState: .FetchingAPI)
+        Chatbubble(author: .Error, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.", chatState: .Done)
     }
 }

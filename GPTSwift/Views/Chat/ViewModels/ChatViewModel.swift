@@ -31,7 +31,7 @@ class ChatViewModel {
             print("DEBUG: Chat is empty")
             return
         }
-        chatState = .FetchingAPI
+        updateChatState(.FetchingAPI)
         errorMessage = ""
         chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
@@ -58,8 +58,9 @@ class ChatViewModel {
                 }
             case .failure(let error):
                 print(error)
-                self.getErrorMessage(errorResponse: error as! APIErrorResponse, newMessage: newMessage)
-                self.updateChatState(.Done)
+                if let apiError = error as? APIErrorResponse {
+                    self.getErrorMessage(errorResponse: apiError, newMessage: newMessage)
+                }
             }
         } completion: { error in
             if let error {
@@ -71,7 +72,6 @@ class ChatViewModel {
                 try? self.modelContext.save()
                 print("Save")
             }
-            self.updateChatState(.Done)
         }
     }
     
@@ -99,9 +99,6 @@ class ChatViewModel {
     }
     
     private func fetchData() {
-        if isTempMessage {
-            return
-        }
         chatState = .FetchingDatabase
         let predicate = #Predicate<Chat>{ $0.id == chatId }
         let descriptor = FetchDescriptor<Chat>(predicate: predicate)

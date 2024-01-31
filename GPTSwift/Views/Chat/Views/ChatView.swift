@@ -12,9 +12,9 @@ import UniformTypeIdentifiers
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
     private let errorMessageId: UUID = UUID()
-    private var latestMessageString: String? {
+    private var latestMessage: MyContent? {
         get {
-            viewModel.getLatestMessage()?.contents.last?.value
+            viewModel.getLatestMessage()?.contents.last
         }
     }
     
@@ -34,10 +34,10 @@ struct ChatView: View {
                 }
                 .onChange(of: viewModel.errorMessage) {
                     if !viewModel.errorMessage.isEmpty {
-                        proxy.scrollTo(errorMessageId)
+                        proxy.scrollTo(errorMessageId, anchor: .bottom)
                     }
                 }
-                .onChange(of: latestMessageString) {
+                .onChange(of: latestMessage?.value) {
                     proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
                 }
                 .onAppear() {
@@ -99,7 +99,7 @@ struct ChatView: View {
     @ViewBuilder private func allMessages() -> some View {
         ForEach(viewModel.sortMessages()) { message in
             ForEach(message.contents) { content in
-                Chatbubble(author: message.author, messageType: content.type, value: content.value)
+                Chatbubble(author: message.author, messageType: content.type, value: content.value, chatState: viewModel.chatState)
                     .id(content.id)
                     .contextMenu {
                         contextMenuButtons(message: message, content: content)
@@ -110,7 +110,7 @@ struct ChatView: View {
     
     @ViewBuilder private func errorMessage() -> some View {
         if !viewModel.errorMessage.isEmpty {
-            Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage)
+            Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage, chatState: .Done)
                 .id(errorMessageId)
                 .listRowSeparator(.hidden)
         }
