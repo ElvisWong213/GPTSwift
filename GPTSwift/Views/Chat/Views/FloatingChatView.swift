@@ -83,8 +83,8 @@ struct FloatingChatView: View {
             model = .gpt3_5Turbo_1106
         }
         let newChat = Chat(title: "New Floating Chat", model: model, prompt: prompt)
-        modelContext.insert(newChat)
         chat = newChat
+        modelContext.insert(newChat)
     }
     
     private func clearChat() {
