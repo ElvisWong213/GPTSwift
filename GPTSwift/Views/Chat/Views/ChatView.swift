@@ -99,7 +99,7 @@ struct ChatView: View {
     @ViewBuilder private func allMessages() -> some View {
         ForEach(viewModel.sortMessages()) { message in
             ForEach(message.contents) { content in
-                Chatbubble(author: message.author, messageType: content.type, value: content.value, chatState: viewModel.chatState)
+                Chatbubble(author: message.author, messageType: content.type, value: content.value, chatState: viewModel.chatState, isLatest: message.isLatest)
                     .id(content.id)
                     .contextMenu {
                         contextMenuButtons(message: message, content: content)

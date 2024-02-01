@@ -42,7 +42,7 @@ struct Chatbubble: View {
                         }
                     }
                     // Loading indicator
-                    if chatState == .FetchingAPI && isLatest == true {
+                    if chatState == .FetchingAPI && (isLatest ?? false) {
                         Image(systemName: "ellipsis")
                             .font(.title)
                             .symbolEffect(.pulse)

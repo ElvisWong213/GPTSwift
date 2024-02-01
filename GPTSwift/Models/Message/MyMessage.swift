@@ -14,18 +14,20 @@ class MyMessage: Identifiable, Codable {
     @Attribute(.unique) var id: UUID = UUID()
     let author: Author
     var timestamp: Date = Date.now
+    var isLatest: Bool?
     
     @Relationship(deleteRule: .cascade, inverse: \MyContent.message)
     var contents: [MyContent] = []
     
     var chat: Chat?
 
-    init(id: UUID = UUID(), author: Author, contents: [MyContent], chat: Chat? = nil, timestamp: Date = Date.now) {
+    init(id: UUID = UUID(), author: Author, contents: [MyContent], chat: Chat? = nil, timestamp: Date = Date.now, isLatest: Bool? = true) {
         self.id = id
         self.author = author
         self.contents = contents
         self.chat = chat
         self.timestamp = timestamp
+        self.isLatest = isLatest
     }
     
     func convertToMessage() -> Message {
@@ -51,6 +53,8 @@ class MyMessage: Identifiable, Codable {
         case author
         case content
         case chat
+        case timestamp
+        case isLatest
     }
     
     required init(from decoder: Decoder) throws {
@@ -59,6 +63,8 @@ class MyMessage: Identifiable, Codable {
         self.author = try container.decode(Author.self, forKey: .author)
         self.contents = try container.decode([MyContent].self, forKey: .content)
         self.chat = try container.decode(Chat.self, forKey: .chat)
+        self.timestamp = try container.decode(Date.self, forKey: .timestamp)
+        self.isLatest = try container.decode(Bool.self, forKey: .isLatest)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -67,6 +73,8 @@ class MyMessage: Identifiable, Codable {
         try container.encode(author, forKey: .author)
         try container.encode(contents, forKey: .content)
         try container.encode(chat, forKey: .chat)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(isLatest, forKey: .isLatest)
     }
 }
 

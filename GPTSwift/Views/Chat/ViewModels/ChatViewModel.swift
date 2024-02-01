@@ -33,33 +33,40 @@ class ChatViewModel {
         }
         updateChatState(.FetchingAPI)
         errorMessage = ""
+        // User message
         chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
         let promptMessage = Message(role: .system, content: .object([ChatContent(type: .text, value: chat.prompt)]))
         var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
         messages.insert(promptMessage, at: 0)
         
-        let chatQuery = ChatQuery(model: chat.model!, messages: messages, maxTokens: chat.maxToken)
+        guard let model = chat.model else {
+            print("DEBUG: Chat model is empty")
+            return
+        }
+        
+        let chatQuery = ChatQuery(model: model, messages: messages, maxTokens: chat.maxToken)
+        
         // debug
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try? encoder.encode(chatQuery)
         print(String(data: data!, encoding: .utf8) ?? "")
         
-        let newMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")])
-        
-        chat.messages.append(newMessage)
+        // API response
+        let responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")])
+        chat.messages.append(responseMessage)
         
         openAI.chatsStream(query: chatQuery) { response in
             switch response {
             case .success(let data):
                 for choice in data.choices {
-                    self.updateMessageContent(newMessage: newMessage, content: choice.delta.content ?? "")
+                    self.updateMessageContent(newMessage: responseMessage, content: choice.delta.content ?? "")
                 }
             case .failure(let error):
                 print(error)
                 if let apiError = error as? APIErrorResponse {
-                    self.getErrorMessage(errorResponse: apiError, newMessage: newMessage)
+                    self.getErrorMessage(errorResponse: apiError, newMessage: responseMessage)
                 }
             }
         } completion: { error in
@@ -68,6 +75,7 @@ class ChatViewModel {
             }
             self.updateChatState(.Done)
             chat.updateDate = Date.now
+            self.updateMessageIsLatest(message: responseMessage)
             if !self.isTempMessage {
                 try? self.modelContext.save()
                 print("Save")
@@ -84,6 +92,12 @@ class ChatViewModel {
     private func updateChatState(_ state: ChatState) {
         DispatchQueue.main.async {
             self.chatState = state
+        }
+    }
+    
+    private func updateMessageIsLatest(message: MyMessage) {
+        DispatchQueue.main.async {
+            message.isLatest = false
         }
     }
     
