@@ -66,12 +66,17 @@ struct ChatView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 NavigationLink {
-                    NewChatView(selectedChat: .constant(nil), editChat: viewModel.chat)
+                    if viewModel.chat != nil {
+                        EditChatView(editChat: viewModel.chat!)
+                    }
                 } label: {
                     Text("Edit")
                         .fixedSize()
                 }
             }
+        }
+        .onDisappear() {
+            viewModel.removeChat()
         }
 #if os(iOS)
         .toolbar(.hidden, for: .tabBar)

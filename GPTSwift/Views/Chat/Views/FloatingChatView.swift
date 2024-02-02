@@ -14,8 +14,8 @@ struct FloatingChatView: View {
     @EnvironmentObject var appState: AppState
     @State private var chat: Chat?
     
-    @AppStorage ("defaultPrompt") var prompt: String = ""
-    @AppStorage ("defaultModel") var model: Model?
+    @AppStorage ("floatingWindowPrompt") var prompt: String = ""
+    @AppStorage ("floatingWindowModel") var model: Model?
 
     var body: some View {
         VStack {
@@ -46,20 +46,10 @@ struct FloatingChatView: View {
             createNewChat()
         }
         .onChange(of: prompt) {
-            if let chat = chat {
-                // Remove chat from Swift Data
-                modelContext.delete(chat)
-            }
-            appState.isUpdatedSetting = true
-            createNewChat()
+            chat?.prompt = prompt
         }
         .onChange(of: model) {
-            if let chat = chat {
-                // Remove chat from Swift Data
-                modelContext.delete(chat)
-            }
-            appState.isUpdatedSetting = true
-            createNewChat()
+            chat?.model = model
         }
     }
     

@@ -20,7 +20,7 @@ struct GPTSwiftApp: App {
         WindowGroup {
             ContentView()
 #if os(macOS)
-                .floatingPanel(isPresented: $appState.toggleFloatWindow, isUpdatedSetting: $appState.isUpdatedSetting) {
+                .floatingPanel(isPresented: $appState.toggleFloatWindow) {
                     FloatingChatView()
                         .modelContext(service.sharedModelContext)
                         .environmentObject(appState)
@@ -40,7 +40,6 @@ struct GPTSwiftApp: App {
 @MainActor
 final class AppState: ObservableObject {
     @Published var toggleFloatWindow: Bool = false
-    @Published var isUpdatedSetting: Bool = false
     
     init() {
         KeyboardShortcuts.onKeyDown(for: .toogleFloatWindow) {

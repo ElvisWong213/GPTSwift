@@ -33,7 +33,7 @@
 		AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA9B8F852B27CFCD0041B64E /* OpenAI */; };
 		AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F892B27E7850041B64E /* Chat.swift */; };
 		AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */; };
-		AAA76CCF2B34FBB800DA5F04 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */; };
+		AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */; };
 		AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */; };
 		AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAD377FC2B3B207F001D0B24 /* MarkdownUI */; };
 		AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */; };
@@ -78,7 +78,7 @@
 		AA9B8F822B27BC010041B64E /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		AA9B8F892B27E7850041B64E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatView.swift; sourceTree = "<group>"; };
 		AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownCodeSyntaxHightlighter.swift; sourceTree = "<group>"; };
 		AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextOutputFormat.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 		AAD377FA2B3B16DD001D0B24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAA76CCE2B34FBB800DA5F04 /* NewChatView.swift */,
+				AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */,
 				AA013EDE2B25FAEB00522152 /* ChatView.swift */,
 				AA9B8F822B27BC010041B64E /* ChatListView.swift */,
 				AA4B026D2B404A3C00C5B227 /* FloatingChatView.swift */,
@@ -385,7 +385,7 @@
 				AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */,
 				AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */,
 				AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */,
-				AAA76CCF2B34FBB800DA5F04 /* NewChatView.swift in Sources */,
+				AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */,
 				AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */,
 				AA013EDF2B25FAEB00522152 /* ChatView.swift in Sources */,
 				AA4B026E2B404A3C00C5B227 /* FloatingChatView.swift in Sources */,

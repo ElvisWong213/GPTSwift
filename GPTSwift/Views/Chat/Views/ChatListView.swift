@@ -12,6 +12,10 @@ import OpenAI
 struct ChatListView: View {
     @Environment(\.modelContext) private var modelContext
     
+    @AppStorage("chatsPrompt") var chatsPrompt: String = ""
+    @AppStorage("chatsModel") var chatsModel: Model?
+    @AppStorage("chatsMaxToken") var chatsMaxToken: Int?
+    
     static var descriptor: FetchDescriptor<Chat> {
         var descriptor = FetchDescriptor<Chat>(sortBy: [SortDescriptor<Chat>(\.updateDate, order: .reverse)])
         let floatingChatTitle = "New Floating Chat"
@@ -94,12 +98,24 @@ struct ChatListView: View {
     }
     
     @ViewBuilder private func createNewChat() -> some View {
-        NavigationLink {
-            NewChatView(selectedChat: $selectedChat)
+        Button {
+            createNewChat()
         } label: {
             Label("Add Item", systemImage: "plus")
         }
         .keyboardShortcut("n", modifiers: .command)
+    }
+    
+    private func createNewChat() {
+        let title = "New Chat"
+        var maxToken = chatsMaxToken
+        if chatsModel == .gpt4_vision_preview && maxToken == nil {
+            maxToken = 4096
+        }
+        let newChat = Chat(title: title, model: chatsModel, prompt: chatsPrompt, maxToken: maxToken)
+        modelContext.insert(newChat)
+        try? modelContext.save()
+        selectedChat = newChat
     }
     
     private func removeChat(chat: Chat) {

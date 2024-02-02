@@ -85,7 +85,6 @@ extension EnvironmentValues {
 
 struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
     @Binding var isPresented: Bool
-    @Binding var isUpdatedSetting: Bool
     
     var contentRect: CGRect = CGRect(x: 0, y: 0, width: 624, height: 512)
 
@@ -104,10 +103,6 @@ struct FloatingPanelModifier<PanelContent: View>: ViewModifier {
             }
             .onChange(of: isPresented) { oldValue, newValue in
                 if newValue {
-                    if isUpdatedSetting {
-                        createPanel()
-                        isUpdatedSetting = false
-                    }
                     present()
                 } else {
                     panel?.close()

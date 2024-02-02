@@ -174,6 +174,16 @@ class ChatViewModel {
     func getLatestMessage() -> MyMessage? {
         return sortMessages().last
     }
+    
+    func removeChat() {
+        guard let chat = chat else {
+            return
+        }
+        if chat.messages.isEmpty {
+            modelContext.delete(chat)
+            try? modelContext.save()
+        }
+    }
 }
 
 enum ChatState {
