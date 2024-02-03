@@ -10,7 +10,7 @@ import OpenAI
 
 class OpenAIService {
     static let shared: OpenAIService = {
-       let instance = OpenAIService()
+        let instance = OpenAIService()
         return instance
     }()
     
