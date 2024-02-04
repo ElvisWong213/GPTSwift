@@ -46,11 +46,11 @@ struct ChatView: View {
                     gotoBottomButton(proxy)
                 }
             }
-            .onTapGesture {
 #if os(iOS)
+            .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-#endif
             }
+#endif
             .scrollIndicators(.automatic)
             .listStyle(.plain)
             .overlay {
@@ -68,9 +68,7 @@ struct ChatView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 NavigationLink {
-                    if viewModel.chat != nil {
-                        EditChatView(editChat: viewModel.chat!)
-                    }
+                    EditChatView(editChat: viewModel.chat)
                 } label: {
                     Text("Edit")
                         .fixedSize()
