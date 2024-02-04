@@ -141,7 +141,8 @@ struct ChatView: View {
                         .padding(10)
                         .background() {
                             Circle()
-                                .fill(.primary)
+                                .fill(.white.opacity(0.7))
+                                .shadow(radius: 5)
                         }
                 }
                 .padding()
