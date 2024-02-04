@@ -4,7 +4,7 @@
 Use ChatGPT on Mac and iOS devices
 
 # Features
-- Floating chat window
+- Floating chat window (MacOS Only)
 - Custom chat prompt
 - Support GPT4 vision, you can upload an image to the chat
 - Support Markdown format responses
