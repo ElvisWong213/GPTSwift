@@ -25,50 +25,54 @@ struct ChatInputTextField: View {
 #endif
     
     var body: some View {
-        HStack {
+        HStack(alignment: .bottom) {
             PhotosPicker(selection: $selectedItem, matching: .images) {
                 Image(systemName: "plus")
                     .font(.title2)
             }
             .disabled(chatViewModel.chat?.model != .gpt4_vision_preview)
             VStack {
+                HStack {
 #if os(iOS)
-                if let uiImage = uiImage {
-                    Button {
-                        self.uiImage = nil
-                        self.selectedItem = nil
-                    } label: {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 100)
+                    if let uiImage = uiImage {
+                        Button {
+                            self.uiImage = nil
+                            self.selectedItem = nil
+                        } label: {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 100)
+                        }
                     }
-                }
 #elseif os(macOS)
-                if let nsimage = nsimage {
-                    Button {
-                        self.nsimage = nil
-                        self.selectedItem = nil
-                    } label: {
-                        Image(nsImage: nsimage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 100)
+                    if let nsimage = nsimage {
+                        Button {
+                            self.nsimage = nil
+                            self.selectedItem = nil
+                        } label: {
+                            Image(nsImage: nsimage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 100)
+                        }
                     }
-                }
 #endif
+                }
+                .frame(maxWidth: .infinity)
+                .background(.black.opacity(0.3))
                 TextField("Message", text: $chatViewModel.textInput, axis: .vertical)
                     .lineLimit(5)
                     .padding(.horizontal, 5)
-                    .padding(.vertical, 2)
-                    .overlay() {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(.gray, lineWidth: 1)
-                    }
+                    .padding(.vertical, 3)
                     .textFieldStyle(.plain)
                     .onSubmit {
                         sendMessage()
                     }
+            }
+            .overlay() {
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(.gray, lineWidth: 1)
             }
             Button {
                 sendMessage()
