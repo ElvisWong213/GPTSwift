@@ -113,7 +113,9 @@ struct EditChatView: View {
     
 }
 
+#if DEBUG
 #Preview {
     EditChatView(editChat: Chat(title: ""))
         .modelContainer(for: [Chat.self])
 }
+#endif

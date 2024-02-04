@@ -144,7 +144,9 @@ struct ChatView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ChatView(modelContext: SwiftDataService.previewData.mainContext, chatId: Chat.MOCK.id)
         .modelContainer(SwiftDataService.previewData)
 }
+#endif

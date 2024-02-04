@@ -149,6 +149,8 @@ extension ChatInputTextField {
     }
 }
 
+#if DEBUG
 #Preview {
     ChatInputTextField(chatViewModel: ChatViewModel(modelContext: ModelContext(try! ModelContainer(for: Chat.self)), chatId: Chat(title: "").id, isTempMessage: false))
 }
+#endif

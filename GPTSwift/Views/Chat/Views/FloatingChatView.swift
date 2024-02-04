@@ -86,9 +86,10 @@ struct FloatingChatView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     FloatingChatView()
         .environmentObject(AppState())
 }
-
+#endif
 #endif

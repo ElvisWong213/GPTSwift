@@ -158,6 +158,8 @@ enum SettringViewEnum {
     case apiKey
 }
 
+#if DEBUG
 #Preview {
     UserSettingView()
 }
+#endif

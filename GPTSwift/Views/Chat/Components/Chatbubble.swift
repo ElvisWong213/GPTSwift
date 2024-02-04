@@ -80,6 +80,7 @@ struct Chatbubble: View {
     }
 }
 
+#if DEBUG
 #Preview {
 //    ScrollView {
 //        ForEach(MyMessage.MOCK) { message in
@@ -95,3 +96,4 @@ struct Chatbubble: View {
         Chatbubble(author: .Error, messageType: .Text, value: "Quod cupiditate voluptas. Veniam tenetur nam. A explicabo expedita a laudantium provident exercitationem numquam commodi repellat. Ratione ad aut laboriosam earum eaque. Rem praesentium occaecati dolore adipisci voluptatem nesciunt. Voluptas quidem beatae corrupti.", chatState: .Done)
     }
 }
+#endif

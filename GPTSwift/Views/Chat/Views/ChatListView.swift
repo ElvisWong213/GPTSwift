@@ -134,7 +134,9 @@ struct ChatListView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ChatListView()
         .modelContainer(SwiftDataService.previewData)
 }
+#endif

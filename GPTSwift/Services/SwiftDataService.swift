@@ -10,6 +10,8 @@ import SwiftData
 
 @MainActor
 final class SwiftDataService: MyServices {
+
+#if DEBUG
     static let previewData: ModelContainer = {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
@@ -24,6 +26,7 @@ final class SwiftDataService: MyServices {
             fatalError("Failed to create model container for previewing: \(error.localizedDescription)")
         }
     }()
+#endif
     
     var sharedModelContext: ModelContext = {
         let schema = Schema([

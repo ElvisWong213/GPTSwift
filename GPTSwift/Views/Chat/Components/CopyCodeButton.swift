@@ -32,6 +32,8 @@ struct CopyCodeButton: View {
     }
 }
 
+#if DEBUG
 #Preview {
     CopyCodeButton(value: "")
 }
+#endif
