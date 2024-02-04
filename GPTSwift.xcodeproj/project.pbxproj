@@ -35,6 +35,7 @@
 		AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */; };
 		AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */; };
 		AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */; };
+		AAAB9A092B6F568200C368AD /* CopyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */; };
 		AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAD377FC2B3B207F001D0B24 /* MarkdownUI */; };
 		AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */; };
 		AAD3780F2B3B36A8001D0B24 /* TextOutputFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */; };
@@ -51,6 +52,7 @@
 		AAD378292B3B4D57001D0B24 /* Theme+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */; };
 		AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */; };
 		AADDFEF22B69355E00FAE4B5 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */; };
+		AAEBFA702B6F38FD0079A9E1 /* CopyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFA6F2B6F38FD0079A9E1 /* CopyService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,11 +82,13 @@
 		AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatView.swift; sourceTree = "<group>"; };
 		AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCodeButton.swift; sourceTree = "<group>"; };
 		AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownCodeSyntaxHightlighter.swift; sourceTree = "<group>"; };
 		AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextOutputFormat.swift; sourceTree = "<group>"; };
 		AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Extensions.swift"; sourceTree = "<group>"; };
 		AAD3F12E2B396CBC000A6CDA /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
+		AAEBFA6F2B6F38FD0079A9E1 /* CopyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,7 @@
 				AA013EE12B25FCE200522152 /* ChatInputTextField.swift */,
 				AA013EE32B25FD4400522152 /* Chatbubble.swift */,
 				AA4B026F2B40F8D800C5B227 /* VisualEffect.swift */,
+				AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				AA9B8F7F2B279FD20041B64E /* KeychainService.swift */,
 				AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */,
 				AADDFEF12B69355E00FAE4B5 /* SwiftDataService.swift */,
+				AAEBFA6F2B6F38FD0079A9E1 /* CopyService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -392,10 +398,12 @@
 				AA013EE92B262E8800522152 /* Author.swift in Sources */,
 				AA4B02672B3E5E7800C5B227 /* View+Extensions.swift in Sources */,
 				AA013EF32B267D9400522152 /* MessageType.swift in Sources */,
+				AAAB9A092B6F568200C368AD /* CopyCodeButton.swift in Sources */,
 				AA013ECD2B25FA0B00522152 /* ContentView.swift in Sources */,
 				AA013EE42B25FD4400522152 /* Chatbubble.swift in Sources */,
 				AA4B02702B40F8D800C5B227 /* VisualEffect.swift in Sources */,
 				AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */,
+				AAEBFA702B6F38FD0079A9E1 /* CopyService.swift in Sources */,
 				AAD3F12F2B396CBC000A6CDA /* NSImage+Extensions.swift in Sources */,
 				AA013EF52B267DA500522152 /* MyContent.swift in Sources */,
 				AAD378292B3B4D57001D0B24 /* Theme+Extensions.swift in Sources */,
@@ -666,7 +674,7 @@
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				minimumVersion = 2.3.0;
 			};
 		};
 		AAD3781D2B3B496D001D0B24 /* XCRemoteSwiftPackageReference "Splash" */ = {

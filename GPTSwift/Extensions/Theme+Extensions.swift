@@ -20,10 +20,21 @@ extension Theme {
             ForegroundColor(.yellow)
             FontWeight(.bold)
         }
-        .codeBlock { content in
-            ScrollView(.horizontal) {
-                content
-                    .padding()
+        .codeBlock { configuration in
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Language:  \(configuration.language ?? "")")
+                        .foregroundStyle(.yellow)
+                        .font(.subheadline)
+                    Spacer()
+                    CopyCodeButton(value: configuration.content)
+                }
+                .padding()
+                .background(.black)
+                ScrollView(.horizontal) {
+                    configuration.label
+                        .padding()
+                }
             }
             .background(.black.opacity(0.7))
             .clipShape(RoundedRectangle(cornerRadius: 15))

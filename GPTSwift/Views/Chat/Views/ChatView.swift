@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import UniformTypeIdentifiers
 
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
@@ -88,12 +87,7 @@ struct ChatView: View {
     
     @ViewBuilder private func contextMenuButtons(message: MyMessage, content: MyContent) -> some View {
         Button {
-#if os(iOS)
-            UIPasteboard.general.setValue(content.value, forPasteboardType: UTType.plainText.identifier)
-#elseif os(macOS)
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString(content.value, forType: .string)
-#endif
+            CopyService.copy(content.value)
         } label: {
             Label("Copy", systemImage: "doc.on.doc")
         }
