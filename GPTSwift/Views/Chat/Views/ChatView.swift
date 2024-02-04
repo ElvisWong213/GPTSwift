@@ -26,22 +26,25 @@ struct ChatView: View {
     var body: some View {
         VStack {
             ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack {
-                        allMessages()
-                        errorMessage()
+                ZStack {
+                    ScrollView {
+                        LazyVStack {
+                            allMessages()
+                            errorMessage()
+                        }
                     }
-                }
-                .onChange(of: viewModel.errorMessage) {
-                    if !viewModel.errorMessage.isEmpty {
-                        proxy.scrollTo(errorMessageId, anchor: .bottom)
+                    .onChange(of: viewModel.errorMessage) {
+                        if !viewModel.errorMessage.isEmpty {
+                            proxy.scrollTo(errorMessageId, anchor: .bottom)
+                        }
                     }
-                }
-                .onChange(of: latestMessage?.value) {
-                    proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
-                }
-                .onAppear() {
-                    proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                    .onChange(of: latestMessage?.value) {
+                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                    }
+                    .onAppear() {
+                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                    }
+                    gotoBottomButton(proxy)
                 }
             }
             .onTapGesture {
@@ -118,6 +121,32 @@ struct ChatView: View {
             Chatbubble(author: .Error, messageType: .Text, value: viewModel.errorMessage, chatState: .Done)
                 .id(errorMessageId)
                 .listRowSeparator(.hidden)
+        }
+    }
+    
+    @ViewBuilder private func gotoBottomButton(_ proxy: ScrollViewProxy) -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button {
+                    withAnimation {
+                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                    }
+                } label: {
+                    Image(systemName: "chevron.down")
+                        .font(.title3)
+                        .bold()
+                        .foregroundStyle(.blue)
+                        .padding(10)
+                        .background() {
+                            Circle()
+                                .fill(.primary)
+                        }
+                }
+                .padding()
+                .buttonStyle(.plain)
+            }
         }
     }
 }
