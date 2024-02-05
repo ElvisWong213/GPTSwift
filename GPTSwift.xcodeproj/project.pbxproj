@@ -36,6 +36,9 @@
 		AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */; };
 		AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */; };
 		AAAB9A092B6F568200C368AD /* CopyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */; };
+		AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = AAC486882B7066BA008C8A4E /* Sparkle */; };
+		AAC4868C2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */; };
+		AAC4868E2B706ADC008C8A4E /* CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */; };
 		AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAD377FC2B3B207F001D0B24 /* MarkdownUI */; };
 		AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */; };
 		AAD3780F2B3B36A8001D0B24 /* TextOutputFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */; };
@@ -83,6 +86,10 @@
 		AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatView.swift; sourceTree = "<group>"; };
 		AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCodeButton.swift; sourceTree = "<group>"; };
+		AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesViewModel.swift; sourceTree = "<group>"; };
+		AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesView.swift; sourceTree = "<group>"; };
+		AAC4868F2B7075F6008C8A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AAC486902B70801B008C8A4E /* GPTSwiftDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GPTSwiftDebug.entitlements; sourceTree = "<group>"; };
 		AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownCodeSyntaxHightlighter.swift; sourceTree = "<group>"; };
 		AAD3780E2B3B36A8001D0B24 /* TextOutputFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextOutputFormat.swift; sourceTree = "<group>"; };
 		AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Extensions.swift"; sourceTree = "<group>"; };
@@ -105,6 +112,7 @@
 				AAD378252B3B496D001D0B24 /* SplashMarkdown in Frameworks */,
 				AAD3781F2B3B496D001D0B24 /* Splash in Frameworks */,
 				AAD378272B3B496D001D0B24 /* SplashTokenizer in Frameworks */,
+				AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */,
 				AAD378232B3B496D001D0B24 /* SplashImageGen in Frameworks */,
 				AAD3781A2B3B3801001D0B24 /* SplashMarkdown in Frameworks */,
 				AAD378162B3B3801001D0B24 /* SplashHTMLGen in Frameworks */,
@@ -136,6 +144,8 @@
 		AA013EC92B25FA0B00522152 /* GPTSwift */ = {
 			isa = PBXGroup;
 			children = (
+				AAC486902B70801B008C8A4E /* GPTSwiftDebug.entitlements */,
+				AAC4868F2B7075F6008C8A4E /* Info.plist */,
 				AAD377FE2B3B3258001D0B24 /* Helpers */,
 				AAA76CCA2B34BC9500DA5F04 /* Extensions */,
 				AA013EF82B27831200522152 /* Services */,
@@ -161,6 +171,7 @@
 		AA013EE02B25FCBB00522152 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AAC4868A2B706A9E008C8A4E /* CheckForUpdates */,
 				AA9B8F812B27BBED0041B64E /* UserSetting */,
 				AA013EFC2B2785AC00522152 /* Chat */,
 			);
@@ -264,6 +275,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		AAC4868A2B706A9E008C8A4E /* CheckForUpdates */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */,
+				AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */,
+			);
+			path = CheckForUpdates;
+			sourceTree = "<group>";
+		};
 		AAD377F92B3B16D6001D0B24 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +344,7 @@
 				AAD378242B3B496D001D0B24 /* SplashMarkdown */,
 				AAD378262B3B496D001D0B24 /* SplashTokenizer */,
 				AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */,
+				AAC486882B7066BA008C8A4E /* Sparkle */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -359,6 +380,7 @@
 				AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				AAD3781D2B3B496D001D0B24 /* XCRemoteSwiftPackageReference "Splash" */,
 				AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
@@ -390,6 +412,7 @@
 				AA4B02652B3E53BB00C5B227 /* FloatingPanel.swift in Sources */,
 				AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */,
 				AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */,
+				AAC4868E2B706ADC008C8A4E /* CheckForUpdatesView.swift in Sources */,
 				AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */,
 				AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */,
 				AA013EE22B25FCE200522152 /* ChatInputTextField.swift in Sources */,
@@ -414,6 +437,7 @@
 				AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */,
 				AADDFEF22B69355E00FAE4B5 /* SwiftDataService.swift in Sources */,
 				AA013EE72B262E4E00522152 /* MyMessage.swift in Sources */,
+				AAC4868C2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift in Sources */,
 				AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,15 +570,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = GPTSwift/GPTSwift.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GPTSwift/GPTSwiftDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GPTSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 447H88N27M;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GPTSwift/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -570,7 +596,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = elvis.GPTSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -588,13 +614,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GPTSwift/GPTSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GPTSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 447H88N27M;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GPTSwift/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -610,7 +637,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = elvis.GPTSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -669,6 +696,14 @@
 				kind = branch;
 			};
 		};
+		AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.2;
+			};
+		};
 		AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -706,6 +741,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
 			productName = OpenAI;
+		};
+		AAC486882B7066BA008C8A4E /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 		AAD377FC2B3B207F001D0B24 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

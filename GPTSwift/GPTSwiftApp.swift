@@ -8,32 +8,47 @@
 import SwiftUI
 import SwiftData
 import KeyboardShortcuts
+import Sparkle
 
 @main
 struct GPTSwiftApp: App {
     private var service = SwiftDataService()
-#if os(macOS)
-    @StateObject private var appState = AppState()
-#endif
-    
+
+#if os(iOS)
     var body: some Scene {
         WindowGroup {
             ContentView()
-#if os(macOS)
+        }
+        .modelContext(service.sharedModelContext)
+    }
+#elseif os(macOS)
+    private let updaterController: SPUStandardUpdaterController
+    @StateObject private var appState = AppState()
+    
+    init() {
+        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+    }
+        
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
                 .floatingPanel(isPresented: $appState.toggleFloatWindow) {
                     FloatingChatView()
                         .modelContext(service.sharedModelContext)
                         .environmentObject(appState)
                 }
-#endif
         }
         .modelContext(service.sharedModelContext)
-#if os(macOS)
+        .commands {
+            CommandGroup(after: .appInfo) {
+                CheckForUpdatesView(updater: updaterController.updater)
+            }
+        }
         Settings {
             UserSettingView()
         }
-#endif
     }
+#endif
 }
 
 #if os(macOS)
