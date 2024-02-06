@@ -8,7 +8,9 @@
 import SwiftUI
 import SwiftData
 import KeyboardShortcuts
+#if os(macOS)
 import Sparkle
+#endif
 
 @main
 struct GPTSwiftApp: App {
