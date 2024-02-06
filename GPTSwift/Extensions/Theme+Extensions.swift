@@ -23,7 +23,7 @@ extension Theme {
         .codeBlock { configuration in
             VStack(spacing: 0) {
                 HStack {
-                    Text("Language:  \(configuration.language ?? "")")
+                    Text("\(configuration.language ?? "")")
                         .foregroundStyle(.yellow)
                         .font(.subheadline)
                     Spacer()

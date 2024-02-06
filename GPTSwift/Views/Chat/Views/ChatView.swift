@@ -32,25 +32,24 @@ struct ChatView: View {
                             errorMessage()
                         }
                     }
+                    .scrollDismissesKeyboard(.immediately)
                     .onChange(of: viewModel.errorMessage) {
                         if !viewModel.errorMessage.isEmpty {
                             proxy.scrollTo(errorMessageId, anchor: .bottom)
                         }
                     }
                     .onChange(of: latestMessage?.value) {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                     .onAppear() {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+//                            withAnimation(.snappy) {
+                            print(latestMessage?.value)
+                                proxy.scrollTo(latestMessage?.id, anchor: .bottom)
+//                            }
                     }
                     gotoBottomButton(proxy)
                 }
             }
-#if os(iOS)
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
-#endif
             .scrollIndicators(.automatic)
             .listStyle(.plain)
             .overlay {
@@ -123,7 +122,7 @@ struct ChatView: View {
                 Spacer()
                 Button {
                     withAnimation {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                 } label: {
                     Image(systemName: "chevron.down")

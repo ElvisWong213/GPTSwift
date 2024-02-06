@@ -25,42 +25,41 @@ struct ChatInputTextField: View {
 #endif
     
     var body: some View {
-        HStack(alignment: .bottom) {
-            PhotosPicker(selection: $selectedItem, matching: .images) {
-                Image(systemName: "plus")
-                    .font(.title2)
-            }
-            .disabled(chatViewModel.chat?.model != .gpt4_vision_preview)
-            VStack {
-                HStack {
+        VStack {
+            HStack {
 #if os(iOS)
-                    if let uiImage = uiImage {
-                        Button {
-                            self.uiImage = nil
-                            self.selectedItem = nil
-                        } label: {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 100)
-                        }
+                if let uiImage = uiImage {
+                    Button {
+                        self.uiImage = nil
+                        self.selectedItem = nil
+                    } label: {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 100)
                     }
-#elseif os(macOS)
-                    if let nsimage = nsimage {
-                        Button {
-                            self.nsimage = nil
-                            self.selectedItem = nil
-                        } label: {
-                            Image(nsImage: nsimage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 100)
-                        }
-                    }
-#endif
                 }
-                .frame(maxWidth: .infinity)
-                .background(.black.opacity(0.3))
+#elseif os(macOS)
+                if let nsimage = nsimage {
+                    Button {
+                        self.nsimage = nil
+                        self.selectedItem = nil
+                    } label: {
+                        Image(nsImage: nsimage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 100)
+                    }
+                }
+#endif
+            }
+            HStack {
+                if (chatViewModel.chat?.model == .gpt4_vision_preview) {
+                    PhotosPicker(selection: $selectedItem, matching: .images) {
+                    Image(systemName: "plus")
+                        .font(.title2)
+                    }
+                }
                 TextField("Message", text: $chatViewModel.textInput, axis: .vertical)
                     .lineLimit(5)
                     .padding(.horizontal, 5)
@@ -69,23 +68,23 @@ struct ChatInputTextField: View {
                     .onSubmit {
                         sendMessage()
                     }
-            }
-            .overlay() {
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(.gray, lineWidth: 1)
-            }
-            Button {
-                sendMessage()
-            } label: {
-                if chatViewModel.chatState == .FetchingAPI {
-                    Image(systemName: "ellipsis")
-                        .symbolEffect(.pulse)
-                } else {
-                    Image(systemName: "arrow.up.circle")
+                    .overlay() {
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(.gray, lineWidth: 1)
+                    }
+                Button {
+                    sendMessage()
+                } label: {
+                    if chatViewModel.chatState == .FetchingAPI {
+                        Image(systemName: "ellipsis")
+                            .symbolEffect(.pulse)
+                    } else {
+                        Image(systemName: "arrow.up.circle")
+                    }
                 }
+                .font(.title2)
+                .disabled(chatViewModel.textInput.isEmpty || chatViewModel.chatState == .FetchingAPI)
             }
-            .font(.title2)
-            .disabled(chatViewModel.textInput.isEmpty || chatViewModel.chatState == .FetchingAPI)
         }
         .padding(.horizontal)
         .padding(.vertical, 5)
