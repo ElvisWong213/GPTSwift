@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import KeyboardShortcuts
+import SyntaxHighlightingMarkdownUI
 #if os(macOS)
 import Sparkle
 #endif
@@ -17,6 +18,13 @@ struct GPTSwiftApp: App {
     private var service = SwiftDataService()
 
 #if os(iOS)
+    init() {
+        // Setup SyntaxHighlightingMarkdownUI
+        DispatchQueue.global().async {
+            _ = SyntaxHighlightingMarkdownUI.shared
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -29,6 +37,10 @@ struct GPTSwiftApp: App {
     
     init() {
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+        // Setup SyntaxHighlightingMarkdownUI
+        DispatchQueue.global().async {
+            _ = SyntaxHighlightingMarkdownUI.shared
+        }
     }
         
     var body: some Scene {

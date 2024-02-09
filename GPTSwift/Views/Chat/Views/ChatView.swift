@@ -27,7 +27,7 @@ struct ChatView: View {
             ScrollViewReader { proxy in
                 ZStack {
                     ScrollView {
-                        LazyVStack {
+                        LazyVStack(spacing: 0) {
                             allMessages()
                             errorMessage()
                         }
@@ -42,10 +42,7 @@ struct ChatView: View {
                         proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                     .onAppear() {
-//                            withAnimation(.snappy) {
-                            print(latestMessage?.value)
-                                proxy.scrollTo(latestMessage?.id, anchor: .bottom)
-//                            }
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                     gotoBottomButton(proxy)
                 }

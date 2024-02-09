@@ -54,7 +54,7 @@ class ChatViewModel {
         print(String(data: data!, encoding: .utf8) ?? "")
         
         // API response
-        var responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")])
+        let responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")], chat: chat)
         chat.messages.append(responseMessage)
         
         openAI.chatsStream(query: chatQuery) { response in
