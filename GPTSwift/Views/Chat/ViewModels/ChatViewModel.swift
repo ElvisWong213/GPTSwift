@@ -54,7 +54,7 @@ class ChatViewModel {
         print(String(data: data!, encoding: .utf8) ?? "")
         
         // API response
-        var responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")])
+        let responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")], chat: chat)
         chat.messages.append(responseMessage)
         
         openAI.chatsStream(query: chatQuery) { response in
@@ -73,12 +73,15 @@ class ChatViewModel {
             if let error {
                 print(error)
             }
-            self.updateChatState(.Done)
-            chat.updateDate = Date.now
-            self.updateMessageIsLatest(message: responseMessage)
-            if !self.isTempMessage {
-                try? self.modelContext.save()
-                print("Save")
+            DispatchQueue.main.async {
+                self.updateChatState(.Done)
+                self.chat?.updateDate = Date.now
+                self.updateMessageIsLatest(message: responseMessage)
+                self.createChatTitle()
+                if !self.isTempMessage {
+                    try? self.modelContext.save()
+                    print("Save")
+                }
             }
         }
     }
@@ -109,6 +112,19 @@ class ChatViewModel {
         DispatchQueue.main.async {
             self.errorMessage = errorResponse.error.message
             chat.messages.removeAll(where: { $0.id == newMessage.id })
+        }
+    }
+    
+    private func createChatTitle() {
+        guard chat != nil, chat!.title.isEmpty && chat!.messages.count >= 2 else {
+            return
+        }
+        for message in sortMessages() {
+            if message.author == .GPT {
+                let firstResponseMessage: String = message.contents.first?.value ?? ""
+                chat?.title = String(firstResponseMessage.prefix(35)) + "..."
+                break
+            }
         }
     }
     

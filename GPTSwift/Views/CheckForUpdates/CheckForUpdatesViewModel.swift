@@ -4,7 +4,7 @@
 //
 //  Created by Elvis on 05/02/2024.
 //
-
+#if os(macOS)
 import SwiftUI
 import Sparkle
 
@@ -16,4 +16,4 @@ final class CheckForUpdatesViewModel: ObservableObject {
             .assign(to: &$canCheckForUpdates)
     }
 }
-
+#endif

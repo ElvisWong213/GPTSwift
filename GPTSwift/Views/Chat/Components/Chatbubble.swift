@@ -26,7 +26,7 @@ struct Chatbubble: View {
                         Markdown(value)
                             .textSelection(.enabled)
                             .markdownTheme(.customMarkdownTheme)
-                            .markdownCodeSyntaxHighlighter(.splash())
+                            .markdownCodeSyntaxHighlighter(.syntaxHighlightingMarkdownUI())
                     } else {
                         if let data = Data(base64Encoded: value) {
 #if os(iOS)

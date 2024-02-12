@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "splash",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Splash",
-      "state" : {
-        "branch" : "master",
-        "revision" : "2e3f17c2d09689c8bf175c4a84ff7f2ad3353301"
-      }
-    },
-    {
       "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
@@ -60,7 +51,61 @@
       "location" : "https://github.com/ElvisWong213/SwiftOpenAI.git",
       "state" : {
         "branch" : "fix-new-content",
-        "revision" : "887852498ed6c3c3e01b726eac8ac5955d3954d9"
+        "revision" : "fce70d7dfca8ba45f1e868334081ac33c8b2af8b"
+      }
+    },
+    {
+      "identity" : "swifttreesitter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ElvisWong213/SwiftTreeSitter",
+      "state" : {
+        "branch" : "fix/ios-support",
+        "revision" : "fe79ea9bdd591a9a279e0338cba1f7e1dade804e"
+      }
+    },
+    {
+      "identity" : "syntaxhighlighting_markdownui_swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ElvisWong213/SyntaxHighlighting_MarkdownUI_Swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8212611324bb599cfd1235d8642b2fe8ed368ff9"
+      }
+    },
+    {
+      "identity" : "tree-sitter-java",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-java",
+      "state" : {
+        "revision" : "2b57cd9541f9fd3a89207d054ce8fbe72657c444",
+        "version" : "0.20.2"
+      }
+    },
+    {
+      "identity" : "tree-sitter-javascript",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-javascript",
+      "state" : {
+        "revision" : "6d84193ae2395e54b699d9b7358bcf66cbcc19f5",
+        "version" : "0.20.3"
+      }
+    },
+    {
+      "identity" : "tree-sitter-rust",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-rust",
+      "state" : {
+        "revision" : "afb6000a71fb9dff3f47f90d412ec080ae12bbb4",
+        "version" : "0.20.4"
+      }
+    },
+    {
+      "identity" : "tree-sitter-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alex-pinkus/tree-sitter-swift",
+      "state" : {
+        "branch" : "with-generated-files",
+        "revision" : "b1b66955d420d5cf5ff268ae552f0d6e43ff66e1"
       }
     }
   ],

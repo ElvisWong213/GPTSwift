@@ -27,30 +27,26 @@ struct ChatView: View {
             ScrollViewReader { proxy in
                 ZStack {
                     ScrollView {
-                        LazyVStack {
+                        LazyVStack(spacing: 0) {
                             allMessages()
                             errorMessage()
                         }
                     }
+                    .scrollDismissesKeyboard(.immediately)
                     .onChange(of: viewModel.errorMessage) {
                         if !viewModel.errorMessage.isEmpty {
                             proxy.scrollTo(errorMessageId, anchor: .bottom)
                         }
                     }
                     .onChange(of: latestMessage?.value) {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                     .onAppear() {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                     gotoBottomButton(proxy)
                 }
             }
-#if os(iOS)
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
-#endif
             .scrollIndicators(.automatic)
             .listStyle(.plain)
             .overlay {
@@ -85,7 +81,7 @@ struct ChatView: View {
     
     @ViewBuilder private func contextMenuButtons(message: MyMessage, content: MyContent) -> some View {
         Button {
-            CopyService.copy(content.value)
+            _ = CopyService.copy(content.value)
         } label: {
             Label("Copy", systemImage: "doc.on.doc")
         }
@@ -123,7 +119,7 @@ struct ChatView: View {
                 Spacer()
                 Button {
                     withAnimation {
-                        proxy.scrollTo(viewModel.getLatestMessage()?.contents.last?.id, anchor: .bottom)
+                        proxy.scrollTo(latestMessage?.id, anchor: .bottom)
                     }
                 } label: {
                     Image(systemName: "chevron.down")

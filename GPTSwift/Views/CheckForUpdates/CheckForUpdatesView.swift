@@ -4,7 +4,7 @@
 //
 //  Created by Elvis on 05/02/2024.
 //
-
+#if os(macOS)
 import SwiftUI
 import Sparkle
 
@@ -24,6 +24,7 @@ struct CheckForUpdatesView: View {
             .disabled(!checkForUpdatesViewModel.canCheckForUpdates)
     }
 }
+#endif
 
 //#Preview {
 //    CheckForUpdatesView()
