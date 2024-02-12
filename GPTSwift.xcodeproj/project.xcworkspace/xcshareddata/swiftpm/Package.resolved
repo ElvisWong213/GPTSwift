@@ -60,7 +60,7 @@
       "location" : "https://github.com/ElvisWong213/SwiftTreeSitter",
       "state" : {
         "branch" : "fix/ios-support",
-        "revision" : "4bea39433ede33aa899ba0d13ef64301f085fe26"
+        "revision" : "fe79ea9bdd591a9a279e0338cba1f7e1dade804e"
       }
     },
     {

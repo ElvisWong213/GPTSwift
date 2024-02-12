@@ -81,7 +81,7 @@ struct ChatView: View {
     
     @ViewBuilder private func contextMenuButtons(message: MyMessage, content: MyContent) -> some View {
         Button {
-            CopyService.copy(content.value)
+            _ = CopyService.copy(content.value)
         } label: {
             Label("Copy", systemImage: "doc.on.doc")
         }

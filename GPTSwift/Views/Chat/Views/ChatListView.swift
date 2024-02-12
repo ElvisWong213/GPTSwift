@@ -30,7 +30,7 @@ struct ChatListView: View {
         NavigationSplitView {
             List(chats, id: \.self, selection: $selectedChat) { chat in
                 HStack {
-                    Text(chat.title)
+                    Text(chat.title.isEmpty ? "New Chat" : chat.title)
                     Spacer()
                     Text(chat.getModelString())
                         .font(.footnote)
@@ -74,7 +74,7 @@ struct ChatListView: View {
                     ChatView(modelContext: modelContext, chatId: selectedChat.id)
                         .id(selectedChat.id)
                 }
-                .navigationTitle(selectedChat.title)
+                .navigationTitle(selectedChat.title.isEmpty ? "New Chat" : selectedChat.title)
 #if os(macOS)
                 .navigationSubtitle(selectedChat.getModelString())
 #elseif os(iOS)
@@ -107,7 +107,7 @@ struct ChatListView: View {
     }
     
     private func createNewChat() {
-        let title = "New Chat"
+        let title = ""
         var maxToken = chatsMaxToken
         if chatsModel == .gpt4_vision_preview && maxToken == nil {
             maxToken = 4096

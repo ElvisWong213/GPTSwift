@@ -98,7 +98,7 @@ struct EditChatView: View {
             return
         }
         if title.isEmpty {
-            title = "New Chat"
+            title = ""
         }
         if model == .gpt4_vision_preview && maxToken == nil {
             maxToken = 4096
