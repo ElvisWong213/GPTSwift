@@ -17,7 +17,7 @@ Integrate ChatGPT on Mac and iOS devices, offering a user-friendly interface for
 - Support code syntax (Swift)
 
 # Download
-[Download on Gumroad](elviswong213.gumroad.com/l/gptswift)
+[Download on Gumroad](https://elviswong213.gumroad.com/l/gptswift)
 
 # Framework Used
 - SwiftUI
