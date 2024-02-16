@@ -22,10 +22,6 @@
 		AA013EF52B267DA500522152 /* MyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EF42B267DA500522152 /* MyContent.swift */; };
 		AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA013EFA2B27859900522152 /* KeychainSwift */; };
 		AA013EFE2B2785C900522152 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA013EFD2B2785C900522152 /* UserSettingView.swift */; };
-		AA278ABC2B74337100BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA278ABB2B74337100BBCD17 /* SyntaxHighlightingMarkdownUI */; };
-		AA278ABF2B7434D000BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA278ABE2B7434D000BBCD17 /* SyntaxHighlightingMarkdownUI */; };
-		AA278AC22B74359700BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA278AC12B74359700BBCD17 /* SyntaxHighlightingMarkdownUI */; };
-		AA278AC52B75818F00BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA278AC42B75818F00BBCD17 /* SyntaxHighlightingMarkdownUI */; };
 		AA4B02652B3E53BB00C5B227 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B02642B3E53BB00C5B227 /* FloatingPanel.swift */; };
 		AA4B02672B3E5E7800C5B227 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B02662B3E5E7800C5B227 /* View+Extensions.swift */; };
 		AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */; };
@@ -79,6 +75,7 @@
 		AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatView.swift; sourceTree = "<group>"; };
 		AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCodeButton.swift; sourceTree = "<group>"; };
+		AAB4E1C92B801CB700CAF0F3 /* SyntaxHighlighting_MarkdownUI_Swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SyntaxHighlighting_MarkdownUI_Swift; sourceTree = "<group>"; };
 		AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesViewModel.swift; sourceTree = "<group>"; };
 		AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesView.swift; sourceTree = "<group>"; };
 		AAC4868F2B7075F6008C8A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -97,12 +94,8 @@
 			files = (
 				AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */,
 				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
-				AA278AC22B74359700BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */,
-				AA278ABC2B74337100BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */,
 				AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */,
-				AA278ABF2B7434D000BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */,
 				AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */,
-				AA278AC52B75818F00BBCD17 /* SyntaxHighlightingMarkdownUI in Frameworks */,
 				AA013EF12B266B2000522152 /* OpenAI in Frameworks */,
 				AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */,
 			);
@@ -114,6 +107,7 @@
 		AA013EBE2B25FA0B00522152 = {
 			isa = PBXGroup;
 			children = (
+				AAB4E1C92B801CB700CAF0F3 /* SyntaxHighlighting_MarkdownUI_Swift */,
 				AA013EC92B25FA0B00522152 /* GPTSwift */,
 				AA013EC82B25FA0B00522152 /* Products */,
 				AA278AC62B7583D600BBCD17 /* Frameworks */,
@@ -328,10 +322,6 @@
 				AAD377FC2B3B207F001D0B24 /* MarkdownUI */,
 				AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */,
 				AAC486882B7066BA008C8A4E /* Sparkle */,
-				AA278ABB2B74337100BBCD17 /* SyntaxHighlightingMarkdownUI */,
-				AA278ABE2B7434D000BBCD17 /* SyntaxHighlightingMarkdownUI */,
-				AA278AC12B74359700BBCD17 /* SyntaxHighlightingMarkdownUI */,
-				AA278AC42B75818F00BBCD17 /* SyntaxHighlightingMarkdownUI */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -367,7 +357,6 @@
 				AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */,
-				AA278AC32B75818F00BBCD17 /* XCRemoteSwiftPackageReference "SyntaxHighlighting_MarkdownUI_Swift" */,
 			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
@@ -672,14 +661,6 @@
 				minimumVersion = 20.0.0;
 			};
 		};
-		AA278AC32B75818F00BBCD17 /* XCRemoteSwiftPackageReference "SyntaxHighlighting_MarkdownUI_Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ElvisWong213/SyntaxHighlighting_MarkdownUI_Swift";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
@@ -723,23 +704,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
-		};
-		AA278ABB2B74337100BBCD17 /* SyntaxHighlightingMarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SyntaxHighlightingMarkdownUI;
-		};
-		AA278ABE2B7434D000BBCD17 /* SyntaxHighlightingMarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SyntaxHighlightingMarkdownUI;
-		};
-		AA278AC12B74359700BBCD17 /* SyntaxHighlightingMarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SyntaxHighlightingMarkdownUI;
-		};
-		AA278AC42B75818F00BBCD17 /* SyntaxHighlightingMarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA278AC32B75818F00BBCD17 /* XCRemoteSwiftPackageReference "SyntaxHighlighting_MarkdownUI_Swift" */;
-			productName = SyntaxHighlightingMarkdownUI;
 		};
 		AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -51,7 +51,7 @@
       "location" : "https://github.com/ElvisWong213/SwiftOpenAI.git",
       "state" : {
         "branch" : "fix-new-content",
-        "revision" : "fce70d7dfca8ba45f1e868334081ac33c8b2af8b"
+        "revision" : "48b0e6d8fff16083240c511c168ad7b81de7d6dc"
       }
     },
     {
@@ -61,15 +61,6 @@
       "state" : {
         "branch" : "fix/ios-support",
         "revision" : "fe79ea9bdd591a9a279e0338cba1f7e1dade804e"
-      }
-    },
-    {
-      "identity" : "syntaxhighlighting_markdownui_swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ElvisWong213/SyntaxHighlighting_MarkdownUI_Swift",
-      "state" : {
-        "branch" : "main",
-        "revision" : "8212611324bb599cfd1235d8642b2fe8ed368ff9"
       }
     },
     {
