@@ -36,6 +36,7 @@
 		AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */; };
 		AAA76CD12B3517D600DA5F04 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CD02B3517D600DA5F04 /* OpenAIService.swift */; };
 		AAAB9A092B6F568200C368AD /* CopyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB9A082B6F568200C368AD /* CopyCodeButton.swift */; };
+		AAB4E1CB2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAB4E1CA2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI */; };
 		AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = AAC486882B7066BA008C8A4E /* Sparkle */; };
 		AAC4868C2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */; };
 		AAC4868E2B706ADC008C8A4E /* CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */; };
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB4E1CB2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI in Frameworks */,
 				AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */,
 				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
 				AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */,
@@ -322,6 +324,7 @@
 				AAD377FC2B3B207F001D0B24 /* MarkdownUI */,
 				AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */,
 				AAC486882B7066BA008C8A4E /* Sparkle */,
+				AAB4E1CA2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -714,6 +717,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
 			productName = OpenAI;
+		};
+		AAB4E1CA2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SyntaxHighlightingMarkdownUI;
 		};
 		AAC486882B7066BA008C8A4E /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
