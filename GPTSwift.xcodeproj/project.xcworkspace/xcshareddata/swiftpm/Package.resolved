@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "tree-sitter-bash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-bash",
+      "state" : {
+        "revision" : "1479a4030f1a399c253aee02097576d4af46f23a",
+        "version" : "0.20.4"
+      }
+    },
+    {
       "identity" : "tree-sitter-java",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tree-sitter/tree-sitter-java",
@@ -79,6 +88,24 @@
       "state" : {
         "revision" : "6d84193ae2395e54b699d9b7358bcf66cbcc19f5",
         "version" : "0.20.3"
+      }
+    },
+    {
+      "identity" : "tree-sitter-json",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-json",
+      "state" : {
+        "revision" : "c5a9a9af069de3fe0ef5fa2fa001b6a2e44d75b2",
+        "version" : "0.20.2"
+      }
+    },
+    {
+      "identity" : "tree-sitter-python",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-python",
+      "state" : {
+        "revision" : "c01fb4e38587e959b9058b8cd34b9e6a3068c827",
+        "version" : "0.20.4"
       }
     },
     {

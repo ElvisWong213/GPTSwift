@@ -132,27 +132,23 @@ class ChatViewModel {
         chatState = .FetchingDatabase
         let predicate = #Predicate<Chat>{ $0.id == chatId }
         let descriptor = FetchDescriptor<Chat>(predicate: predicate)
-//        DispatchQueue.global().async {
-            do {
-                let chats = try self.modelContext.fetch(descriptor)
-//                DispatchQueue.main.async {
-                    guard let fetchChat = chats.first else {
-                        print("DUBUG: Chats are empty")
-                        self.chatState = .Empty
-                        return
-                    }
-                    if fetchChat.messages.isEmpty {
-                        self.chatState = .Empty
-                    } else {
-                        self.chatState = .Done
-                    }
-                    self.chat = fetchChat
-//                }
-            } catch {
-                print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
+        do {
+            let chats = try self.modelContext.fetch(descriptor)
+            guard let fetchChat = chats.first else {
+                print("DUBUG: Chats are empty")
                 self.chatState = .Empty
+                return
             }
-//        }
+            if fetchChat.messages.isEmpty {
+                self.chatState = .Empty
+            } else {
+                self.chatState = .Done
+            }
+            self.chat = fetchChat
+        } catch {
+            print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
+            self.chatState = .Empty
+        }
     }
     
     func removeMessage(message: MyMessage) {
