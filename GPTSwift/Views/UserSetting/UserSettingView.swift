@@ -13,6 +13,8 @@ struct UserSettingView: View {
     @State private var apiKey: String = ""
     
     @State private var openAIService = OpenAIService.shared
+    
+    @AppStorage("markdownToggle") var markdownToggle: Bool = true
         
     // Chats Setting
     @AppStorage("chatsPrompt") var chatsPrompt: String = ""
@@ -58,6 +60,10 @@ struct UserSettingView: View {
         } label: {
             Text("Delete Key")
         }
+        Toggle(isOn: $markdownToggle) {
+            Text("Show Markdown")
+        }
+        .toggleStyle(.checkbox)
     }
     
     @ViewBuilder private func chatsSettingView() -> some View {

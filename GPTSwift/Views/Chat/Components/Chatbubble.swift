@@ -15,6 +15,8 @@ struct Chatbubble: View {
     var chatState: ChatState
     var isLatest: Bool?
     
+    @AppStorage("markdownToggle") var markdownToggle: Bool = true
+
     var body: some View {
         HStack {
             if author.isUser {
@@ -23,10 +25,14 @@ struct Chatbubble: View {
             if author != .System {
                 VStack(alignment: author.isUser ? .trailing : .leading) {
                     if messageType == .Text {
-                        Markdown(value)
-                            .textSelection(.enabled)
-                            .markdownTheme(.customMarkdownTheme)
-                            .markdownCodeSyntaxHighlighter(.syntaxHighlightingMarkdownUI())
+                        if markdownToggle {
+                            Markdown(value)
+                                .textSelection(.enabled)
+                                .markdownTheme(.customMarkdownTheme)
+                                .markdownCodeSyntaxHighlighter(.syntaxHighlightingMarkdownUI())
+                        } else {
+                            Text(value)
+                        }
                     } else {
                         if let data = Data(base64Encoded: value) {
 #if os(iOS)
