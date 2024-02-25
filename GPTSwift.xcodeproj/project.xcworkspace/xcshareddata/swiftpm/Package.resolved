@@ -68,6 +68,15 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tree-sitter/tree-sitter-bash",
       "state" : {
+        "branch" : "main",
+        "revision" : "f832ba185cf5436f5a48ca1eb0342ca97f0087a7"
+      }
+    },
+    {
+      "identity" : "tree-sitter-bash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter/tree-sitter-bash",
+      "state" : {
         "revision" : "1479a4030f1a399c253aee02097576d4af46f23a",
         "version" : "0.20.4"
       }
