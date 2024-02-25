@@ -25,6 +25,7 @@ struct ChatListView: View {
     
     @Query(descriptor, animation: .easeIn) private var chats: [Chat]
     @State private var selectedChat: Chat?
+    @State private var isDelete: Bool = false
     
     var body: some View {
         NavigationSplitView {
@@ -40,18 +41,31 @@ struct ChatListView: View {
                                 .stroke(.gray, lineWidth: 0.5)
                         }
                 }
+#if os(macOS)
                 .contextMenu {
                     contextMenuButtons(chat: chat)
                 }
+#elseif os(iOS)
                 .swipeActions() {
                     Button {
-                        removeChat(chat: chat)
+                        isDelete = true
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
                     .tint(.red)
                 }
-                
+#endif
+                .confirmationDialog("Delete chat?", isPresented: $isDelete) {
+                    Button(role: .destructive) {
+                        removeChat(chat: chat)
+                    } label: {
+                        Text("Delete")
+                    }
+                    Button(role: .cancel) {
+                    } label: {
+                        Text("Cencel")
+                    }
+                }
             }
             .navigationTitle("Chats")
 #if os(macOS)
@@ -120,17 +134,18 @@ struct ChatListView: View {
     
     private func removeChat(chat: Chat) {
         modelContext.delete(chat)
+        selectedChat = nil
         try? modelContext.save()
     }
     
     
     @ViewBuilder private func contextMenuButtons(chat: Chat) -> some View {
         Button(role: .destructive) {
-            removeChat(chat: chat)
-            selectedChat = nil
+            isDelete = true
         } label: {
             Label("Delete", systemImage: "trash")
         }
+        .tint(.red)
     }
 }
 

@@ -63,7 +63,9 @@ struct UserSettingView: View {
         Toggle(isOn: $markdownToggle) {
             Text("Show Markdown")
         }
+#if os(macOS)
         .toggleStyle(.checkbox)
+#endif
     }
     
     @ViewBuilder private func chatsSettingView() -> some View {
