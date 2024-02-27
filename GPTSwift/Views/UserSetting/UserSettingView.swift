@@ -13,6 +13,7 @@ struct UserSettingView: View {
     @State private var apiKey: String = ""
     
     @State private var openAIService = OpenAIService.shared
+    @State private var isRemoveKey: Bool = false
     
     @AppStorage("markdownToggle") var markdownToggle: Bool = true
         
@@ -54,11 +55,22 @@ struct UserSettingView: View {
             Text("API Key")
         }
         Button {
-            if KeychainService.deleteKey() {
-                apiKey = ""
-            }
+            isRemoveKey = true
         } label: {
             Text("Delete Key")
+        }
+        .confirmationDialog("Delete API Key?", isPresented: $isRemoveKey) {
+            Button(role: .destructive) {
+                if KeychainService.deleteKey() {
+                    apiKey = ""
+                }
+            } label: {
+                Text("Delete")
+            }
+            Button(role: .cancel) {
+            } label: {
+                Text("Cencel")
+            }
         }
         Toggle(isOn: $markdownToggle) {
             Text("Show Markdown")
