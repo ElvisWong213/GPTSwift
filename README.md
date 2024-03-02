@@ -14,7 +14,7 @@ Integrate ChatGPT on Mac and iOS devices, offering a user-friendly interface for
 - Custom chat prompt
 - Support GPT4 vision, you can upload an image to the chat
 - Support Markdown format responses
-- Support code syntax (Swift)
+- Support code syntax (Swift, Java, Rust, JS, TS, more...)
 
 # Download
 [Download on Gumroad](https://elviswong213.gumroad.com/l/gptswift)
@@ -22,8 +22,11 @@ Integrate ChatGPT on Mac and iOS devices, offering a user-friendly interface for
 # Framework Used
 - SwiftUI
 - SwiftData
-- Keychain
-- ChatGPT API
+- [Keychain Swift](https://github.com/evgenyneu/keychain-swift)
+- [OpenAI API](https://github.com/MacPaw/OpenAI)
+- [Swift MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
+- [Sparkle](https://github.com/sparkle-project/Sparkle)
+- [Swift Tree Sitter](https://github.com/ChimeHQ/SwiftTreeSitter)
 
 # Requirements
 - iOS 17+
