@@ -3,12 +3,14 @@
     <channel>
         <title>GPTSwift</title>
         <item>
-            <title>1.0</title>
-            <pubDate>Mon, 05 Feb 2024 02:37:03 +0000</pubDate>
-            <sparkle:version>1.0</sparkle:version>
-            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <title>1.2</title>
+            <pubDate>Sat, 02 Mar 2024 17:09:22 +0000</pubDate>
+            <sparkle:version>4</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/ElvisWong213/GPTSwift/releases/download/1.0/GPTSwift.app.tar.xz" length="1727064" type="application/octet-stream" sparkle:edSignature="2fmE7amjsEWN3CWrB2p3AGrYreQ3lG/73K+dKEyhmTSSCQDLk8A4eF0yB64h1JxHHeZKikSl+M/0b1oj4y8wDg=="/>
+            <enclosure url="https://github.com/ElvisWong213/GPTSwift/releases/download/1.2/GPTSwift.app.tar.xz" length="4696068" type="application/octet-stream" sparkle:edSignature="LZyARZTqCg+KMAGKJIYuKwrn/xuoGQ56eqzTDVi73d5uKXNaeAPHGeEsAOqA6gTkOW6gHB7Mv5bws9UuZpgFDQ=="/>
+            <sparkle:releaseNotesLink>https://elviswong213.github.io/GPTSwift/release_note/</sparkle:releaseNotesLink>
+            <sparkle:fullReleaseNotesLink>https://github.com/ElvisWong213/GPTSwift/releases/tag/1.2</sparkle:fullReleaseNotesLink>
         </item>
         <item>
             <title>1.1</title>
@@ -19,6 +21,14 @@
             <enclosure url="https://github.com/ElvisWong213/GPTSwift/releases/download/1.1/GPTSwift.app.tar.xz" length="3466508" type="application/octet-stream" sparkle:edSignature="JiNEKAYctHn1PZ4ESbJAZa0JdSNGuszL/6Z+XniRNH40cZ5ZKFF8TG5WU4cJCmyML8w2aYEzoLGEttSamOawDA=="/>
             <sparkle:releaseNotesLink>https://elviswong213.github.io/GPTSwift/release_note/</sparkle:releaseNotesLink>
             <sparkle:fullReleaseNotesLink>https://github.com/ElvisWong213/GPTSwift/releases/tag/1.1</sparkle:fullReleaseNotesLink>
+        </item>
+        <item>
+            <title>1.0</title>
+            <pubDate>Mon, 05 Feb 2024 02:37:03 +0000</pubDate>
+            <sparkle:version>1.0</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/ElvisWong213/GPTSwift/releases/download/1.0/GPTSwift.app.tar.xz" length="1727064" type="application/octet-stream" sparkle:edSignature="2fmE7amjsEWN3CWrB2p3AGrYreQ3lG/73K+dKEyhmTSSCQDLk8A4eF0yB64h1JxHHeZKikSl+M/0b1oj4y8wDg=="/>
         </item>
     </channel>
 </rss>
