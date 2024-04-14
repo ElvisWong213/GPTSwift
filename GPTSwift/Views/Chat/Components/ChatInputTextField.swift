@@ -16,8 +16,13 @@ import AppKit
 #endif
 
 struct ChatInputTextField: View {
+    enum FocusedField {
+        case message
+    }
+    
     @Bindable var chatViewModel: ChatViewModel
     @State var selectedItem: PhotosPickerItem?
+    @FocusState private var focusedField: FocusedField?
 #if os(iOS)
     @State var uiImage: UIImage?
 #elseif os(macOS)
@@ -61,6 +66,7 @@ struct ChatInputTextField: View {
                     }
                 }
                 TextField("Message", text: $chatViewModel.textInput, axis: .vertical)
+                    .focused($focusedField, equals: .message)
                     .lineLimit(5)
                     .padding(.horizontal, 5)
                     .padding(.vertical, 3)
@@ -90,6 +96,9 @@ struct ChatInputTextField: View {
         .padding(.vertical, 5)
         .onChange(of: selectedItem) {
             resizeImage()
+        }
+        .onAppear() {
+            focusedField = .message
         }
     }
 }
