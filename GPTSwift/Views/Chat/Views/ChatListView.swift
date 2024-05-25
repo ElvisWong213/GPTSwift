@@ -134,8 +134,8 @@ struct ChatListView: View {
     
     private func removeChat(chat: Chat) {
         modelContext.delete(chat)
-        selectedChat = nil
         try? modelContext.save()
+        selectedChat = nil
     }
     
     
