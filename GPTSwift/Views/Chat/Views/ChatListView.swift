@@ -85,7 +85,7 @@ struct ChatListView: View {
         } detail: {
             if let selectedChat = selectedChat {
                 NavigationStack {
-                    ChatView(modelContext: modelContext, chatId: selectedChat.id)
+                    ChatView(selectedChat: $selectedChat, modelContext: modelContext, chatId: selectedChat.id)
                         .id(selectedChat.id)
                 }
                 .navigationTitle(selectedChat.title.isEmpty ? "New Chat" : selectedChat.title)

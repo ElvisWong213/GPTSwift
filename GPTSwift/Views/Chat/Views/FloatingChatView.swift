@@ -36,7 +36,7 @@ struct FloatingChatView: View {
                 }
             }
             if let chat = chat {
-                ChatView(modelContext: modelContext, chatId: chat.id, isTempMessage: true)
+                ChatView(selectedChat: .constant(nil), modelContext: modelContext, chatId: chat.id, isTempMessage: true)
             }
         }
         .padding()

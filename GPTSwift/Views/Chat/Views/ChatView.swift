@@ -10,6 +10,7 @@ import SwiftData
 
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
+    @Binding var selectedChat: Chat?
     private let errorMessageId: UUID = UUID()
     private var latestMessage: MyContent? {
         get {
@@ -17,7 +18,8 @@ struct ChatView: View {
         }
     }
     
-    init(modelContext: ModelContext, chatId: UUID, isTempMessage: Bool = false) {
+    init(selectedChat: Binding<Chat?>, modelContext: ModelContext, chatId: UUID, isTempMessage: Bool = false) {
+        self._selectedChat = selectedChat
         let viewModel = ChatViewModel(modelContext: modelContext, chatId: chatId, isTempMessage: isTempMessage)
         self._viewModel = State(initialValue: viewModel)
     }
@@ -72,7 +74,9 @@ struct ChatView: View {
             }
         }
         .onDisappear() {
-            viewModel.removeChat()
+            if selectedChat == nil || selectedChat != viewModel.chat {
+                viewModel.removeChat()
+            }
         }
 #if os(iOS)
         .toolbar(.hidden, for: .tabBar)
@@ -142,7 +146,7 @@ struct ChatView: View {
 
 #if DEBUG
 #Preview {
-    ChatView(modelContext: SwiftDataService.previewData.mainContext, chatId: Chat.MOCK.id)
+    ChatView(selectedChat: .constant(nil), modelContext: SwiftDataService.previewData.mainContext, chatId: Chat.MOCK.id)
         .modelContainer(SwiftDataService.previewData)
 }
 #endif
