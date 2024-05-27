@@ -59,7 +59,7 @@ struct ChatInputTextField: View {
 #endif
             }
             HStack {
-                if (chatViewModel.chat?.model == .gpt4_vision_preview) {
+                if ((chatViewModel.chat?.isSupportImage()) != nil) {
                     PhotosPicker(selection: $selectedItem, matching: .images) {
                     Image(systemName: "plus")
                         .font(.title2)

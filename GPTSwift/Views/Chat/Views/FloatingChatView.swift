@@ -70,7 +70,7 @@ struct FloatingChatView: View {
     
     private func createNewChat() {
         if model == nil {
-            model = .gpt3_5Turbo_1106
+            model = .gpt3_5Turbo
         }
         let newChat = Chat(title: "New Floating Chat", model: model, prompt: prompt)
         chat = newChat

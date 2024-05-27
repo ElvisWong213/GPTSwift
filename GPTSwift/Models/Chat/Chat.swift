@@ -69,14 +69,25 @@ class Chat: Identifiable, Codable {
             return ""
         }
         switch model {
-        case .gpt4, .gpt4_32k, .gpt4_0613, .gpt4_1106_preview:
+        case .gpt4, .gpt4_32k, .gpt4_0613, .gpt4_turbo, .gpt4_32k_0613, .gpt4_0125_preview:
             return "GPT4"
         case .gpt4_vision_preview:
             return "GPT4 Vision"
-        case .gpt3_5Turbo, .gpt3_5Turbo_16k, .gpt3_5Turbo_1106, .gpt3_5Turbo_16k_0613:
+        case .gpt4_o:
+            return "GPT4o"
+        case .gpt3_5Turbo, .gpt3_5Turbo_16k, .gpt3_5Turbo_0125, .gpt3_5Turbo_16k_0613:
             return "GPT3.5"
         default:
             return ""
+        }
+    }
+    
+    func isSupportImage() -> Bool {
+        switch model {
+        case .gpt4_vision_preview, .gpt4_o:
+            return true
+        default:
+            return false
         }
     }
     

@@ -9,10 +9,9 @@ import SwiftUI
 import OpenAI
 
 struct EditChatView: View {
-    @State private var openAIService = OpenAIService.shared
     @State private var title: String = ""
     @State private var prompt: String = ""
-    @State private var model: Model = .gpt3_5Turbo_1106
+    @State private var model: Model = .gpt3_5Turbo
     @State private var maxToken: Int? = nil
     @State var editChat: Chat?
     
@@ -40,9 +39,9 @@ struct EditChatView: View {
                             .multilineTextAlignment(.trailing)
                     }
                     Picker(selection: $model, label: Text("GPT Version")) {
-                        ForEach(openAIService.availableModels, id: \.id) { model in
-                            Text(model.id)
-                                .tag(Optional(model.id))
+                        ForEach(OpenAIService.availableModels, id: \.self) { model in
+                            Text(model)
+                                .tag(model)
                         }
                     }
 #if os(macOS)
@@ -88,7 +87,7 @@ struct EditChatView: View {
             return
         }
         title = editChat.title
-        model = editChat.model ?? .gpt3_5Turbo_1106
+        model = editChat.model ?? .gpt3_5Turbo
         prompt = editChat.prompt
         maxToken = editChat.maxToken
     }
