@@ -40,7 +40,7 @@ struct EditChatView: View {
                             .multilineTextAlignment(.trailing)
                     }
                     Picker(selection: $model, label: Text("GPT Version")) {
-                        ForEach(openAIService.availableModels) { model in
+                        ForEach(openAIService.availableModels, id: \.id) { model in
                             Text(model.id)
                                 .tag(Optional(model.id))
                         }

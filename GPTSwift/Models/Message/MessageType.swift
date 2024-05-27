@@ -11,14 +11,14 @@ import OpenAI
 enum MessageType: Codable {
     case Text, Image
     
-    var chatContentType: ChatContent.ChatContentType {
-        switch self {
-        case .Text:
-            return .text
-        case .Image:
-            return .imageUrl
-        }
-    }
+//    var chatContentType: ChatContent.ChatContentType {
+//        switch self {
+//        case .Text:
+//            return .text
+//        case .Image:
+//            return .imageUrl
+//        }
+//    }
     
     enum CodingKeys: String, CodingKey {
         case Text = "Text"

@@ -123,8 +123,8 @@ extension ChatInputTextField {
                 return
             }
             let bitmap = NSBitmapImageRep(data: imageData)
-            let pngData = bitmap?.representation(using: .png, properties: [:])
-            contents.append(MyContent(type: .Image, value: pngData?.base64EncodedString() ?? ""))
+            let jpegData = bitmap?.representation(using: .jpeg, properties: [:])
+            contents.append(MyContent(type: .Image, value: jpegData?.base64EncodedString() ?? ""))
         }
 #endif
         

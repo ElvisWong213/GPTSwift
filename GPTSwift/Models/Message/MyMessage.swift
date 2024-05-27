@@ -30,8 +30,27 @@ class MyMessage: Identifiable, Codable {
         self.isLatest = isLatest
     }
     
-    func convertToMessage() -> Message {
-        return Message(role: author.toRole, content: .object(contents.map{ $0.convertToChatContent() }))
+    func convertToMessage() -> [ChatQuery.ChatCompletionMessageParam] {
+        var messages: [ChatQuery.ChatCompletionMessageParam] = []
+        switch author.toRole {
+        case .system:
+            for content in contents {
+                messages.append(.system(.init(content: content.value)))
+            }
+        case .user:
+            for content in contents {
+                messages.append(.user(.init(content: content.convertToChatContent())))
+            }
+        case .assistant:
+            for content in contents {
+                messages.append(.assistant(.init(content: content.value)))
+            }
+        case .tool:
+            for content in contents {
+                messages.append(.system(.init(content: content.value)))
+            }
+        }
+        return messages
     }
     
     func fetchContent() -> [MyContent] {

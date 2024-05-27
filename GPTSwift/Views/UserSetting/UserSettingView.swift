@@ -91,7 +91,7 @@ struct UserSettingView: View {
                 .submitLabel(.done)
         }
         Picker(selection: $chatsModel, label: Text("GPT Version")) {
-            ForEach(openAIService.availableModels) { model in
+            ForEach(openAIService.availableModels, id: \.id) { model in
                 Text(model.id)
                     .tag(Optional(model.id))
             }
@@ -164,7 +164,7 @@ extension UserSettingView {
                     .font(.title3)
             }
             Picker(selection: $floatingWindowModel, label: Text("GPT Version")) {
-                ForEach(openAIService.availableModels) { model in
+                ForEach(openAIService.availableModels, id: \.id) { model in
                     Text(model.id)
                         .tag(Optional(model.id))
                 }

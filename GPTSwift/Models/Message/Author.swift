@@ -20,7 +20,7 @@ enum Author: Codable {
         }
     }
     
-    var toRole: Message.Role {
+    var toRole: ChatQuery.ChatCompletionMessageParam.Role {
         switch self {
         case .User:
             return .user

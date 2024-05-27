@@ -24,8 +24,13 @@ class MyContent: Identifiable, Codable {
         self.message = message
     }
     
-    func convertToChatContent() -> ChatContent {
-        return ChatContent(type: type.chatContentType, value: value)
+    func convertToChatContent() -> ChatQuery.ChatCompletionMessageParam.ChatCompletionUserMessageParam.Content {
+        switch type {
+        case .Text:
+            return .string(value)
+        case .Image:
+            return .vision([.chatCompletionContentPartImageParam(.init(imageUrl: .init(url: "data:image/jpeg;base64,\(value)", detail: .auto)))])
+        }
     }
     
     enum CodingKeys: String, CodingKey {
