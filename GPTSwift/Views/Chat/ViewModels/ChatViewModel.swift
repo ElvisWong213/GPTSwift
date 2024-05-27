@@ -36,8 +36,8 @@ class ChatViewModel {
         // User message
         chat.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
-        let promptMessage = Message(role: .system, content: .object([ChatContent(type: .text, value: chat.prompt)]))
-        var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).map{ $0.convertToMessage() }
+        let promptMessage = ChatQuery.ChatCompletionMessageParam.system(.init(content: chat.prompt))
+        var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).flatMap{ $0.convertToMessage() }
         messages.insert(promptMessage, at: 0)
         
         guard let model = chat.model else {
@@ -45,7 +45,7 @@ class ChatViewModel {
             return
         }
         
-        let chatQuery = ChatQuery(model: model, messages: messages, maxTokens: chat.maxToken)
+        let chatQuery = ChatQuery(messages: messages, model: model, maxTokens: chat.maxToken)
         
         // debug
         let encoder = JSONEncoder()

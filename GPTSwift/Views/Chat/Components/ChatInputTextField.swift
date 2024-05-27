@@ -16,8 +16,13 @@ import AppKit
 #endif
 
 struct ChatInputTextField: View {
+    enum FocusedField {
+        case message
+    }
+    
     @Bindable var chatViewModel: ChatViewModel
     @State var selectedItem: PhotosPickerItem?
+    @FocusState private var focusedField: FocusedField?
 #if os(iOS)
     @State var uiImage: UIImage?
 #elseif os(macOS)
@@ -54,13 +59,14 @@ struct ChatInputTextField: View {
 #endif
             }
             HStack {
-                if (chatViewModel.chat?.model == .gpt4_vision_preview) {
+                if ((chatViewModel.chat?.isSupportImage()) != nil) {
                     PhotosPicker(selection: $selectedItem, matching: .images) {
                     Image(systemName: "plus")
                         .font(.title2)
                     }
                 }
                 TextField("Message", text: $chatViewModel.textInput, axis: .vertical)
+                    .focused($focusedField, equals: .message)
                     .lineLimit(5)
                     .padding(.horizontal, 5)
                     .padding(.vertical, 3)
@@ -91,6 +97,9 @@ struct ChatInputTextField: View {
         .onChange(of: selectedItem) {
             resizeImage()
         }
+        .onAppear() {
+            focusedField = .message
+        }
     }
 }
 
@@ -114,8 +123,8 @@ extension ChatInputTextField {
                 return
             }
             let bitmap = NSBitmapImageRep(data: imageData)
-            let pngData = bitmap?.representation(using: .png, properties: [:])
-            contents.append(MyContent(type: .Image, value: pngData?.base64EncodedString() ?? ""))
+            let jpegData = bitmap?.representation(using: .jpeg, properties: [:])
+            contents.append(MyContent(type: .Image, value: jpegData?.base64EncodedString() ?? ""))
         }
 #endif
         

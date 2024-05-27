@@ -12,19 +12,18 @@ import OpenAI
 struct UserSettingView: View {
     @State private var apiKey: String = ""
     
-    @State private var openAIService = OpenAIService.shared
     @State private var isRemoveKey: Bool = false
     
     @AppStorage("markdownToggle") var markdownToggle: Bool = true
         
     // Chats Setting
     @AppStorage("chatsPrompt") var chatsPrompt: String = ""
-    @AppStorage("chatsModel") var chatsModel: Model?
+    @AppStorage("chatsModel") var chatsModel: Model = .gpt3_5Turbo
     @AppStorage("chatsMaxToken") var chatsMaxToken: Int?
     
     // Floating Window Setting
     @AppStorage ("floatingWindowPrompt") var floatingWindowPrompt: String = ""
-    @AppStorage ("floatingWindowModel") var floatingWindowModel: Model?
+    @AppStorage ("floatingWindowModel") var floatingWindowModel: Model = .gpt3_5Turbo
     
     var body: some View {
         VStack {
@@ -91,19 +90,19 @@ struct UserSettingView: View {
                 .submitLabel(.done)
         }
         Picker(selection: $chatsModel, label: Text("GPT Version")) {
-            ForEach(openAIService.availableModels) { model in
-                Text(model.id)
-                    .tag(Optional(model.id))
+            ForEach(OpenAIService.availableModels, id: \.self) { model in
+                Text(model)
+                    .tag(model)
             }
         }
     }
     
     private func setupModels() {
         if floatingWindowModel == nil {
-            floatingWindowModel = openAIService.availableModels.first?.id
+            floatingWindowModel = .gpt3_5Turbo
         }
         if chatsModel == nil {
-            chatsModel = openAIService.availableModels.first?.id
+            chatsModel = .gpt3_5Turbo
         }
     }
 }
@@ -164,9 +163,9 @@ extension UserSettingView {
                     .font(.title3)
             }
             Picker(selection: $floatingWindowModel, label: Text("GPT Version")) {
-                ForEach(openAIService.availableModels) { model in
-                    Text(model.id)
-                        .tag(Optional(model.id))
+                ForEach(OpenAIService.availableModels, id: \.self) { model in
+                    Text(model)
+                        .tag(model)
                 }
             }
         }

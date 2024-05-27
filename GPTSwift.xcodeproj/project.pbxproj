@@ -30,7 +30,6 @@
 		AA4B02702B40F8D800C5B227 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B026F2B40F8D800C5B227 /* VisualEffect.swift */; };
 		AA9B8F802B279FD20041B64E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F7F2B279FD20041B64E /* KeychainService.swift */; };
 		AA9B8F832B27BC010041B64E /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F822B27BC010041B64E /* ChatListView.swift */; };
-		AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AA9B8F852B27CFCD0041B64E /* OpenAI */; };
 		AA9B8F8A2B27E7850041B64E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9B8F892B27E7850041B64E /* Chat.swift */; };
 		AAA76CCC2B34BCEA00DA5F04 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCB2B34BCEA00DA5F04 /* UIImage+Extensions.swift */; };
 		AAA76CCF2B34FBB800DA5F04 /* EditChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA76CCE2B34FBB800DA5F04 /* EditChatView.swift */; };
@@ -40,6 +39,7 @@
 		AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = AAC486882B7066BA008C8A4E /* Sparkle */; };
 		AAC4868C2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868B2B706ABA008C8A4E /* CheckForUpdatesViewModel.swift */; };
 		AAC4868E2B706ADC008C8A4E /* CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC4868D2B706ADC008C8A4E /* CheckForUpdatesView.swift */; };
+		AAD21A1C2C0223E1003501B5 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = AAD21A1B2C0223E1003501B5 /* OpenAI */; };
 		AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = AAD377FC2B3B207F001D0B24 /* MarkdownUI */; };
 		AAD3780B2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD3780A2B3B32BC001D0B24 /* MarkdownCodeSyntaxHightlighter.swift */; };
 		AAD378292B3B4D57001D0B24 /* Theme+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD378282B3B4D57001D0B24 /* Theme+Extensions.swift */; };
@@ -96,8 +96,8 @@
 				AAB4E1CB2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI in Frameworks */,
 				AA4B026A2B3EF34B00C5B227 /* KeyboardShortcuts in Frameworks */,
 				AA013EFB2B27859900522152 /* KeychainSwift in Frameworks */,
-				AA9B8F862B27CFCD0041B64E /* OpenAI in Frameworks */,
 				AAC486892B7066BA008C8A4E /* Sparkle in Frameworks */,
+				AAD21A1C2C0223E1003501B5 /* OpenAI in Frameworks */,
 				AA013EF12B266B2000522152 /* OpenAI in Frameworks */,
 				AAD377FD2B3B207F001D0B24 /* MarkdownUI in Frameworks */,
 			);
@@ -320,11 +320,11 @@
 			packageProductDependencies = (
 				AA013EF02B266B2000522152 /* OpenAI */,
 				AA013EFA2B27859900522152 /* KeychainSwift */,
-				AA9B8F852B27CFCD0041B64E /* OpenAI */,
 				AAD377FC2B3B207F001D0B24 /* MarkdownUI */,
 				AA4B02692B3EF34B00C5B227 /* KeyboardShortcuts */,
 				AAC486882B7066BA008C8A4E /* Sparkle */,
 				AAB4E1CA2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI */,
+				AAD21A1B2C0223E1003501B5 /* OpenAI */,
 			);
 			productName = GPTSwift;
 			productReference = AA013EC72B25FA0B00522152 /* GPTSwift.app */;
@@ -356,10 +356,10 @@
 			mainGroup = AA013EBE2B25FA0B00522152;
 			packageReferences = (
 				AA013EF92B27859900522152 /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 				AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */,
+				AAD21A1A2C0223E1003501B5 /* XCRemoteSwiftPackageReference "OpenAI" */,
 			);
 			productRefGroup = AA013EC82B25FA0B00522152 /* Products */;
 			projectDirPath = "";
@@ -672,20 +672,20 @@
 				minimumVersion = 1.16.1;
 			};
 		};
-		AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ElvisWong213/SwiftOpenAI.git";
-			requirement = {
-				branch = "fix-new-content";
-				kind = branch;
-			};
-		};
 		AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.5.2;
+			};
+		};
+		AAD21A1A2C0223E1003501B5 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI?tab=readme-ov-file#chats";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.9;
 			};
 		};
 		AAD377FB2B3B207F001D0B24 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
@@ -713,11 +713,6 @@
 			package = AA4B02682B3EF34B00C5B227 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
 		};
-		AA9B8F852B27CFCD0041B64E /* OpenAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA9B8F842B27CFCD0041B64E /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
-			productName = OpenAI;
-		};
 		AAB4E1CA2B81124800CAF0F3 /* SyntaxHighlightingMarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SyntaxHighlightingMarkdownUI;
@@ -726,6 +721,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AAC486872B7066BA008C8A4E /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		AAD21A1B2C0223E1003501B5 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAD21A1A2C0223E1003501B5 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
 		};
 		AAD377FC2B3B207F001D0B24 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

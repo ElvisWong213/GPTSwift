@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "openai?tab=readme-ov-file#chats",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MacPaw/OpenAI?tab=readme-ov-file#chats",
+      "state" : {
+        "revision" : "fd13a41e987004d14f1793c570721953a2767b03",
+        "version" : "0.2.9"
+      }
+    },
+    {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
@@ -43,15 +52,6 @@
       "state" : {
         "revision" : "ae799d015a5374708f7b4c85f3294c05f2a564e2",
         "version" : "2.3.0"
-      }
-    },
-    {
-      "identity" : "swiftopenai",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ElvisWong213/SwiftOpenAI.git",
-      "state" : {
-        "branch" : "fix-new-content",
-        "revision" : "48b0e6d8fff16083240c511c168ad7b81de7d6dc"
       }
     },
     {
