@@ -1,6 +1,60 @@
 {
   "pins" : [
     {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
+      "state" : {
+        "revision" : "c252200141e4abaecf30c14ea474dc009f56d553",
+        "version" : "1.16.1"
+      }
+    },
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift.git",
+      "state" : {
+        "revision" : "d108a1fa6189e661f91560548ef48651ed8d93b9",
+        "version" : "20.0.0"
+      }
+    },
+    {
+      "identity" : "networkimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/NetworkImage",
+      "state" : {
+        "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "openai?tab=readme-ov-file#chats",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MacPaw/OpenAI?tab=readme-ov-file#chats",
+      "state" : {
+        "revision" : "fd13a41e987004d14f1793c570721953a2767b03",
+        "version" : "0.2.9"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "41847a58cdef7506b257591fcca6f9495df591d4",
+        "version" : "2.6.2"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "state" : {
+        "revision" : "ae799d015a5374708f7b4c85f3294c05f2a564e2",
+        "version" : "2.3.0"
+      }
+    },
+    {
       "identity" : "swifttreesitter",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ElvisWong213/SwiftTreeSitter",

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3] - 2024-05-28
+
+### Bug Fixes
+
+- Create new chat issue
+- Delete confirmation dialog appears twice issue
+
+### Features
+
+- Add auto focused feature on textfield
+- Add support to gpt4o and remove deprecated models
+
+### Build
+
+- Update dependence (open ai swift, sparkle)
+- Update version
+
 ## [1.2] - 2024-03-02
 
 ### Bug Fixes
