@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2024-06-01
+
+### Bug Fixes
+
+- Resolve crashing issue
+
+### Build
+
+- Update build version
+
 ## [1.3] - 2024-05-28
 
 ### Bug Fixes
