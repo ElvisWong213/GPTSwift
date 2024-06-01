@@ -12,7 +12,7 @@ import SyntaxHighlightingMarkdownUI
 
 struct MarkdownCodeSyntaxHightlighter: CodeSyntaxHighlighter {
     func highlightCode(_ content: String, language: String?) -> Text {
-        guard let language = language else {
+        guard let language = language?.lowercased() else {
             return Text(content)
         }
         do {
