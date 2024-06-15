@@ -12,15 +12,24 @@ import SyntaxHighlightingMarkdownUI
 
 struct MarkdownCodeSyntaxHightlighter: CodeSyntaxHighlighter {
     func highlightCode(_ content: String, language: String?) -> Text {
-        guard let language = language?.lowercased() else {
-            return Text(content)
+        var output = Text(content)
+        
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global().async {
+            do {
+                guard let language = language?.lowercased() else {
+                    throw SyntaxHighlightingError.UnsupportedFormatError
+                }
+                output = try SyntaxHighlightingMarkdownUI.shared.output(content, language: language)
+            } catch {
+                print(error)
+            }
+            group.leave()
         }
-        do {
-            return try SyntaxHighlightingMarkdownUI.shared.output(content, language: language)
-        } catch {
-            print(error)
-            return Text(content)
-        }
+        _ = group.wait(timeout: .now() + 1)
+        
+        return output
     }
 }
 
