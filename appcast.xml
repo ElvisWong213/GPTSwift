@@ -3,6 +3,16 @@
     <channel>
         <title>GPTSwift</title>
         <item>
+            <title>1.3.2</title>
+            <pubDate>Sun, 16 Jun 2024 14:42:22 +0100</pubDate>
+            <sparkle:version>1.3.2</sparkle:version>
+            <sparkle:shortVersionString>1.3.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/ElvisWong213/GPTSwift/releases/download/1.3.2/GPTSwift.app.tar.xz" length="4152112" type="application/octet-stream" sparkle:edSignature="mXp/hWUXMp999jUrW3lSAyTkLALNG/J1jm7xrVEtxVB89cmwvDlsZ2/yMVXfxnzrRLiaY76QH5I3e6PodjpyAQ=="/>
+            <sparkle:releaseNotesLink>https://elviswong213.github.io/GPTSwift/release_note/</sparkle:releaseNotesLink>
+            <sparkle:fullReleaseNotesLink>https://github.com/ElvisWong213/GPTSwift/releases/tag/1.3.2</sparkle:fullReleaseNotesLink>
+        </item>
+        <item>
             <title>1.3.1</title>
             <pubDate>Sat, 01 Jun 2024 15:56:12 +0100</pubDate>
             <sparkle:version>1.3.1</sparkle:version>

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2024-06-16
+
+### Bug Fixes
+
+- Syntax highlighting cause app freezing issue
+
+### Build
+
+- Update project version
+
 ## [1.3.1] - 2024-06-01
 
 ### Bug Fixes
