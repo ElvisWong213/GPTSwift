@@ -12,7 +12,7 @@ import SwiftData
 @Model
 class MyMessage: Identifiable, Codable {
     @Attribute(.unique) var id: UUID = UUID()
-    let author: Author
+    var author: Author
     var timestamp: Date = Date.now
     var isLatest: Bool?
     

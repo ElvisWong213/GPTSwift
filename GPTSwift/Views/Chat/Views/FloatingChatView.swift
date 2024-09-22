@@ -13,9 +13,10 @@ struct FloatingChatView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var appState: AppState
     @State private var chat: Chat?
+    @State private var isClearChat: Bool = false
     
-    @AppStorage ("floatingWindowPrompt") var prompt: String = ""
-    @AppStorage ("floatingWindowModel") var model: Model?
+    @AppStorage("floatingWindowPrompt") var prompt: String = ""
+    @AppStorage("floatingWindowModel") var model: Model?
 
     var body: some View {
         VStack {
@@ -28,15 +29,10 @@ struct FloatingChatView: View {
                     } label: {
                         Text("Clear")
                     }
-//                        Button {
-//                            saveChat()
-//                        } label: {
-//                            Text("Save")
-//                        }
                 }
             }
             if let chat = chat {
-                ChatView(selectedChat: .constant(nil), modelContext: modelContext, chatId: chat.id, isTempMessage: true)
+                ChatView(selectedChat: .constant(nil), modelContext: modelContext, chatId: chat.id, isTempMessage: true, clearChat: $isClearChat)
             }
         }
         .padding()
@@ -78,11 +74,7 @@ struct FloatingChatView: View {
     }
     
     private func clearChat() {
-        chat?.messages = []
-    }
-    
-    private func saveChat() {
-        try? modelContext.save()
+        self.isClearChat = true
     }
 }
 

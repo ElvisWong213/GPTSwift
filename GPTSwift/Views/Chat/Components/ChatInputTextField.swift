@@ -128,8 +128,9 @@ extension ChatInputTextField {
         }
 #endif
         
+        let newMessage = MyMessage(author: .User, contents: [], isLatest: false)
         contents.append(MyContent(type: .Text, value: chatViewModel.textInput))
-        let newMessage = MyMessage(author: .User, contents: contents, isLatest: false)
+        newMessage.contents = contents
         
         // Clear input
         chatViewModel.textInput = ""

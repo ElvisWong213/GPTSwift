@@ -12,7 +12,7 @@ import SwiftData
 @Model
 class MyContent: Identifiable, Codable {
     @Attribute(.unique) var id: UUID = UUID()
-    let type: MessageType
+    var type: MessageType
     var value: String
     
     var message: MyMessage?

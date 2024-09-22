@@ -13,6 +13,7 @@ import SwiftData
 class ChatViewModel {
     var modelContext: ModelContext
     var chatId: UUID
+    var messages: [MyMessage]
     var chat: Chat?
     var textInput: String = ""
     var errorMessage: String = ""
@@ -23,21 +24,24 @@ class ChatViewModel {
         self.modelContext = modelContext
         self.chatId = chatId
         self.isTempMessage = isTempMessage
-        self.fetchData()
+        self.messages = []
+        self.chat = fetchChat()
+        self.fetchMessage()
     }
     
     func sendMessage(newMessage: MyMessage) {
-        guard let chat = chat else {
+        guard let chat = self.chat else {
             print("DEBUG: Chat is empty")
             return
         }
         updateChatState(.FetchingAPI)
         errorMessage = ""
         // User message
-        chat.messages.append(newMessage)
+        newMessage.chat = chat
+        self.messages.append(newMessage)
         let openAI = OpenAI(apiToken: KeychainService.getKey())
         let promptMessage = ChatQuery.ChatCompletionMessageParam.system(.init(content: chat.prompt))
-        var messages = chat.messages.sorted(by: { $0.timestamp < $1.timestamp } ).flatMap{ $0.convertToMessage() }
+        var messages = self.messages.flatMap{ $0.convertToMessage() }
         messages.insert(promptMessage, at: 0)
         
         guard let model = chat.model else {
@@ -55,7 +59,7 @@ class ChatViewModel {
         
         // API response
         let responseMessage = MyMessage(author: .GPT, contents: [MyContent(type: .Text, value: "")], chat: chat)
-        chat.messages.append(responseMessage)
+        self.messages.append(responseMessage)
         
         openAI.chatsStream(query: chatQuery) { response in
             switch response {
@@ -105,7 +109,7 @@ class ChatViewModel {
     }
     
     private func getErrorMessage(errorResponse: APIErrorResponse, newMessage: MyMessage) {
-        guard let chat = chat else {
+        guard let chat = self.chat else {
             print("DEBUG: Chat is empty")
             return
         }
@@ -116,43 +120,59 @@ class ChatViewModel {
     }
     
     private func createChatTitle() {
-        guard chat != nil, chat!.title.isEmpty && chat!.messages.count >= 2 else {
+        guard let chat = fetchChat(), chat.title.isEmpty && chat.messages.count >= 2 else {
             return
         }
-        for message in sortMessages() {
+        for message in self.messages {
             if message.author == .GPT {
                 let firstResponseMessage: String = message.contents.first?.value ?? ""
-                chat?.title = String(firstResponseMessage.prefix(35)) + "..."
+                chat.title = String(firstResponseMessage.prefix(35)) + "..."
                 break
             }
         }
     }
     
-    private func fetchData() {
-        chatState = .FetchingDatabase
+    private func fetchChat() -> Chat? {
         let predicate = #Predicate<Chat>{ $0.id == chatId }
         let descriptor = FetchDescriptor<Chat>(predicate: predicate)
+        guard let chat = try? self.modelContext.fetch(descriptor).first else {
+            print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
+            return nil
+        }
+        return chat
+    }
+    
+    private func fetchMessage() {
+        chatState = .FetchingDatabase
+        let predicate = #Predicate<MyMessage>{ $0.chat?.id == chatId }
+        let descriptor = FetchDescriptor<MyMessage>(predicate: predicate, sortBy: [SortDescriptor<MyMessage>(\.timestamp)])
         do {
-            let chats = try self.modelContext.fetch(descriptor)
-            guard let fetchChat = chats.first else {
+            let messages = try self.modelContext.fetch(descriptor)
+            if messages.isEmpty {
                 print("DUBUG: Chats are empty")
-                self.chatState = .Empty
-                return
-            }
-            if fetchChat.messages.isEmpty {
                 self.chatState = .Empty
             } else {
                 self.chatState = .Done
             }
-            self.chat = fetchChat
+            self.messages = messages
         } catch {
             print("DEBUG: Unable to fetch the chat -- \(self.chatId)")
             self.chatState = .Empty
         }
     }
     
+    public func fetchContents(messageId: UUID) -> [MyContent] {
+        let predicate = #Predicate<MyContent>{ $0.message?.id == messageId }
+        let descriptor = FetchDescriptor<MyContent>(predicate: predicate)
+        guard let content = try? self.modelContext.fetch(descriptor) else {
+            print("DEBUG: Unable to fetch the contnet -- \(messageId)")
+            return []
+        }
+        return content
+    }
+    
     func removeMessage(message: MyMessage) {
-        guard let chat = chat else {
+        guard let chat = self.chat else {
             print("DEBUG: Chat is empty")
             return
         }
@@ -164,34 +184,23 @@ class ChatViewModel {
     }
     
     func removeAllMessage() {
-        guard let chat = chat else {
+        guard self.chat != nil else {
             return
         }
-        for message in chat.messages {
+        for message in self.messages {
             modelContext.delete(message)
         }
         if !isTempMessage {
             try? modelContext.save()
         }
+        messages.removeAll()
     }
     
-    func sortMessages() -> [MyMessage] {
-        guard let chat = chat else {
-            print("DEBUG: Chat is empty")
-            return []
-        }
-        return chat.messages.sorted(by: { $0.timestamp < $1.timestamp })
-    }
-    
-    func getLatestMessage() -> MyMessage? {
-        return sortMessages().last
-    }
-    
-    func removeChat() {
-        guard let chat = chat else {
+    func removeEmptyChat() {
+        guard let chat = self.chat else {
             return
         }
-        if chat.messages.isEmpty {
+        if self.messages.isEmpty {
             modelContext.delete(chat)
             try? modelContext.save()
         }

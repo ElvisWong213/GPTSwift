@@ -10,18 +10,24 @@ import SwiftData
 
 struct ChatView: View {
     @State private var viewModel: ChatViewModel
-    @Binding var selectedChat: Chat?
+    @Binding private var selectedChat: Chat?
+    @Binding private var clearChat: Bool
     private let errorMessageId: UUID = UUID()
     private var latestMessage: MyContent? {
         get {
-            viewModel.getLatestMessage()?.contents.last
+            guard let messageId = viewModel.messages.last?.id else {
+                print("DEBUG: Last message id is null")
+                return nil
+            }
+            return viewModel.fetchContents(messageId: messageId).last
         }
     }
     
-    init(selectedChat: Binding<Chat?>, modelContext: ModelContext, chatId: UUID, isTempMessage: Bool = false) {
+    init(selectedChat: Binding<Chat?>, modelContext: ModelContext, chatId: UUID, isTempMessage: Bool = false, clearChat: Binding<Bool>? = .constant(false)) {
         self._selectedChat = selectedChat
         let viewModel = ChatViewModel(modelContext: modelContext, chatId: chatId, isTempMessage: isTempMessage)
         self._viewModel = State(initialValue: viewModel)
+        self._clearChat = clearChat ?? .constant(false)
     }
     
     var body: some View {
@@ -73,9 +79,14 @@ struct ChatView: View {
                 }
             }
         }
+        .onChange(of: clearChat, {
+            if clearChat == true {
+                viewModel.removeAllMessage()
+            }
+        })
         .onDisappear() {
             if selectedChat == nil || selectedChat != viewModel.chat {
-                viewModel.removeChat()
+                viewModel.removeEmptyChat()
             }
         }
 #if os(iOS)
@@ -97,8 +108,8 @@ struct ChatView: View {
     }
     
     @ViewBuilder private func allMessages() -> some View {
-        ForEach(viewModel.sortMessages()) { message in
-            ForEach(message.contents) { content in
+        ForEach(viewModel.messages) { message in
+            ForEach(viewModel.fetchContents(messageId: message.id)) { content in
                 Chatbubble(author: message.author, messageType: content.type, value: content.value, chatState: viewModel.chatState, isLatest: message.isLatest)
                     .id(content.id)
                     .contextMenu {

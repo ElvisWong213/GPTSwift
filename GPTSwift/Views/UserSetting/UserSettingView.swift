@@ -22,8 +22,8 @@ struct UserSettingView: View {
     @AppStorage("chatsMaxToken") var chatsMaxToken: Int?
     
     // Floating Window Setting
-    @AppStorage ("floatingWindowPrompt") var floatingWindowPrompt: String = ""
-    @AppStorage ("floatingWindowModel") var floatingWindowModel: Model = .gpt3_5Turbo
+    @AppStorage("floatingWindowPrompt") var floatingWindowPrompt: String = ""
+    @AppStorage("floatingWindowModel") var floatingWindowModel: Model = .gpt3_5Turbo
     
     var body: some View {
         VStack {
@@ -98,10 +98,10 @@ struct UserSettingView: View {
     }
     
     private func setupModels() {
-        if floatingWindowModel == nil {
+        if floatingWindowModel.isEmpty {
             floatingWindowModel = .gpt3_5Turbo
         }
-        if chatsModel == nil {
+        if chatsModel.isEmpty {
             chatsModel = .gpt3_5Turbo
         }
     }
