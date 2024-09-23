@@ -19,7 +19,7 @@ class Chat: Identifiable, Codable {
     var updateDate: Date = Date.now
     
     @Relationship(deleteRule: .cascade, inverse: \MyMessage.chat)
-    var messages: [MyMessage] = []
+    var messages: [MyMessage]?
     
     init(id: UUID = UUID(), title: String, model: Model? = nil, prompt: String = "", messages: [MyMessage] = [], maxToken: Int? = nil, updateDate: Date = Date.now) {
         self.id = id

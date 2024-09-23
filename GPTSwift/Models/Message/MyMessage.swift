@@ -17,7 +17,7 @@ class MyMessage: Identifiable, Codable {
     var isLatest: Bool?
     
     @Relationship(deleteRule: .cascade, inverse: \MyContent.message)
-    var contents: [MyContent] = []
+    var contents: [MyContent]?
     
     var chat: Chat?
 
@@ -32,6 +32,9 @@ class MyMessage: Identifiable, Codable {
     
     func convertToMessage() -> [ChatQuery.ChatCompletionMessageParam] {
         var messages: [ChatQuery.ChatCompletionMessageParam] = []
+        guard let contents = self.contents else {
+            return messages
+        }
         switch author.toRole {
         case .system:
             for content in contents {

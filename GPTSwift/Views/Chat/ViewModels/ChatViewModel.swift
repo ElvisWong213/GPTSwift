@@ -92,7 +92,7 @@ class ChatViewModel {
     
     private func updateMessageContent(newMessage: MyMessage, content: String) {
         DispatchQueue.main.async {
-            newMessage.contents.first?.value.append(content)
+            newMessage.contents?.first?.value.append(content)
         }
     }
     
@@ -115,17 +115,17 @@ class ChatViewModel {
         }
         DispatchQueue.main.async {
             self.errorMessage = errorResponse.error.message
-            chat.messages.removeAll(where: { $0.id == newMessage.id })
+            chat.messages?.removeAll(where: { $0.id == newMessage.id })
         }
     }
     
     private func createChatTitle() {
-        guard let chat = fetchChat(), chat.title.isEmpty && chat.messages.count >= 2 else {
+        guard let chat = fetchChat(), chat.title.isEmpty, let messages = chat.messages, messages.count >= 2 else {
             return
         }
         for message in self.messages {
             if message.author == .GPT {
-                let firstResponseMessage: String = message.contents.first?.value ?? ""
+                let firstResponseMessage: String = message.contents?.first?.value ?? ""
                 chat.title = String(firstResponseMessage.prefix(35)) + "..."
                 break
             }
@@ -172,11 +172,11 @@ class ChatViewModel {
     }
     
     func removeMessage(message: MyMessage) {
-        guard let chat = self.chat else {
+        guard self.chat != nil else {
             print("DEBUG: Chat is empty")
             return
         }
-        chat.messages.removeAll(where: { $0.id == message.id })
+        self.messages.removeAll(where: { $0.id == message.id })
         modelContext.delete(message)
         if !isTempMessage {
             try? modelContext.save()
