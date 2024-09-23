@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4] - 2024-09-23
+
+### Bug Fixes
+
+- Support iOS 18 and MacOS 15
+- Swift data crash issues
+
+### Build
+
+- Update swift markdown ui dependency
+- Update build version
+
 ## [1.3.2] - 2024-06-16
 
 ### Bug Fixes
